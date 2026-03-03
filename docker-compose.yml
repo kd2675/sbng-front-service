@@ -6,9 +6,34 @@ services:
       dockerfile: Dockerfile
     image: sbng-front-service:latest
     restart: unless-stopped
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"
     environment:
       NODE_ENV: production
       HOSTNAME: 0.0.0.0
       PORT: 3000
+    networks:
+      - web
+
+  caddy:
+    container_name: sbng-front-caddy
+    image: caddy:2.8-alpine
+    restart: unless-stopped
+    depends_on:
+      - sbng-front-service
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - web
+
+volumes:
+  caddy_data:
+  caddy_config:
+
+networks:
+  web:
