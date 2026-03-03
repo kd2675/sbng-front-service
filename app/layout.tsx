@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Manrope, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
-const siteUrl = "https://www.subuknongup.com";
+const siteUrl = "https://www.subuknongeop.com";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     "수북농업은 지속 가능한 농업을 위한 비료 솔루션과 토양 중심 농업 컨설팅을 제공합니다.",
   keywords: [
     "수북농업",
-    "subuknongup",
+    "subuknongeop",
     "친환경 비료",
     "유기질 비료",
     "농업 솔루션",

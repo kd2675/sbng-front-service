@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const siteUrl = "https://www.subuknongup.com";
+const siteUrl = "https://www.subuknongeop.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = ["", "/products", "/about", "/sustainability", "/contact"];
