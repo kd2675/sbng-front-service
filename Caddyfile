@@ -1,3 +1,7 @@
+subuknongeop.com {
+  redir https://www.subuknongeop.com{uri} permanent
+}
+
 www.subuknongeop.com {
   encode zstd gzip
   reverse_proxy sbng-front-service:3000
