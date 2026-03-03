@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.subuknongeop.com/sitemap.xml
+
+#DaumWebMasterTool:e0c3a1dc64236f133b47afde2fa564a57e7761310e8c3acb013622d0d4ce3191:R98rmM28KNmZUNVNYT21Sg==
