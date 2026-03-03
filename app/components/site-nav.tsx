@@ -8,6 +8,7 @@ import { NAV_ITEMS } from "./nav-items";
 
 type SiteNavProps = {
   overlay?: boolean;
+  dark?: boolean;
 };
 
 function isActivePath(pathname: string, href: string) {
@@ -17,7 +18,7 @@ function isActivePath(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export default function SiteNav({ overlay = false }: SiteNavProps) {
+export default function SiteNav({ overlay = false, dark = false }: SiteNavProps) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -34,14 +35,18 @@ export default function SiteNav({ overlay = false }: SiteNavProps) {
       className={
         overlay
           ? "absolute inset-x-0 top-0 z-30 px-5 py-5 md:px-10 lg:px-20"
-          : "sticky top-0 z-30 border-b border-black/8 bg-[var(--agri-paper)]/90 px-5 py-4 backdrop-blur md:px-10 lg:px-20"
+          : dark
+            ? "sticky top-0 z-30 border-b border-white/10 bg-[#132210]/95 px-5 py-4 backdrop-blur md:px-10 lg:px-20"
+            : "sticky top-0 z-30 border-b border-black/8 bg-[var(--agri-paper)]/90 px-5 py-4 backdrop-blur md:px-10 lg:px-20"
       }
     >
       <div
         className={
           overlay
             ? "mx-auto flex w-full max-w-7xl items-center justify-between rounded-full border border-white/15 bg-black/20 px-4 py-2.5 backdrop-blur-lg md:px-6"
-            : "mx-auto flex w-full max-w-7xl items-center justify-between rounded-full border border-black/8 bg-white/80 px-4 py-2.5 md:px-6"
+            : dark
+              ? "mx-auto flex w-full max-w-7xl items-center justify-between rounded-full border border-white/12 bg-white/8 px-4 py-2.5 md:px-6"
+              : "mx-auto flex w-full max-w-7xl items-center justify-between rounded-full border border-black/8 bg-white/80 px-4 py-2.5 md:px-6"
         }
       >
         <Link href="/" className="flex items-center gap-3">
@@ -55,7 +60,9 @@ export default function SiteNav({ overlay = false }: SiteNavProps) {
             className={
               overlay
                 ? "font-display text-2xl font-bold tracking-tight text-white"
-                : "font-display text-2xl font-bold tracking-tight text-[var(--agri-ink)]"
+                : dark
+                  ? "font-display text-2xl font-bold tracking-tight text-white"
+                  : "font-display text-2xl font-bold tracking-tight text-[var(--agri-ink)]"
             }
           >
             수북농업
@@ -71,7 +78,7 @@ export default function SiteNav({ overlay = false }: SiteNavProps) {
                 key={item.href}
                 href={item.href}
                 className={
-                  overlay
+                  overlay || dark
                     ? active
                       ? "text-[var(--agri-primary)]"
                       : "text-white/90 transition-colors hover:text-[var(--agri-primary)]"
@@ -93,7 +100,7 @@ export default function SiteNav({ overlay = false }: SiteNavProps) {
           aria-label="Toggle navigation menu"
           onClick={() => setMobileOpen((prev) => !prev)}
           className={
-            overlay
+            overlay || dark
               ? "rounded-full border border-white/20 bg-white/10 p-2 text-white md:hidden"
               : "rounded-full border border-black/15 bg-white p-2 text-[var(--agri-ink)] md:hidden"
           }
@@ -129,7 +136,7 @@ export default function SiteNav({ overlay = false }: SiteNavProps) {
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
               className={
-                overlay
+                overlay || dark
                   ? "relative z-30 mt-3 rounded-2xl border border-white/20 bg-black/72 p-3 backdrop-blur-md md:hidden"
                   : "relative z-30 mt-3 rounded-2xl border border-black/10 bg-white p-3 shadow-[0_10px_30px_rgba(10,25,10,0.08)] md:hidden"
               }
@@ -141,7 +148,7 @@ export default function SiteNav({ overlay = false }: SiteNavProps) {
                     key={item.href}
                     href={item.href}
                     className={
-                      overlay
+                      overlay || dark
                         ? active
                           ? "block rounded-xl bg-white/10 px-3 py-2 text-sm font-semibold text-[var(--agri-primary)]"
                           : "block rounded-xl px-3 py-2 text-sm font-semibold text-white/90 transition-colors hover:bg-white/10 hover:text-[var(--agri-primary)]"

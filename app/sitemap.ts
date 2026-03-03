@@ -3,7 +3,7 @@ import type { MetadataRoute } from "next";
 const siteUrl = "https://www.subuknongeop.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ["", "/products", "/about", "/sustainability", "/contact"];
+  const routes = ["", "/ceo", "/products", "/about", "/contact"];
   const lastModified = new Date();
 
   return routes.map((route) => ({

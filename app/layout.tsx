@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     template: "%s | 수북농업",
   },
   description:
-    "수북농업은 지속 가능한 농업을 위한 비료 솔루션과 토양 중심 농업 컨설팅을 제공합니다.",
+    "수북농업은 고효율 비료 솔루션과 토양 중심 농업 컨설팅을 제공합니다.",
   keywords: [
     "수북농업",
     "subuknongeop",
@@ -40,13 +40,13 @@ export const metadata: Metadata = {
     siteName: "수북농업",
     title: "수북농업",
     description:
-      "수북농업은 지속 가능한 농업을 위한 비료 솔루션과 토양 중심 농업 컨설팅을 제공합니다.",
+      "수북농업은 고효율 비료 솔루션과 토양 중심 농업 컨설팅을 제공합니다.",
   },
   twitter: {
     card: "summary_large_image",
     title: "수북농업",
     description:
-      "수북농업은 지속 가능한 농업을 위한 비료 솔루션과 토양 중심 농업 컨설팅을 제공합니다.",
+      "수북농업은 고효율 비료 솔루션과 토양 중심 농업 컨설팅을 제공합니다.",
   },
   robots: {
     index: true,
@@ -57,6 +57,11 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
       "max-video-preview": -1,
+    },
+  },
+  verification: {
+    other: {
+      "naver-site-verification": "338733ff0b62d612e4fdae7ce88d19ce157e815d",
     },
   },
 };

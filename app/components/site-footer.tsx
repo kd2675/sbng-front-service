@@ -10,7 +10,7 @@ export default function SiteFooter() {
             수북농업
           </p>
           <p className="mt-1 text-sm text-[#5a6a57]">
-            수북농업과 함께 지속가능한 농업의 미래를 만듭니다.
+            수북농업과 함께 생산성과 토양 건강을 높입니다.
           </p>
         </div>
 
