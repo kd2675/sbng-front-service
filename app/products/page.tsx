@@ -45,7 +45,7 @@ export const metadata: Metadata = {
 export default function ProductsPage() {
   return (
     <div className="min-h-screen bg-[#f6f8f6]">
-      <SiteNav dark />
+      <SiteNav />
 
       <section className="relative overflow-hidden bg-[#132210] px-6 py-20 md:px-10 lg:px-20">
         <div className="absolute right-0 top-0 h-96 w-96 translate-x-1/3 -translate-y-1/3 rounded-full bg-[var(--agri-primary)]/16 blur-3xl" />

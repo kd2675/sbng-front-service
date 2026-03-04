@@ -126,8 +126,8 @@ export default function Home() {
   const activeSectionRef = useRef(0);
   const wheelAccumulatorRef = useRef(0);
   const isSwitchingRef = useRef(false);
-  const touchStartYRef = useRef<number | null>(null);
   const [activeSection, setActiveSection] = useState(0);
+  const [isDesktopMode, setIsDesktopMode] = useState(false);
 
   const fadeUpInitial = reduceMotion ? { opacity: 1 } : { opacity: 0, y: 24 };
   const fadeUpAnimate = { opacity: 1, y: 0 };
@@ -137,6 +137,22 @@ export default function Home() {
   useEffect(() => {
     activeSectionRef.current = activeSection;
   }, [activeSection]);
+
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 1024px)");
+    const sync = () => {
+      const isTouchDevice =
+        "ontouchstart" in window || navigator.maxTouchPoints > 0;
+      setIsDesktopMode(media.matches && !isTouchDevice);
+    };
+
+    sync();
+    media.addEventListener("change", sync);
+
+    return () => {
+      media.removeEventListener("change", sync);
+    };
+  }, []);
 
   const scrollToSection = useCallback((index: number) => {
     const clampedIndex = Math.max(0, Math.min(maxSectionIndex, index));
@@ -173,6 +189,45 @@ export default function Home() {
       return;
     }
 
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+        if (visible.length === 0) {
+          return;
+        }
+
+        const index = Number((visible[0].target as HTMLElement).dataset.sectionIndex);
+
+        if (!Number.isNaN(index) && index !== activeSectionRef.current) {
+          activeSectionRef.current = index;
+          setActiveSection(index);
+        }
+      },
+      {
+        root,
+        threshold: [0.3, 0.55, 0.75],
+      },
+    );
+
+    sectionRefs.current.forEach((section) => {
+      if (section) {
+        observer.observe(section);
+      }
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const root = mainRef.current;
+
+    if (!root || !isDesktopMode) {
+      return;
+    }
+
     const onWheel = (event: WheelEvent) => {
       event.preventDefault();
 
@@ -189,32 +244,6 @@ export default function Home() {
       const direction = wheelAccumulatorRef.current > 0 ? 1 : -1;
       wheelAccumulatorRef.current = 0;
       scrollToSection(activeSectionRef.current + direction);
-    };
-
-    const onTouchStart = (event: TouchEvent) => {
-      touchStartYRef.current = event.touches[0]?.clientY ?? null;
-    };
-
-    const onTouchMove = (event: TouchEvent) => {
-      if (touchStartYRef.current !== null) {
-        event.preventDefault();
-      }
-    };
-
-    const onTouchEnd = (event: TouchEvent) => {
-      if (touchStartYRef.current === null || isSwitchingRef.current) {
-        return;
-      }
-
-      const endY = event.changedTouches[0]?.clientY ?? touchStartYRef.current;
-      const delta = touchStartYRef.current - endY;
-      touchStartYRef.current = null;
-
-      if (Math.abs(delta) < 70) {
-        return;
-      }
-
-      scrollToSection(activeSectionRef.current + (delta > 0 ? 1 : -1));
     };
 
     const onKeyDown = (event: KeyboardEvent) => {
@@ -234,22 +263,16 @@ export default function Home() {
     };
 
     root.addEventListener("wheel", onWheel, { passive: false });
-    root.addEventListener("touchstart", onTouchStart, { passive: true });
-    root.addEventListener("touchmove", onTouchMove, { passive: false });
-    root.addEventListener("touchend", onTouchEnd, { passive: true });
     window.addEventListener("keydown", onKeyDown);
 
     return () => {
       root.removeEventListener("wheel", onWheel);
-      root.removeEventListener("touchstart", onTouchStart);
-      root.removeEventListener("touchmove", onTouchMove);
-      root.removeEventListener("touchend", onTouchEnd);
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [scrollToSection]);
+  }, [isDesktopMode, scrollToSection]);
 
   const sectionClassName =
-    "relative z-10 flex min-h-[100svh] items-center px-5 py-20 md:snap-start md:snap-always md:px-10 lg:px-20";
+    "relative z-10 flex min-h-[auto] items-center px-5 py-20 md:min-h-[100svh] md:snap-start md:snap-always md:px-10 lg:px-20";
 
   return (
     <MotionConfig
@@ -257,7 +280,7 @@ export default function Home() {
       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className="relative overflow-x-clip bg-[var(--agri-paper)]">
-        <SiteNav overlay />
+        <SiteNav />
 
         <div className="pointer-events-none fixed right-5 top-1/2 z-30 hidden -translate-y-1/2 md:block lg:right-8">
           <div className="pointer-events-auto flex flex-col items-center gap-2 px-1 py-1">
@@ -292,7 +315,11 @@ export default function Home() {
 
         <main
           ref={mainRef}
-          className="h-[100svh] overflow-y-hidden scroll-smooth pb-24"
+          className={
+            isDesktopMode
+              ? "h-[100svh] overflow-y-hidden scroll-smooth pb-24"
+              : "h-[100svh] overflow-y-auto scroll-smooth pb-36"
+          }
         >
           <section
             ref={registerSection(0)}
@@ -698,6 +725,7 @@ export default function Home() {
           className={`fixed inset-x-0 bottom-0 z-40 border-t border-black/10 bg-white/92 backdrop-blur-md transition-transform duration-300 ${
             isBottomSection ? "translate-y-0" : "pointer-events-none translate-y-full"
           }`}
+          style={{ paddingBottom: "max(env(safe-area-inset-bottom), 0rem)" }}
         >
           <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-3 px-4 py-3 sm:flex-row sm:px-6 md:px-8">
             <div className="flex flex-col items-center gap-1 text-center sm:items-start sm:text-left">

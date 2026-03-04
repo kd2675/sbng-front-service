@@ -49,7 +49,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-[linear-gradient(180deg,#ebe8dd_0%,#f3f0e6_34%,#eeebdf_100%)]">
-      <SiteNav overlay />
+      <SiteNav />
 
       <main className="overflow-x-hidden">
         <section className="relative flex h-[60vh] w-full flex-col items-center justify-center px-4">
@@ -123,9 +123,9 @@ export default function AboutPage() {
                           alt={`${item.year} ${item.title}`}
                           containerClassName="aspect-[4/3] overflow-hidden rounded-2xl border border-[#d7e0d2] bg-white shadow-[0_24px_60px_rgba(12,26,12,0.18)]"
                           grayContainerClassName={
-                            left ? "md:rotate-5" : "md:-rotate-5"
+                            left ? "rotate-6 md:rotate-5" : "-rotate-6 md:-rotate-5"
                           }
-                          colorContainerClassName="md:rotate-0"
+                          colorContainerClassName="rotate-0"
                         />
                       </div>
                     </article>

@@ -50,7 +50,7 @@ export default function CeoPageClient() {
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-[var(--agri-paper)] text-[var(--agri-ink)]">
-      <SiteNav overlay />
+      <SiteNav />
 
       <main>
         <section className="relative flex h-[84vh] items-end">
