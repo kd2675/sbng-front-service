@@ -139,18 +139,19 @@ export default function Home() {
   }, [activeSection]);
 
   useEffect(() => {
-    const media = window.matchMedia("(min-width: 1024px)");
+    const widthMedia = window.matchMedia("(min-width: 1024px)");
+    const pointerMedia = window.matchMedia("(any-pointer: fine)");
     const sync = () => {
-      const isTouchDevice =
-        "ontouchstart" in window || navigator.maxTouchPoints > 0;
-      setIsDesktopMode(media.matches && !isTouchDevice);
+      setIsDesktopMode(widthMedia.matches && pointerMedia.matches);
     };
 
     sync();
-    media.addEventListener("change", sync);
+    widthMedia.addEventListener("change", sync);
+    pointerMedia.addEventListener("change", sync);
 
     return () => {
-      media.removeEventListener("change", sync);
+      widthMedia.removeEventListener("change", sync);
+      pointerMedia.removeEventListener("change", sync);
     };
   }, []);
 
@@ -315,6 +316,7 @@ export default function Home() {
 
         <main
           ref={mainRef}
+          data-nav-scroll-root="true"
           className={
             isDesktopMode
               ? "h-[100svh] overflow-y-hidden scroll-smooth pb-24"
