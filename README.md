@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# sbng-front-service
 
-## Getting Started
+수북농업 브랜드/기업 사이트입니다. 제품 앱이 아니라 소개, 제품, CEO, 문의, SEO 자산을 제공하는 Next.js 사이트입니다.
 
-First, run the development server:
+## 주요 라우트
+
+- `/`
+- `/about`
+- `/ceo`
+- `/products`
+- `/contact`
+- `/rss.xml`
+
+## 특징
+
+- 사이트 URL 고정: `https://www.subuknongeop.com`
+- metadata, Open Graph, JSON-LD 포함
+- sitemap 생성
+- RSS 피드 제공
+- Naver site verification 메타 포함
+- Motion 기반 페이지 전환/표현 사용
+
+## 실행
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
+npm run start
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 포트
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- 개발 서버: `3004`
+- 프로덕션 시작: `3004`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 기술 스택
 
-## Learn More
+- Next.js 16.1.6
+- React 19.2.3
+- TypeScript 5
+- Tailwind CSS 4
+- Motion
 
-To learn more about Next.js, take a look at the following resources:
+## 참고
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- 별도 API 의존성은 거의 없습니다.
+- 문서/SEO 출력 검증 시 `app/layout.tsx`, `app/sitemap.ts`, `app/rss.xml/route.ts`를 함께 확인하면 됩니다.
