@@ -58,19 +58,22 @@ export default function SiteNav() {
         }`}
       >
         <Link href="/" className="flex items-center gap-3" onClick={() => setMobileOpen(false)}>
-          <div className="size-10 rounded-xl p-2 text-[var(--agri-primary)]">
-            <svg viewBox="0 0 48 48" fill="currentColor" className="size-full">
-              <path d="M24 5c8.4 0 16 2.1 16 7.2v.2c-.2.7-.7 1.6-1.9 2.6-1.9 1.5-4.9 2.7-8.2 3.4a27.5 27.5 0 0 1-11.8 0c-3.3-.7-6.2-1.9-8.2-3.4A6.5 6.5 0 0 1 8 12.4v-.2C8 7.1 15.6 5 24 5Zm0 18.2c3.6 0 7-.4 10-1.1L24 38.3l-10-16.2c3 .7 6.4 1.1 10 1.1Z" />
-              <path d="M24 3C18.7 3 13.8 3.7 10.1 5 8.2 5.7 6.5 6.5 5.2 7.6A6.3 6.3 0 0 0 3 12.3c0 .8.2 1.6.5 2.4.2.5.5 1.1.9 1.8l16.5 26.5c1.2 1.9 4 1.9 5.2 0l16.5-26.5c.4-.7.7-1.3.9-1.8.3-.8.5-1.6.5-2.4 0-1.8-.8-3.5-2.2-4.7C40.5 6.5 38.8 5.7 37 5c-3.8-1.3-8.7-2-13-2Zm0 4c8.9 0 15.7 2.4 16 5.2v.1c0 .1-.1.4-.5.9-.6.7-1.8 1.5-3.5 2.2-3.3 1.4-7.9 2.2-12 2.2s-8.7-.8-12-2.2c-1.7-.7-2.9-1.5-3.5-2.2a2 2 0 0 1-.5-.9v-.1C8.3 9.4 15.1 7 24 7Z" />
-            </svg>
-          </div>
-          <p
-            className={`font-display text-2xl font-bold tracking-tight ${
-              isScrolled ? "text-white" : useDarkText ? "text-[var(--agri-ink)]" : "text-white"
+          <img
+            alt="수북농업 브랜드 마크"
+            src="/image/logo-only-svg.svg"
+            className="h-10 w-10 shrink-0 object-contain"
+          />
+          <span
+            className={`text-lg font-semibold tracking-[-0.04em] ${
+              isScrolled
+                ? "text-white"
+                : useDarkText
+                ? "text-[var(--agri-ink)]"
+                : "text-white"
             }`}
           >
             수북농업
-          </p>
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-8 text-sm font-semibold md:flex">

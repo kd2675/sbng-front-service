@@ -4,24 +4,6 @@ import { motion, useReducedMotion } from "motion/react";
 import SiteFooter from "../components/site-footer";
 import SiteNav from "../components/site-nav";
 
-const principles = [
-  {
-    title: "Innovation with Integrity",
-    description:
-      "성과 기준과 현장 안전 기준을 동시에 통과한 기술만 적용합니다.",
-  },
-  {
-    title: "Farmer-First Thinking",
-    description:
-      "연구실 데이터보다 현장 문제 해결을 우선해 제품과 서비스를 고도화합니다.",
-  },
-  {
-    title: "Radical Transparency",
-    description:
-      "원료, 배합, 기대효과를 공개해 농가가 스스로 판단할 수 있게 돕습니다.",
-  },
-];
-
 const gallery = [
   {
     title: "Field Visit",
@@ -94,14 +76,17 @@ export default function CeoPageClient() {
               className="md:sticky md:top-24"
             >
               <img
-                alt="수북농업 CEO 프로필 사진"
+                alt="임시 CEO 남성 캐릭터 프로필"
                 className="aspect-[3/4] w-full rounded-2xl object-cover shadow-[0_24px_64px_rgba(12,26,12,0.22)]"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5ZwdXCEdDYALLNWxRkSvVZCABxzQh2Q9hbJGdWsPiTaDYumTCHLZxnknJmIRn0nbgxiZGGHc1zbCarJge28mYgHWiExhXBut-a4S1F637btOjwbqpDDl9PauNkpj7ZrZfcrpDipGU7d12i_Uurj1qZstlwQIwIvVrs8Tb70aSLATfQ9TW0g8lN8DeilH1Gw5m-xbL05i-ho3XfBV7jyIov2NrObjpG7rwim_0TrayzZTlvidwpyXXDYWdahwVtLEb9NrJ8W3I5_s"
+                src="/image/ceo-placeholder-male.svg"
               />
               <div className="mt-5">
-                <p className="font-display text-2xl font-bold">김수현</p>
-                <p className="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#516551]">
-                  Chief Executive Officer
+                <p className="font-display text-2xl font-bold">대표이사</p>
+                <p className="mt-1 text-sm font-semibold text-[#516551]">
+                  (유)수북농업 · 수북환경개발
+                </p>
+                <p className="mt-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#6a7d69]">
+                  Chairman of Jeonnam Eco-Friendly Agro Industry Federation
                 </p>
               </div>
             </motion.aside>
@@ -116,25 +101,26 @@ export default function CeoPageClient() {
                 CEO 메시지
               </h2>
               <p className="mt-7 text-2xl leading-relaxed text-[#3f523f]">
-                &ldquo;농업의 미래는 생산량이 아니라, 토양과 사람을 함께 지키는
-                방식에 달려 있습니다.&rdquo;
+                &ldquo;지역 농업의 신뢰는 현장에 답하고 책임 있게 연결하는 데서
+                시작된다고 생각합니다.&rdquo;
               </p>
               <div className="mt-8 space-y-5 text-lg leading-relaxed text-[#4a5f49]">
                 <p>
-                  수북농업은 데이터 기반 영양 설계와 현장 맞춤 컨설팅으로 농가의
-                  불확실성을 줄이고 있습니다.
+                  명함 기준으로 이 소개 페이지에서 확인되는 역할은 세 가지입니다.
+                  전남친환경농산업연합회 회장, 수북농업 대표이사, 수북환경개발
+                  대표이사입니다.
                 </p>
                 <p>
-                  우리는 더 적은 자원으로 더 높은 안정성을 만드는 기술에 집중하며,
-                  모든 제품이 실제 현장에서 검증되도록 운영합니다.
+                  이는 단순한 직함 나열보다, 지역 농업 네트워크와 기업 운영을 동시에
+                  맡고 있다는 의미로 읽히며 수북농업의 신뢰도와 실행 범위를 보여줍니다.
                 </p>
                 <p>
-                  앞으로도 수북농업은 농가와 함께 지역 토양을 회복하고, 다음 세대에
-                  건강한 농업 생태계를 남기는 데 책임을 다하겠습니다.
+                  CEO 소개 페이지는 이 명함 정보에 맞춰 과장된 개인 서사보다 실제
+                  직책, 회사 기반, 연락 가능성 중심으로 정리하는 편이 더 적절합니다.
                 </p>
               </div>
               <p className="mt-8 text-xl font-bold text-[#1f351f]">감사합니다.</p>
-              <p className="mt-1 text-lg text-[#385238]">수북농업 CEO 김수현</p>
+              <p className="mt-1 text-lg text-[#385238]">(유)수북농업 대표이사</p>
             </motion.article>
           </div>
         </section>
@@ -173,35 +159,36 @@ export default function CeoPageClient() {
               className="rounded-3xl border border-black/8 bg-white p-8 shadow-[0_18px_46px_rgba(12,26,12,0.08)]"
             >
               <h3 className="font-display text-3xl font-bold text-[var(--agri-ink)]">
-                Professional Biography
+                명함 기준 소개
               </h3>
               <div className="mt-6 space-y-5 leading-relaxed text-[#4f634e]">
                 <p>
-                  김수현 CEO는 토양미생물학 박사 학위와 경영학 석사를 바탕으로
-                  농업 기술 상용화와 조직 운영을 함께 이끌어 왔습니다.
+                  이 페이지에서 근거로 삼은 자료는 `ceo-card.png` 명함 이미지입니다.
+                  명함에는 전남친환경농산업연합회 회장, (유)수북농업·수북환경개발
+                  대표이사라는 직함이 확인됩니다.
                 </p>
                 <p>
-                  지난 20여 년간 정밀 비료, 토양 데이터 분석, 농가 컨설팅 체계를
-                  구축하며 현장 중심의 성과를 만들어냈습니다.
+                  개인 이름이나 상세 경력은 명함에서 명확히 확인되지 않으므로, 이
+                  소개 영역은 확인 가능한 직함과 사업 기반 정보만 중심으로 작성했습니다.
                 </p>
               </div>
               <div className="mt-9 flex flex-wrap gap-8 border-t border-black/8 pt-8">
                 <div>
-                  <p className="text-4xl font-bold text-[var(--agri-primary-deep)]">20+</p>
+                  <p className="text-4xl font-bold text-[var(--agri-primary-deep)]">3</p>
                   <p className="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#5f725d]">
-                    Years Experience
+                    Verified Roles
                   </p>
                 </div>
                 <div>
-                  <p className="text-4xl font-bold text-[var(--agri-primary-deep)]">15</p>
+                  <p className="text-4xl font-bold text-[var(--agri-primary-deep)]">1030</p>
                   <p className="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#5f725d]">
-                    Patents Held
+                    Chuseong-ro
                   </p>
                 </div>
                 <div>
-                  <p className="text-4xl font-bold text-[var(--agri-primary-deep)]">R&D x 3</p>
+                  <p className="text-4xl font-bold text-[var(--agri-primary-deep)]">061</p>
                   <p className="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#5f725d]">
-                    New Product Lines
+                    Main Contact Code
                   </p>
                 </div>
               </div>
@@ -214,15 +201,34 @@ export default function CeoPageClient() {
               className="rounded-3xl border border-black/8 bg-white p-8 shadow-[0_18px_46px_rgba(12,26,12,0.08)]"
             >
               <h3 className="font-display text-3xl font-bold text-[var(--agri-ink)]">
-                Core Philosophy
+                연락 및 운영 정보
               </h3>
               <div className="mt-7 space-y-6">
-                {principles.map((item) => (
-                  <div key={item.title} className="border-l-2 border-black/10 pl-5">
-                    <h4 className="text-lg font-bold text-[var(--agri-ink)]">{item.title}</h4>
-                    <p className="mt-1 leading-relaxed text-[#4f634e]">{item.description}</p>
-                  </div>
-                ))}
+                <div className="border-l-2 border-black/10 pl-5">
+                  <h4 className="text-lg font-bold text-[var(--agri-ink)]">주소</h4>
+                  <p className="mt-1 leading-relaxed text-[#4f634e]">
+                    전남 담양군 담양읍 추성로 1030
+                  </p>
+                </div>
+                <div className="border-l-2 border-black/10 pl-5">
+                  <h4 className="text-lg font-bold text-[var(--agri-ink)]">대표 연락처</h4>
+                  <p className="mt-1 leading-relaxed text-[#4f634e]">
+                    TEL. (061) 383-6186 / FAX. (061) 383-6187
+                  </p>
+                </div>
+                <div className="border-l-2 border-black/10 pl-5">
+                  <h4 className="text-lg font-bold text-[var(--agri-ink)]">직통 및 이메일</h4>
+                  <p className="mt-1 leading-relaxed text-[#4f634e]">
+                    H.P 010-6408-6186 / kgy2675@hanmail.net
+                  </p>
+                </div>
+                <div className="border-l-2 border-black/10 pl-5">
+                  <h4 className="text-lg font-bold text-[var(--agri-ink)]">운영 성격</h4>
+                  <p className="mt-1 leading-relaxed text-[#4f634e]">
+                    지역 기반 기업 운영과 친환경 농산업 네트워크 역할을 함께 수행하는
+                    구조로 읽힙니다.
+                  </p>
+                </div>
               </div>
             </motion.article>
           </div>
