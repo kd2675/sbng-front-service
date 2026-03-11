@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { companyInfo } from "../company-info";
 import { NAV_ITEMS } from "./nav-items";
@@ -8,9 +9,12 @@ export default function SiteFooter() {
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 md:flex-row md:items-center md:justify-between">
         <div className="flex items-start gap-4">
           <div className="flex items-center gap-3">
-            <img
+            <Image
               alt="수북농업 브랜드 마크"
               src="/image/logo-only-svg.svg"
+              width={48}
+              height={48}
+              sizes="48px"
               className="h-12 w-12 shrink-0 object-contain"
             />
             <p className="text-lg font-semibold tracking-[-0.04em] text-[#243422]">수북농업</p>

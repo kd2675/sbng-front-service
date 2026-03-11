@@ -1,10 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 type ColorShiftImageProps = {
   src: string;
   alt: string;
+  sizes?: string;
   containerClassName?: string;
   imageClassName?: string;
   grayContainerClassName?: string;
@@ -14,6 +16,7 @@ type ColorShiftImageProps = {
 export default function ColorShiftImage({
   src,
   alt,
+  sizes = "(min-width: 768px) 42vw, 100vw",
   containerClassName = "",
   imageClassName = "",
   grayContainerClassName = "",
@@ -49,14 +52,16 @@ export default function ColorShiftImage({
   return (
     <div
       ref={wrapperRef}
-      className={`${containerClassName} transition-transform duration-700 ease-out ${
+      className={`relative ${containerClassName} transition-transform duration-700 ease-out ${
         isColored ? colorContainerClassName : grayContainerClassName
       }`}
     >
-      <img
+      <Image
         alt={alt}
         src={src}
-        className={`h-full w-full object-cover transition-[filter] duration-700 ease-out ${
+        fill
+        sizes={sizes}
+        className={`object-cover transition-[filter] duration-700 ease-out ${
           isColored
             ? "grayscale-0 sepia-0 contrast-100 brightness-100 saturate-100"
             : "grayscale-[0.78] sepia-[0.36] contrast-70 brightness-75 saturate-40"

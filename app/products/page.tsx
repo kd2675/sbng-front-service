@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { companyInfo } from "../company-info";
 import { productCatalog } from "../product-catalog";
 import SiteFooter from "../components/site-footer";
@@ -195,26 +196,33 @@ export default function ProductsPage() {
                   </div>
 
                   <div className={`grid gap-4 md:grid-cols-[1.08fr_0.92fr] ${reverse ? "lg:order-1" : ""}`}>
-                    <figure className="overflow-hidden rounded-[1.75rem] border border-[#dce4d5] bg-[#eef4ea]">
-                      <img
+                    <figure className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] border border-[#dce4d5] bg-[#eef4ea]">
+                      <Image
                         alt={`${product.name} 제품 앞면`}
                         src={product.frontImage}
-                        className="h-full w-full object-cover"
+                        fill
+                        sizes="(min-width: 1280px) 26rem, (min-width: 768px) 46vw, 100vw"
+                        className="object-cover"
                       />
                     </figure>
                     <div className="grid gap-4">
-                      <figure className="overflow-hidden rounded-[1.5rem] border border-[#dce4d5] bg-[#f7faf4]">
-                        <img
+                      <figure className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] border border-[#dce4d5] bg-[#f7faf4]">
+                        <Image
                           alt={`${product.name} 제품 안내 시트`}
                           src={product.sheetImage}
-                          className="h-full w-full object-cover"
+                          fill
+                          sizes="(min-width: 1280px) 22rem, (min-width: 768px) 38vw, 100vw"
+                          quality={82}
+                          className="object-cover"
                         />
                       </figure>
-                      <figure className="overflow-hidden rounded-[1.5rem] border border-[#dce4d5] bg-[#f7faf4]">
-                        <img
+                      <figure className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] border border-[#dce4d5] bg-[#f7faf4]">
+                        <Image
                           alt={`${product.name} 제품 뒷면`}
                           src={product.backImage}
-                          className="h-full w-full object-cover"
+                          fill
+                          sizes="(min-width: 1280px) 22rem, (min-width: 768px) 38vw, 100vw"
+                          className="object-cover"
                         />
                       </figure>
                     </div>

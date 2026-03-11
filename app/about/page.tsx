@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import ColorShiftImage from "./color-shift-image";
 import SiteFooter from "../components/site-footer";
 import SiteNav from "../components/site-nav";
@@ -55,10 +56,13 @@ export default function AboutPage() {
         <section className="relative flex h-[60vh] w-full flex-col items-center justify-center px-4">
           <div className="absolute inset-0 z-0 h-full w-full">
             <div className="absolute inset-0 z-10 bg-[#0f2814]/50" />
-            <img
+            <Image
               alt="Historical farm photo from 1985"
-              className="h-full w-full object-cover sepia-[0.3] contrast-75 grayscale-[0.2]"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbB7OvuFpZ2-kDvE02bXeutf-6pdVSWl0T9n8t1VaXwtHEYpaM2jk39g7ieo4p3n0FHPrC8Ujfjo2s1SR4n-j4fkXUmWaRCkrYrsMWjGT34DnzTu-norFdaxRb8eUCFOb_vpchnO3Sa8DEEyrd_KDbegxlaMlNtZd1ZpRDGo2ExkoEnW6uzDNxma6YU42OUiIFcwpS2uo-QNJrhvaHgaYbsv_zNGQ6Yg_iAxbMJzSbSWaADoMHMdM1Uorv9R1cznT-MsiaYeEufz0"
+              fill
+              preload
+              sizes="100vw"
+              className="object-cover sepia-[0.3] contrast-75 grayscale-[0.2]"
             />
           </div>
 

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { MotionConfig, motion, useReducedMotion } from "motion/react";
@@ -321,7 +322,14 @@ export default function Home() {
             data-section-index={0}
             className="hero-grain relative isolate flex min-h-[100svh] items-center justify-center px-5 pb-16 pt-28 md:snap-start md:snap-always md:px-10 lg:px-20"
           >
-            <div className="absolute inset-0 -z-20 bg-[url('https://images.unsplash.com/photo-1592982537447-6f2a6a0c8d43?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center" />
+            <Image
+              alt="수북농업 대표 농업 현장"
+              src="https://images.unsplash.com/photo-1592982537447-6f2a6a0c8d43?auto=format&fit=crop&w=1920&q=80"
+              fill
+              preload
+              sizes="100vw"
+              className="-z-20 object-cover"
+            />
             <div className="absolute inset-0 -z-10 bg-black/25" />
 
             <div className="mx-auto flex w-full max-w-5xl flex-col items-center text-center">
@@ -438,10 +446,12 @@ export default function Home() {
                     className="flex flex-col overflow-hidden rounded-3xl border border-black/6 bg-white shadow-[0_20px_50px_rgba(10,25,10,0.07)]"
                   >
                     <div className="relative h-56 overflow-hidden bg-[#edf3e7]">
-                      <img
+                      <Image
                         alt={`${item.name} 제품 이미지`}
                         src={item.image}
-                        className="h-full w-full object-cover"
+                        fill
+                        sizes="(min-width: 768px) 28vw, 100vw"
+                        className="object-cover"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent" />
                       <p className="absolute left-5 top-5 rounded-full bg-white/82 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--agri-ink)] backdrop-blur">
@@ -558,11 +568,13 @@ export default function Home() {
                 viewport={{ once: true, amount: 0.35 }}
                 className="relative lg:col-span-4"
               >
-                <div className="overflow-hidden rounded-3xl border border-black/10 shadow-[0_30px_70px_rgba(13,28,11,0.16)]">
-                  <img
+                <div className="relative aspect-[3/4] overflow-hidden rounded-3xl border border-black/10 shadow-[0_30px_70px_rgba(13,28,11,0.16)]">
+                  <Image
                     alt="수북농업 CEO 프로필"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfNvDKOA4us8Alix8jWVyu9urycX7CVV0JHF2Oyn_q3QsnIetIvYF0EgmdheZjgusMTMdPL-fVIxhFDDMdRKXfA0Cez0UsJf5TLPkvZotFit9BsCAmE_QfMnqCpxJIsy2ESR12g92bWDTjePFIXGej4QL7Gr8ndelj0l6HLLQiS-7bhvYJiwapUYvMfWXkAaDFFxW6PVzE4sSYkk4AkjuGmAR8w0f2mNwEi0rSi4HZta0qVc96JqNlqpb8AYgT4QUkh4aAWFiB77E"
-                    className="aspect-[3/4] w-full object-cover"
+                    fill
+                    sizes="(min-width: 1024px) 28vw, 100vw"
+                    className="object-cover"
                   />
                 </div>
               </motion.div>

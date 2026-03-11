@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import SiteFooter from "../components/site-footer";
 import SiteNav from "../components/site-nav";
@@ -38,10 +39,13 @@ export default function CeoPageClient() {
         <section className="relative flex h-[84vh] items-end">
           <div className="absolute inset-0">
             <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/75 via-black/50 to-black/20" />
-            <img
+            <Image
               alt="수북농업 CEO 과수원 현장"
-              className="h-full w-full object-cover object-center"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8IWhyQjGiWdq3v9aNX8WMSfftZ0FykbqCoOXjDMS60RREBzh6P4vVtFTqtuUnlneVNF7dMFhf1_C2oAGXkzM04ow8PgwrdO6lN06b_6VgCrY-nz5aNZcvTSSL2iG4TjxTbMcCAzg4ESOlCdjeYc2mOZcNaqOdEvMFXfK1jqMYuW_WWeLT6VAazP-1yOcBaKIoiccqw7Cq39X8BEG6gP0BtC08NXukNb4YwyrqpOXEFj3aDwMtBzni7kpjSHJjjKjPfSXsGvwgKdU"
+              fill
+              preload
+              sizes="100vw"
+              className="object-cover object-center"
             />
           </div>
 
@@ -75,10 +79,13 @@ export default function CeoPageClient() {
               viewport={{ once: true, amount: 0.35 }}
               className="md:sticky md:top-24"
             >
-              <img
+              <Image
                 alt="임시 CEO 남성 캐릭터 프로필"
-                className="aspect-[3/4] w-full rounded-2xl object-cover shadow-[0_24px_64px_rgba(12,26,12,0.22)]"
                 src="/image/ceo-placeholder-male.svg"
+                width={900}
+                height={1200}
+                sizes="(min-width: 768px) 28vw, 100vw"
+                className="aspect-[3/4] w-full rounded-2xl object-cover shadow-[0_24px_64px_rgba(12,26,12,0.22)]"
               />
               <div className="mt-5">
                 <p className="font-display text-2xl font-bold">대표이사</p>
@@ -125,13 +132,14 @@ export default function CeoPageClient() {
           </div>
         </section>
 
-        <section
-          className="relative bg-cover bg-center bg-no-repeat px-5 py-24 md:px-10 lg:px-20"
-          style={{
-            backgroundImage:
-              "url('https://lh3.googleusercontent.com/aida-public/AB6AXuDGKqbL13qycgyQApJwBNaP9hO_xLI3lZZw3zaDiUJp74yqLEx3XNZ5cSgiCbcVG6TTwv5YPrgGXgZVx3VeapE92ahabXhYLxohyAB13jfxONFaX9NQytcpdmJfn64eTCaUkNMDIsi9kLjpA5_xWWIPK-dQfLi_kypplEdHD2KFFJ0UwGK8AZ-eOsm9ZpnBz7op7kFlHMg_yW8dkdKUNN3LFq1QjTlvRDvxwn8bh-c2WKxrqdEjHGVAKbf4nrPc64OIvcw61s1zTgk')",
-          }}
-        >
+        <section className="relative overflow-hidden px-5 py-24 md:px-10 lg:px-20">
+          <Image
+            alt="수북농업 비전 배경"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGKqbL13qycgyQApJwBNaP9hO_xLI3lZZw3zaDiUJp74yqLEx3XNZ5cSgiCbcVG6TTwv5YPrgGXgZVx3VeapE92ahabXhYLxohyAB13jfxONFaX9NQytcpdmJfn64eTCaUkNMDIsi9kLjpA5_xWWIPK-dQfLi_kypplEdHD2KFFJ0UwGK8AZ-eOsm9ZpnBz7op7kFlHMg_yW8dkdKUNN3LFq1QjTlvRDvxwn8bh-c2WKxrqdEjHGVAKbf4nrPc64OIvcw61s1zTgk"
+            fill
+            sizes="100vw"
+            className="object-cover"
+          />
           <div className="absolute inset-0 bg-[#132210]/82" />
           <motion.div
             initial={revealInitial}
@@ -262,10 +270,12 @@ export default function CeoPageClient() {
                   className="group overflow-hidden rounded-2xl border border-black/8 bg-white shadow-[0_14px_35px_rgba(12,26,12,0.1)]"
                 >
                   <div className="relative h-72">
-                    <img
+                    <Image
                       alt={item.description}
                       src={item.image}
-                      className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                      fill
+                      sizes="(min-width: 768px) 30vw, 100vw"
+                      className="object-cover transition duration-700 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/75 to-transparent" />
                     <div className="absolute bottom-5 left-5 right-5">
