@@ -1,42 +1,13 @@
 import type { Metadata } from "next";
+import { companyInfo } from "../company-info";
+import { productCatalog } from "../product-catalog";
+import SiteFooter from "../components/site-footer";
 import SiteNav from "../components/site-nav";
-
-const products = [
-  {
-    name: "Nitrogen Plus Boost",
-    category: "Liquid Fertilizer",
-    badge: "Top Rated",
-    badgeClass: "bg-[var(--agri-primary)] text-[#112614]",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuCBcAqphtMh_B0rGg70Z64gQKQ3bAHQ8AGijEkCcjKmPvVJ1M8W0LvGo-ml_KyNblEg_INwMC_GDC9cwmAi_4DqpyZAdwWurccFimrSePJIX9zlwgvuXWYmgsU6CVmCCjsDECl3rVNsqTI6f6kX4gL0Mcr3dbILg2R0ruNP4Ygcao9DwtXEITdUrOnU2yk1--4rddN8yV8KiMfLYVjXjKFkGdY7ofbnu7HQX9B5CF90gkey_Gg3wRbVDeEuIgQMiWPPH4_s1VXAHLA",
-    summary:
-      "질소 흡수 효율을 높여 초기 생육과 엽면 활력을 빠르게 끌어올리는 액상 포뮬러입니다.",
-  },
-  {
-    name: "EcoGrow Pellets",
-    category: "Organic Series",
-    badge: "Eco-Choice",
-    badgeClass: "bg-[#2e7d32] text-white",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBVnt6Av3Y1m82e9QtSCUih0RQpN6XM5dB4pJnKh8xBId1r0LdlvpBUPDvLQVxz4aDjbt39x2z0RBVWY9rEHKV_7xrhKZzrexQzQrwgN4GgI3JcMcxp6gPTXJWzTy06dqpdqHWBPsOg-aEEXnCKMmiTnAFawcFQMM_p9x0ExXRVG9W4WdV6RZbmct1Dvi1Y_ShpisNXafPBnJ7s3F7bQjb8OzUJMYMxdjwymZkxlchjDxTpKhsyxcYolvffnAYFrnPwhjB30ZnqJMM",
-    summary:
-      "유기질 펠릿 기반의 완효성 제품으로 토양 구조를 장기적으로 안정화하고 생태 균형을 강화합니다.",
-  },
-  {
-    name: "PhosPower Granules",
-    category: "Granular Blend",
-    badge: "Power Blend",
-    badgeClass: "bg-[#5d4037] text-white",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBCPxx16jFN3bOyzBut8Zen2NP3ELxhdquWISoQcJgub-bbN84qTZ74YsHohlY2z9y5am6akCCEedpYMRzW092PjrnGFKaPvMV1AZzV1_sLmC4uUo3sBcDt3oeeyEsyxBYETC2foTYMXGNmLuUk2utvyM4B6cK-1KuBStlbo8v5Uqi7GNzhyBNOksjbx0BnB1g5sEV489jsfKJ-KJeLsajVv3Ckj2nRW8LHu1ivpYhAyh_F-DS-AZsWGaaMZEk-tXWmwDs4XToi23A",
-    summary:
-      "인산 중심의 과립 배합으로 뿌리 발달과 개화·결실 안정성을 높여 생산량 개선에 유리합니다.",
-  },
-];
 
 export const metadata: Metadata = {
   title: "제품 소개",
-  description: "수북농업의 비료 제품 라인업과 적용 작물 정보를 확인하세요.",
+  description:
+    "수북농업의 흙손, 흙보약, 무등산 제품 라인업과 적용 방향을 확인하세요.",
   alternates: {
     canonical: "/products",
   },
@@ -44,80 +15,232 @@ export const metadata: Metadata = {
 
 export default function ProductsPage() {
   return (
-    <div className="min-h-screen bg-[#f6f8f6]">
+    <div className="min-h-screen bg-[#f4f6ef]">
       <SiteNav />
 
-      <section className="relative overflow-hidden bg-[#132210] px-6 py-20 md:px-10 lg:px-20">
-        <div className="absolute right-0 top-0 h-96 w-96 translate-x-1/3 -translate-y-1/3 rounded-full bg-[var(--agri-primary)]/16 blur-3xl" />
-        <div className="absolute bottom-0 left-0 h-80 w-80 -translate-x-1/3 translate-y-1/4 rounded-full bg-[#2e7d32]/24 blur-3xl" />
-        <div className="relative mx-auto max-w-7xl text-center">
-          <p className="text-sm font-semibold tracking-wide text-[var(--agri-primary)]">
-            Flagship Collection
+      <section className="relative overflow-hidden bg-[#112614] px-6 pb-20 pt-28 md:px-10 lg:px-20">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(122,240,83,0.22),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(93,140,84,0.22),transparent_36%)]" />
+        <div className="relative mx-auto max-w-7xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--agri-primary)]">
+            Product Lineup
           </p>
-          <h1 className="font-display mt-4 text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl">
-            수북농업 프리미엄 비료 솔루션
+          <h1 className="font-display mt-5 max-w-4xl text-4xl font-bold leading-tight text-white md:text-6xl">
+            홍보자료 기준으로 정리한
+            <br className="hidden sm:block" /> 수북농업 대표 제품 3종
           </h1>
-          <p className="mx-auto mt-6 max-w-3xl text-lg text-slate-300">
-            고효율 흡수 설계, 토양 친화 배합, 현장 검증 데이터를 바탕으로 핵심 제품
-            3종을 제안합니다.
+          <p className="mt-6 max-w-3xl text-base leading-relaxed text-white/78 md:text-lg">
+            흙손, 흙보약, 무등산은 모두 토양개량 및 작물생육용 제품군입니다.
+            포장 실사와 안내 시트를 함께 배치해 브랜드 소개 사이트에서도 제품 신뢰도를
+            빠르게 전달하도록 구성했습니다.
           </p>
+
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {productCatalog.map((product) => (
+              <article
+                key={product.id}
+                className="rounded-3xl border border-white/12 bg-white/6 p-5 backdrop-blur-sm"
+              >
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--agri-primary)]">
+                  {product.category}
+                </p>
+                <h2 className="mt-3 text-2xl font-bold text-white">{product.name}</h2>
+                <p className="mt-3 text-sm leading-relaxed text-white/74">{product.cardSummary}</p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-white/86">
+                    {product.form}
+                  </span>
+                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-white/86">
+                    {product.packUnit}
+                  </span>
+                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-white/86">
+                    {product.material}
+                  </span>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
       <main className="mx-auto w-full max-w-[1440px] px-6 py-16 md:px-10 lg:px-20">
-        <section className="grid grid-cols-1 gap-8 xl:gap-12 md:grid-cols-3">
-          {products.map((product) => (
-            <article
-              key={product.name}
-              className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-slate-100 bg-white transition-all hover:-translate-y-2 hover:shadow-2xl"
-            >
-              <div className="relative h-64 overflow-hidden bg-slate-100">
-                <span
-                  className={`absolute right-4 top-4 z-10 rounded-full px-4 py-1.5 text-sm font-bold shadow-lg ${product.badgeClass}`}
-                >
-                  {product.badge}
-                </span>
-                <img
-                  alt={product.name}
-                  src={product.image}
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60" />
-                <div className="absolute bottom-4 left-4 right-4">
-                  <p className="text-xs font-bold uppercase tracking-widest text-[var(--agri-primary)]">
-                    {product.category}
-                  </p>
-                </div>
-              </div>
+        <section className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+          <div className="rounded-[2rem] border border-[#dfe7d7] bg-white p-8 shadow-[0_24px_60px_rgba(12,26,12,0.08)] md:p-10">
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--agri-primary-deep)]">
+              Selection Principle
+            </p>
+            <h2 className="font-display mt-3 text-3xl font-bold text-[var(--agri-ink)] md:text-4xl">
+              브랜드 소개 사이트에 맞는 제품 커뮤니케이션 구조
+            </h2>
+            <p className="mt-5 max-w-3xl leading-relaxed text-[#496048]">
+              대표 썸네일에는 포장 앞면 실사를, 상세 설명에는 안내 시트를, 신뢰 보강
+              용도로는 포장 뒷면 이미지를 배치했습니다. 판매 페이지처럼 복잡하게 보이지
+              않으면서도, 실제 제품 확인과 핵심 정보 전달이 동시에 되도록 설계했습니다.
+            </p>
+          </div>
 
-              <div className="flex flex-1 flex-col p-8">
-                <h2 className="text-2xl font-bold leading-tight text-slate-900 md:text-3xl">
-                  {product.name}
-                </h2>
-                <p className="mt-4 leading-relaxed text-slate-600">
-                  {product.summary}
-                </p>
+          <aside className="rounded-[2rem] border border-[#dfe7d7] bg-[#edf5e7] p-8 shadow-[0_24px_60px_rgba(12,26,12,0.05)]">
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--agri-primary-deep)]">
+              Consultation
+            </p>
+            <h3 className="mt-3 text-2xl font-bold text-[var(--agri-ink)]">
+              제품 상담 및 자료 문의
+            </h3>
+            <p className="mt-4 leading-relaxed text-[#496048]">
+              작물 특성, 투입 시기, 토양 상태에 따라 실제 적용량은 달라질 수 있습니다.
+              상세 상담은 본사로 문의하는 구성이 가장 자연스럽습니다.
+            </p>
+            <div className="mt-6 space-y-2 text-sm font-semibold text-[#264526]">
+              <p>{companyInfo.legalName}</p>
+              <p>{companyInfo.address}</p>
+              <p>전화 {companyInfo.telephoneDisplay}</p>
+              <p>팩스 {companyInfo.faxDisplay}</p>
+            </div>
+          </aside>
+        </section>
 
-                <div className="mt-auto border-t border-slate-100 pt-6">
-                  <button
-                    type="button"
-                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#132210] py-4 text-lg font-bold text-white transition-all hover:bg-[var(--agri-primary)] hover:text-[#132210]"
-                  >
-                    제품 상세 보기
-                    <span aria-hidden>→</span>
-                  </button>
+        <section className="mt-16 space-y-16">
+          {productCatalog.map((product, index) => {
+            const reverse = index % 2 === 1;
+
+            return (
+              <article
+                key={product.id}
+                className="rounded-[2rem] border border-[#dce5d5] bg-white p-6 shadow-[0_26px_80px_rgba(12,26,12,0.08)] md:p-8 lg:p-10"
+              >
+                <div className="grid items-start gap-8 lg:grid-cols-2">
+                  <div className={reverse ? "lg:order-2" : undefined}>
+                    <div className="flex flex-wrap items-center gap-3">
+                      <span
+                        className={`rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-[0.16em] ${product.badgeClass}`}
+                      >
+                        {product.category}
+                      </span>
+                      <span className="text-xs font-bold uppercase tracking-[0.18em] text-[#60765f]">
+                        Series 0{index + 1}
+                      </span>
+                    </div>
+
+                    <h2 className="font-display mt-5 text-4xl font-bold tracking-tight text-[var(--agri-ink)] md:text-5xl">
+                      {product.name}
+                    </h2>
+                    <p className="mt-3 text-lg font-semibold text-[#315131]">
+                      {product.displayName}
+                    </p>
+                    <p className="mt-5 max-w-2xl leading-relaxed text-[#4f644e]">
+                      {product.summary}
+                    </p>
+
+                    <div className="mt-7 grid gap-3 sm:grid-cols-2">
+                      <div className="rounded-2xl bg-[#f4f8f0] p-4">
+                        <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#6a7f69]">
+                          성상
+                        </p>
+                        <p className="mt-2 text-lg font-bold text-[var(--agri-ink)]">
+                          {product.form}
+                        </p>
+                      </div>
+                      <div className="rounded-2xl bg-[#f4f8f0] p-4">
+                        <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#6a7f69]">
+                          자재명
+                        </p>
+                        <p className="mt-2 text-lg font-bold text-[var(--agri-ink)]">
+                          {product.material}
+                        </p>
+                      </div>
+                      <div className="rounded-2xl bg-[#f4f8f0] p-4">
+                        <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#6a7f69]">
+                          포장단위
+                        </p>
+                        <p className="mt-2 text-lg font-bold text-[var(--agri-ink)]">
+                          {product.packUnit}
+                        </p>
+                      </div>
+                      <div className="rounded-2xl bg-[#f4f8f0] p-4">
+                        <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#6a7f69]">
+                          사용 기준
+                        </p>
+                        <p className="mt-2 text-lg font-bold text-[var(--agri-ink)]">
+                          {product.usage}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="mt-7 rounded-3xl border border-[#deead8] bg-[#f8fbf5] p-6">
+                      <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--agri-primary-deep)]">
+                        보증 성분량
+                      </p>
+                      <p className="mt-3 text-xl font-bold leading-snug text-[var(--agri-ink)]">
+                        {product.guarantee}
+                      </p>
+                      <ul className="mt-5 space-y-3 text-sm leading-relaxed text-[#4e664d]">
+                        {product.highlights.map((highlight) => (
+                          <li key={highlight} className="flex gap-3">
+                            <span className="mt-1.5 h-2 w-2 rounded-full bg-[var(--agri-primary-deep)]" />
+                            <span>{highlight}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {product.cropTags.map((tag) => (
+                        <span
+                          key={`${product.id}-${tag}`}
+                          className="rounded-full border border-[#cfe0c8] bg-white px-3 py-1.5 text-xs font-semibold text-[#4a6148]"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className={`grid gap-4 md:grid-cols-[1.08fr_0.92fr] ${reverse ? "lg:order-1" : ""}`}>
+                    <figure className="overflow-hidden rounded-[1.75rem] border border-[#dce4d5] bg-[#eef4ea]">
+                      <img
+                        alt={`${product.name} 제품 앞면`}
+                        src={product.frontImage}
+                        className="h-full w-full object-cover"
+                      />
+                    </figure>
+                    <div className="grid gap-4">
+                      <figure className="overflow-hidden rounded-[1.5rem] border border-[#dce4d5] bg-[#f7faf4]">
+                        <img
+                          alt={`${product.name} 제품 안내 시트`}
+                          src={product.sheetImage}
+                          className="h-full w-full object-cover"
+                        />
+                      </figure>
+                      <figure className="overflow-hidden rounded-[1.5rem] border border-[#dce4d5] bg-[#f7faf4]">
+                        <img
+                          alt={`${product.name} 제품 뒷면`}
+                          src={product.backImage}
+                          className="h-full w-full object-cover"
+                        />
+                      </figure>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
+        </section>
+
+        <section className="mt-16 rounded-[2rem] bg-[#112614] px-8 py-12 text-white md:px-10">
+          <p className="text-sm font-bold uppercase tracking-[0.22em] text-[var(--agri-primary)]">
+            Brand Note
+          </p>
+          <h2 className="font-display mt-4 text-3xl font-bold md:text-4xl">
+            제품 이미지는 소개용, 세부 적용은 상담 중심으로
+          </h2>
+          <p className="mt-5 max-w-4xl leading-relaxed text-white/82">
+            이 페이지는 온라인 판매가 아니라 브랜드 소개와 제품 이해를 위한 구성입니다.
+            실제 시비량과 적용 시기는 토양 상태와 작물 조건에 따라 달라질 수 있으므로,
+            현장 상담을 통해 최종 안내하는 흐름이 가장 적절합니다.
+          </p>
         </section>
       </main>
 
-      <footer className="mt-auto border-t border-white/10 bg-[#132210] py-10">
-        <div className="mx-auto max-w-7xl px-6 text-center text-sm text-slate-400 md:px-10 lg:px-20">
-          <p>© 2026 수북농업. All rights reserved.</p>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

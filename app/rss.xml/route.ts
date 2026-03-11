@@ -13,7 +13,7 @@ type FeedItem = {
 const feedItems: FeedItem[] = [
   {
     title: "수북농업 공식 홈페이지",
-    description: "토양 중심 농업 솔루션과 핵심 서비스 안내를 확인할 수 있습니다.",
+    description: "토양 중심 농업 솔루션과 대표 제품 3종 안내를 확인할 수 있습니다.",
     path: "/",
     publishedAt: "2026-02-18T00:00:00+09:00",
   },
@@ -25,7 +25,7 @@ const feedItems: FeedItem[] = [
   },
   {
     title: "제품 소개",
-    description: "수북농업의 비료 제품 라인업과 적용 작물 정보를 확인할 수 있습니다.",
+    description: "흙손, 흙보약, 무등산 제품 라인업과 적용 방향을 확인할 수 있습니다.",
     path: "/products",
     publishedAt: "2026-02-18T00:00:00+09:00",
   },
@@ -37,7 +37,7 @@ const feedItems: FeedItem[] = [
   },
   {
     title: "문의하기",
-    description: "제품 및 농업 솔루션 상담 문의를 접수할 수 있습니다.",
+    description: "제품 및 농업 솔루션 상담 문의와 본사 연락처를 확인할 수 있습니다.",
     path: "/contact",
     publishedAt: "2026-01-10T00:00:00+09:00",
   },

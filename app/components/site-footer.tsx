@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { companyInfo } from "../company-info";
 import { NAV_ITEMS } from "./nav-items";
 
 export default function SiteFooter() {
@@ -11,6 +12,11 @@ export default function SiteFooter() {
           </p>
           <p className="mt-1 text-sm text-[#5a6a57]">
             수북농업과 함께 생산성과 토양 건강을 높입니다.
+          </p>
+          <p className="mt-3 text-sm leading-relaxed text-[#5a6a57]">
+            {companyInfo.address}
+            <br />
+            전화 {companyInfo.telephoneDisplay} · 팩스 {companyInfo.faxDisplay}
           </p>
         </div>
 

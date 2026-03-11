@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope, Playfair_Display } from "next/font/google";
+import { companyInfo } from "./company-info";
 import "./globals.css";
 
 const siteUrl = "https://www.subuknongeop.com";
@@ -21,12 +22,15 @@ export const metadata: Metadata = {
     template: "%s | 수북농업",
   },
   description:
-    "수북농업은 고효율 비료 솔루션과 토양 중심 농업 컨설팅을 제공합니다.",
+    "수북농업은 흙손, 흙보약, 무등산 등 토양 중심 비료 솔루션과 농업 컨설팅을 제공합니다.",
   keywords: [
     "수북농업",
     "subuknongeop",
     "친환경 비료",
     "유기질 비료",
+    "흙손",
+    "흙보약",
+    "무등산",
     "농업 솔루션",
     "토양 관리",
   ],
@@ -40,13 +44,13 @@ export const metadata: Metadata = {
     siteName: "수북농업",
     title: "수북농업",
     description:
-      "수북농업은 고효율 비료 솔루션과 토양 중심 농업 컨설팅을 제공합니다.",
+      "수북농업은 흙손, 흙보약, 무등산 등 토양 중심 비료 솔루션과 농업 컨설팅을 제공합니다.",
   },
   twitter: {
     card: "summary_large_image",
     title: "수북농업",
     description:
-      "수북농업은 고효율 비료 솔루션과 토양 중심 농업 컨설팅을 제공합니다.",
+      "수북농업은 흙손, 흙보약, 무등산 등 토양 중심 비료 솔루션과 농업 컨설팅을 제공합니다.",
   },
   robots: {
     index: true,
@@ -77,6 +81,21 @@ export default function RootLayout({
     name: "수북농업",
     url: siteUrl,
     logo: `${siteUrl}/favicon.ico`,
+    telephone: companyInfo.telephoneDisplay,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: companyInfo.address,
+      addressLocality: companyInfo.addressLocality,
+      addressRegion: companyInfo.addressRegion,
+      addressCountry: "KR",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: companyInfo.telephoneDisplay,
+      contactType: "customer support",
+      areaServed: "KR",
+      availableLanguage: ["ko"],
+    },
   };
 
   const webSiteJsonLd = {

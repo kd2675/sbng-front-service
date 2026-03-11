@@ -3,28 +3,18 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { MotionConfig, motion, useReducedMotion } from "motion/react";
+import { companyInfo } from "./company-info";
+import { productCatalog } from "./product-catalog";
 import SiteNav from "./components/site-nav";
 
-const productSummaries = [
-  {
-    id: "nitro",
-    name: "NitroBoost Organic",
-    benefit: "초기 생육 속도를 끌어올려 잎 전개와 활착 안정성을 강화합니다.",
-    crops: ["엽채류", "옥수수", "밀"],
-  },
-  {
-    id: "phos",
-    name: "PhosFlow Release",
-    benefit: "완효성 인산 설계로 뿌리 밀도와 개화 단계의 안정성을 높입니다.",
-    crops: ["감자", "양파", "근채류"],
-  },
-  {
-    id: "hydra",
-    name: "HydraSoil Max",
-    benefit: "건조 구간의 수분 보유력을 높여 생육 편차를 줄입니다.",
-    crops: ["과수", "포도", "베리류"],
-  },
-];
+const productSummaries = productCatalog.map((product) => ({
+  id: product.id,
+  name: product.name,
+  benefit: product.cardSummary,
+  crops: product.cropTags,
+  image: product.frontImage,
+  label: product.material,
+}));
 
 const caseStudies = [
   {
@@ -98,22 +88,25 @@ const faqItems = [
 
 const newsItems = [
   {
-    category: "신제품",
+    category: "제품안내",
     date: "2026.02.18",
-    title: "HydraSoil Max 정식 출시",
-    summary: "건조 구간 대응형 수분 보유 포뮬러가 공식 라인업에 추가되었습니다.",
+    title: "흙손·흙보약·무등산 제품 소개 페이지 공개",
+    summary: "실제 포장 실사와 안내 시트를 기반으로 대표 제품 3종 정보를 정리했습니다.",
+    href: "/products",
   },
   {
-    category: "시범사업",
+    category: "상담안내",
     date: "2026.01.29",
-    title: "정밀 영양 처방 시범농가 2기 모집",
-    summary: "토양 데이터 기반 처방 실증 프로그램 참여 농가를 모집합니다.",
+    title: "담양 본사 상담 접수 안내",
+    summary: "작물 유형과 토양 상태에 따라 제품 적용 방향을 상담 중심으로 안내합니다.",
+    href: "/contact",
   },
   {
-    category: "행사",
+    category: "브랜드",
     date: "2025.12.11",
-    title: "수북농업 현장 기술 세미나 개최",
-    summary: "작물별 처방 사례와 계절 전환기 관리 전략을 공유하는 오프라인 세션입니다.",
+    title: "수북농업 브랜드 사이트 운영 시작",
+    summary: "회사 소개, CEO 메시지, 제품 정보, 문의 채널을 한곳에서 확인할 수 있습니다.",
+    href: "/about",
   },
 ];
 
@@ -347,7 +340,7 @@ export default function Home() {
                   }
                   transition={{ duration: 1.9, repeat: Infinity }}
                 />
-                수북농업 바이오-유기질 시리즈 출시
+                수북농업 대표 제품 3종 안내
               </motion.div>
 
               <motion.h1
@@ -442,30 +435,45 @@ export default function Home() {
                     viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 0.42, delay: Math.min(index * 0.08, 0.2) }}
                     whileHover={reduceMotion ? undefined : { y: -6 }}
-                    className="flex flex-col rounded-3xl border border-black/6 bg-white p-7 shadow-[0_20px_50px_rgba(10,25,10,0.07)]"
+                    className="flex flex-col overflow-hidden rounded-3xl border border-black/6 bg-white shadow-[0_20px_50px_rgba(10,25,10,0.07)]"
                   >
-                    <p className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-[var(--agri-primary-deep)]">
-                      Flagship
-                    </p>
-                    <h3 className="text-xl font-extrabold text-[var(--agri-ink)]">{item.name}</h3>
-                    <p className="mt-3 leading-relaxed text-[#4f624d]">{item.benefit}</p>
-                    <div className="mt-5 flex flex-wrap gap-2">
-                      {item.crops.map((crop) => (
-                        <span
-                          key={`${item.id}-${crop}`}
-                          className="rounded-full bg-[#edf4e8] px-3 py-1 text-xs font-semibold text-[#476247]"
-                        >
-                          {crop}
-                        </span>
-                      ))}
+                    <div className="relative h-56 overflow-hidden bg-[#edf3e7]">
+                      <img
+                        alt={`${item.name} 제품 이미지`}
+                        src={item.image}
+                        className="h-full w-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent" />
+                      <p className="absolute left-5 top-5 rounded-full bg-white/82 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--agri-ink)] backdrop-blur">
+                        {item.label}
+                      </p>
                     </div>
-                    <Link
-                      href="/products"
-                      className="mt-8 inline-flex w-fit items-center gap-2 text-sm font-bold text-[var(--agri-ink)] transition hover:text-[var(--agri-primary-deep)]"
-                    >
-                      자세히 보기
-                      <span aria-hidden>→</span>
-                    </Link>
+                    <div className="flex flex-1 flex-col p-7">
+                      <p className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-[var(--agri-primary-deep)]">
+                        Flagship
+                      </p>
+                      <h3 className="text-xl font-extrabold text-[var(--agri-ink)]">
+                        {item.name}
+                      </h3>
+                      <p className="mt-3 leading-relaxed text-[#4f624d]">{item.benefit}</p>
+                      <div className="mt-5 flex flex-wrap gap-2">
+                        {item.crops.map((crop) => (
+                          <span
+                            key={`${item.id}-${crop}`}
+                            className="rounded-full bg-[#edf4e8] px-3 py-1 text-xs font-semibold text-[#476247]"
+                          >
+                            {crop}
+                          </span>
+                        ))}
+                      </div>
+                      <Link
+                        href="/products"
+                        className="mt-8 inline-flex w-fit items-center gap-2 text-sm font-bold text-[var(--agri-ink)] transition hover:text-[var(--agri-primary-deep)]"
+                      >
+                        자세히 보기
+                        <span aria-hidden>→</span>
+                      </Link>
+                    </div>
                   </motion.article>
                 ))}
               </div>
@@ -710,12 +718,12 @@ export default function Home() {
                       {item.title}
                     </h3>
                     <p className="mt-3 leading-relaxed text-[#4d654d]">{item.summary}</p>
-                    <button
-                      type="button"
+                    <Link
+                      href={item.href}
                       className="mt-6 w-fit text-sm font-bold text-[var(--agri-primary-deep)]"
                     >
                       자세히 보기 →
-                    </button>
+                    </Link>
                   </motion.article>
                 ))}
               </div>
@@ -732,23 +740,23 @@ export default function Home() {
           <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-3 px-4 py-3 sm:flex-row sm:px-6 md:px-8">
             <div className="flex flex-col items-center gap-1 text-center sm:items-start sm:text-left">
               <p className="text-sm font-bold text-[var(--agri-ink)]">상담 가능 시간</p>
-              <p className="text-xs text-[#526652]">평일 09:00 - 18:00, 문의 접수 후 순차 회신</p>
+              <p className="text-xs text-[#526652]">
+                {companyInfo.businessHours}, 문의 접수 후 순차 회신
+              </p>
             </div>
             <div className="flex w-full gap-2 sm:w-auto">
               <a
-                href="tel:+18315550147"
+                href={companyInfo.telephoneHref}
                 className="flex-1 rounded-lg border border-black/10 bg-[#f2f6ef] px-4 py-2 text-center text-sm font-bold text-[var(--agri-ink)] transition hover:bg-[#e9f2e3] sm:flex-none"
               >
-                전화상담
+                전화 {companyInfo.telephoneDisplay}
               </a>
-              <a
-                href="https://open.kakao.com/"
-                target="_blank"
-                rel="noreferrer"
+              <Link
+                href="/products"
                 className="flex-1 rounded-lg bg-[#ffe812] px-4 py-2 text-center text-sm font-bold text-[#3b1f1f] transition hover:brightness-95 sm:flex-none"
               >
-                카카오톡
-              </a>
+                제품 보기
+              </Link>
               <Link
                 href="/contact"
                 className="flex-1 rounded-lg bg-[var(--agri-primary)] px-4 py-2 text-center text-sm font-bold text-[var(--agri-ink)] transition hover:brightness-95 sm:flex-none"
