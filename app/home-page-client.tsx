@@ -274,7 +274,7 @@ export default function HomePageClient() {
       reducedMotion="user"
       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div className="relative overflow-x-clip bg-[var(--agri-paper)]">
+      <div className="relative overflow-x-hidden bg-[var(--agri-paper)]">
         <SiteNav />
 
         <div className="pointer-events-none fixed right-5 top-1/2 z-30 hidden -translate-y-1/2 md:block lg:right-8">
@@ -320,12 +320,12 @@ export default function HomePageClient() {
           <section
             ref={registerSection(0)}
             data-section-index={0}
-            className="hero-grain relative isolate flex min-h-[100svh] items-center justify-center px-5 pb-16 pt-28 md:snap-start md:snap-always md:px-10 lg:px-20"
+            className="hero-grain relative isolate overflow-hidden flex min-h-[100svh] items-center justify-center px-5 pb-16 pt-28 md:snap-start md:snap-always md:px-10 lg:px-20"
           >
             <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_top,_rgba(255,244,220,0.2),_transparent_36%),linear-gradient(135deg,_#431414_0%,_#7a2323_42%,_#a42d2d_100%)]" />
             <div className="absolute inset-x-0 top-0 -z-10 h-64 bg-[linear-gradient(180deg,rgba(255,255,255,0.18),transparent)]" />
-            <div className="absolute -left-24 top-28 -z-10 h-72 w-72 rounded-full bg-[#f3e6c6]/10 blur-3xl" />
-            <div className="absolute bottom-16 right-[-6rem] -z-10 h-80 w-80 rounded-full bg-[#d8ff8d]/10 blur-3xl" />
+            <div className="absolute left-[-4rem] top-28 -z-10 h-56 w-56 rounded-full bg-[#f3e6c6]/10 blur-3xl md:-left-24 md:h-72 md:w-72" />
+            <div className="absolute bottom-16 right-[-3rem] -z-10 h-60 w-60 rounded-full bg-[#d8ff8d]/10 blur-3xl md:right-[-6rem] md:h-80 md:w-80" />
 
             <div className="mx-auto flex w-full max-w-5xl flex-col items-center text-center">
               <motion.div
