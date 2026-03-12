@@ -431,55 +431,63 @@ export default function HomePageClient() {
 
               <div className="grid gap-6 md:grid-cols-3">
                 {productSummaries.map((item, index) => (
-                  <motion.article
+                  <Link
                     key={item.id}
-                    initial={fadeUpInitial}
-                    whileInView={fadeUpAnimate}
-                    viewport={{ once: true, amount: 0.2 }}
-                    transition={{ duration: 0.42, delay: Math.min(index * 0.08, 0.2) }}
-                    whileHover={reduceMotion ? undefined : { y: -6 }}
-                    className="flex flex-col overflow-hidden rounded-3xl border border-black/6 bg-white shadow-[0_20px_50px_rgba(10,25,10,0.07)]"
+                    href="/products"
+                    aria-label={`${item.name} 제품 상세 보기`}
+                    className="group block rounded-3xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--agri-primary-deep)] focus-visible:ring-offset-4"
                   >
-                    <div className="relative h-56 overflow-hidden bg-[#edf3e7]">
-                      <Image
-                        alt={`${item.name} 제품 이미지`}
-                        src={item.image}
-                        fill
-                        sizes="(min-width: 768px) 28vw, 100vw"
-                        className="object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent" />
-                      <p className="absolute left-5 top-5 rounded-full bg-white/82 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--agri-ink)] backdrop-blur">
-                        {item.label}
-                      </p>
-                    </div>
-                    <div className="flex flex-1 flex-col p-7">
-                      <p className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-[var(--agri-primary-deep)]">
-                        Flagship
-                      </p>
-                      <h3 className="text-xl font-extrabold text-[var(--agri-ink)]">
-                        {item.name}
-                      </h3>
-                      <p className="mt-3 leading-relaxed text-[#4f624d]">{item.benefit}</p>
-                      <div className="mt-5 flex flex-wrap gap-2">
-                        {item.crops.map((crop) => (
-                          <span
-                            key={`${item.id}-${crop}`}
-                            className="rounded-full bg-[#edf4e8] px-3 py-1 text-xs font-semibold text-[#476247]"
-                          >
-                            {crop}
-                          </span>
-                        ))}
+                    <motion.article
+                      initial={fadeUpInitial}
+                      whileInView={fadeUpAnimate}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ duration: 0.42, delay: Math.min(index * 0.08, 0.2) }}
+                      whileHover={reduceMotion ? undefined : { y: -8, scale: 1.012 }}
+                      className="flex flex-col overflow-hidden rounded-3xl border border-black/6 bg-white shadow-[0_20px_50px_rgba(10,25,10,0.07)] transition-shadow duration-300 group-hover:shadow-[0_28px_70px_rgba(10,25,10,0.14)]"
+                    >
+                      <div className="relative h-56 overflow-hidden bg-[#edf3e7]">
+                        <Image
+                          alt={`${item.name} 제품 이미지`}
+                          src={item.image}
+                          fill
+                          sizes="(min-width: 768px) 28vw, 100vw"
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent transition-opacity duration-300 group-hover:opacity-80" />
+                        <p className="absolute left-5 top-5 rounded-full bg-white/82 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--agri-ink)] backdrop-blur">
+                          {item.label}
+                        </p>
                       </div>
-                      <Link
-                        href="/products"
-                        className="mt-8 inline-flex w-fit items-center gap-2 text-sm font-bold text-[var(--agri-ink)] transition hover:text-[var(--agri-primary-deep)]"
-                      >
-                        자세히 보기
-                        <span aria-hidden>→</span>
-                      </Link>
-                    </div>
-                  </motion.article>
+                      <div className="flex flex-1 flex-col p-7">
+                        <p className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-[var(--agri-primary-deep)]">
+                          Flagship
+                        </p>
+                        <h3 className="text-xl font-extrabold text-[var(--agri-ink)] transition-colors duration-300 group-hover:text-[var(--agri-primary-deep)]">
+                          {item.name}
+                        </h3>
+                        <p className="mt-3 leading-relaxed text-[#4f624d]">{item.benefit}</p>
+                        <div className="mt-5 flex flex-wrap gap-2">
+                          {item.crops.map((crop) => (
+                            <span
+                              key={`${item.id}-${crop}`}
+                              className="rounded-full bg-[#edf4e8] px-3 py-1 text-xs font-semibold text-[#476247]"
+                            >
+                              {crop}
+                            </span>
+                          ))}
+                        </div>
+                        <div className="mt-8 inline-flex w-fit items-center gap-2 text-sm font-bold text-[var(--agri-ink)] transition-colors duration-300 group-hover:text-[var(--agri-primary-deep)]">
+                          자세히 보기
+                          <span
+                            aria-hidden
+                            className="transition-transform duration-300 group-hover:translate-x-1"
+                          >
+                            →
+                          </span>
+                        </div>
+                      </div>
+                    </motion.article>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -756,7 +764,8 @@ export default function HomePageClient() {
                 href={companyInfo.telephoneHref}
                 className="flex-1 rounded-lg border border-black/10 bg-[#f2f6ef] px-4 py-2 text-center text-sm font-bold text-[var(--agri-ink)] transition hover:bg-[#e9f2e3] sm:flex-none"
               >
-                전화 {companyInfo.telephoneDisplay}
+                <span className="sm:hidden">전화</span>
+                <span className="hidden sm:inline">전화 {companyInfo.telephoneDisplay}</span>
               </a>
               <Link
                 href="/products"

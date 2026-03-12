@@ -8,30 +8,30 @@ import SiteNav from "../components/site-nav";
 const timeline = [
   {
     year: "2012",
-    title: "토양 과학 연구 시작",
+    title: "흙손 출시",
     description:
-      "가족 농장을 기반으로 수북농업의 첫 토양 영양 테스트가 시작되었습니다.",
+      "가축분퇴비 분상 제품인 흙손을 선보이며 수북농업의 제품 구성이 시작되었습니다.",
     image: "/image/heukson-front.jpeg",
   },
   {
     year: "2016",
-    title: "현장 실증 프로그램 확대",
+    title: "흙보약 출시",
     description:
-      "전국 파트너 농가와 함께 기후·토양 조건별 맞춤 비료 모델을 구축했습니다.",
+      "혼합유기질비료 흙보약을 통해 토양 중심 비료 제품군을 확장했습니다.",
     image: "/image/heukboyak-front.jpeg",
   },
   {
     year: "2021",
-    title: "운영 패키지 전환",
+    title: "무등산 출시",
     description:
-      "신규 포장과 저유실 영양 설계 도입으로 운영 전반을 고도화했습니다.",
+      "일반퇴비 1등급 제품 무등산을 더해 주요 제품 라인업을 완성했습니다.",
     image: "/image/mudeungsan-front.jpeg",
   },
   {
     year: "2026",
-    title: "AI 기반 토양 진단",
+    title: "브랜드 사이트 정비",
     description:
-      "작물 생육 데이터와 토양 상태를 결합한 정밀 처방으로 생산 안정성을 높였습니다.",
+      "회사 소개와 제품 정보를 한곳에서 확인할 수 있도록 브랜드 사이트를 새롭게 정리했습니다.",
     image: "/image/heukboyak-sheet-300.jpg",
   },
 ];
@@ -57,14 +57,15 @@ export default function AboutPageClient() {
 
           <div className="relative z-10 mx-auto mt-16 max-w-4xl px-4 text-center">
             <span className="mb-4 block text-sm font-bold uppercase tracking-[0.2em] text-green-200">
-              Established 1985
+              About Subuk
             </span>
             <h1 className="font-display mb-6 text-5xl font-bold leading-tight text-white md:text-7xl">
-              Our Journey Through Time
+              토양을 먼저 생각하는
+              <br className="hidden sm:block" /> 수북농업의 기준
             </h1>
             <p className="mx-auto max-w-2xl text-lg font-light text-gray-200 md:text-xl">
-              From humble beginnings on a family farm to global innovation in
-              sustainable agriculture.
+              수북농업은 작물보다 먼저 토양을 이해해야 한다는 기준으로 제품과 현장 상담의
+              방향을 다듬어가고 있습니다.
             </p>
           </div>
         </section>
@@ -87,8 +88,8 @@ export default function AboutPageClient() {
                       <div
                         className={`${
                           left
-                            ? "order-2 text-left md:order-1 md:pr-12 md:text-right"
-                            : "order-2 text-left md:order-2 md:pl-12"
+                            ? "order-1 text-left md:order-1 md:pr-12 md:text-right"
+                            : "order-1 text-left md:order-2 md:pl-12"
                         }`}
                       >
                         <p className="font-display text-6xl font-bold text-[var(--agri-primary-deep)]/46">
@@ -107,8 +108,8 @@ export default function AboutPageClient() {
                       <div
                         className={`${
                           left
-                            ? "order-1 md:order-2 md:pl-12"
-                            : "order-1 md:order-1 md:pr-12"
+                            ? "order-2 md:order-2 md:pl-12"
+                            : "order-2 md:order-1 md:pr-12"
                         }`}
                       >
                         <ColorShiftImage
@@ -131,20 +132,20 @@ export default function AboutPageClient() {
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(87,219,49,0.2),transparent_40%),radial-gradient(circle_at_80%_80%,rgba(87,219,49,0.14),transparent_45%)]" />
               <div className="relative">
                 <p className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--agri-primary)]">
-                  2030 and Beyond
+                  What We Build Next
                 </p>
                 <h3 className="font-display mt-4 text-4xl font-bold text-white md:text-5xl">
-                  수북농업의 다음 목표
+                  더 선명한 현장 해답을 위해
                 </h3>
                 <p className="mx-auto mt-5 max-w-3xl leading-relaxed text-white/90">
-                  AI 기반 토양 진단과 차세대 재생형 비료 개발을 통해 2040년까지
-                  농업 유실 저감 50% 달성을 목표로 하고 있습니다.
+                  수북농업은 제품 소개에 그치지 않고, 토양 상태와 재배 조건에 맞는 설명과
+                  상담 경험을 더 명확하게 전달하는 브랜드를 지향합니다.
                 </p>
                 <button
                   type="button"
                   className="mt-8 rounded-full bg-white px-8 py-3 font-bold text-[#132714] transition hover:bg-[var(--agri-primary)]"
                 >
-                  우리의 여정 함께하기
+                  제품과 회사 소개 보기
                 </button>
               </div>
             </section>
