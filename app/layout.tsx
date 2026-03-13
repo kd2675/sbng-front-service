@@ -39,11 +39,10 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.webmanifest",
   icons: {
-    shortcut: [{ url: "/image/logo-only-svg.svg", type: "image/svg+xml" }],
+    shortcut: [{ url: "/favicon-32x32.svg", type: "image/svg+xml" }],
     icon: [
-      { url: "/image/logo-only-svg.svg", type: "image/svg+xml" },
-      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
-      { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
+      { url: "/favicon-32x32.svg", type: "image/svg+xml", sizes: "32x32" },
+      { url: "/favicon-16x16.svg", type: "image/svg+xml", sizes: "16x16" },
     ],
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
@@ -90,7 +89,7 @@ export default function RootLayout({
     "@type": "Organization",
     name: "수북농업",
     url: siteUrl,
-    logo: `${siteUrl}/image/logo-only-svg.svg`,
+    logo: `${siteUrl}/icon.svg`,
     telephone: companyInfo.telephoneDisplay,
     address: {
       "@type": "PostalAddress",
