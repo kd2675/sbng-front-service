@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope, Playfair_Display } from "next/font/google";
-import { companyInfo } from "./company-info";
+import { companyInfo } from "./companyInfo";
 import "./globals.css";
 
 const siteUrl = "https://www.subuknongeop.com";

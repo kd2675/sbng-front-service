@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
-import SiteFooter from "../components/site-footer";
-import SiteNav from "../components/site-nav";
+import SiteFooter from "../components/SiteFooter";
+import SiteNav from "../components/SiteNav";
 
 const gallery = [
   {

@@ -2,10 +2,10 @@
 
 import Image from "next/image";
 import { MotionConfig, motion, useReducedMotion } from "motion/react";
-import { companyInfo } from "../company-info";
-import { productCatalog } from "../product-catalog";
-import SiteFooter from "../components/site-footer";
-import SiteNav from "../components/site-nav";
+import { companyInfo } from "../companyInfo";
+import { productCatalog } from "../productCatalog";
+import SiteFooter from "../components/SiteFooter";
+import SiteNav from "../components/SiteNav";
 
 export default function ProductsPageClient() {
   const reduceMotion = useReducedMotion();

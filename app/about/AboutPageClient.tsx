@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import ColorShiftImage from "./color-shift-image";
-import SiteFooter from "../components/site-footer";
-import SiteNav from "../components/site-nav";
+import ColorShiftImage from "./ColorShiftImage";
+import SiteFooter from "../components/SiteFooter";
+import SiteNav from "../components/SiteNav";
 
 const timeline = [
   {

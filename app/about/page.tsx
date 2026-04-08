@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import AboutPageClient from "./about-page-client";
+import AboutPageClient from "./AboutPageClient";
 
 export const metadata: Metadata = {
   title: "회사 연혁",

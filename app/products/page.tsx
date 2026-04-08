@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ProductsPageClient from "./products-page-client";
+import ProductsPageClient from "./ProductsPageClient";
 
 export const metadata: Metadata = {
   title: "제품 소개",

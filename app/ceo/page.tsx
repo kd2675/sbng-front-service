@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import CeoPageClient from "./ceo-page-client";
+import CeoPageClient from "./CEOPageClient";
 
 export const metadata: Metadata = {
   title: "CEO 소개",

@@ -1,8 +1,8 @@
 "use client";
 
-import { companyInfo } from "../company-info";
-import SiteFooter from "../components/site-footer";
-import SiteNav from "../components/site-nav";
+import { companyInfo } from "../companyInfo";
+import SiteFooter from "../components/SiteFooter";
+import SiteNav from "../components/SiteNav";
 
 export default function ContactPageClient() {
   return (

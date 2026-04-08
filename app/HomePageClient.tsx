@@ -4,9 +4,9 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { MotionConfig, motion, useReducedMotion } from "motion/react";
-import { companyInfo } from "./company-info";
-import { productCatalog } from "./product-catalog";
-import SiteNav from "./components/site-nav";
+import { companyInfo } from "./companyInfo";
+import { productCatalog } from "./productCatalog";
+import SiteNav from "./components/SiteNav";
 
 const productSummaries = productCatalog.map((product) => ({
   id: product.id,

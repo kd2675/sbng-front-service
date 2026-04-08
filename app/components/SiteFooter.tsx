@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { companyInfo } from "../company-info";
-import { NAV_ITEMS } from "./nav-items";
+import { companyInfo } from "../companyInfo";
+import { NAV_ITEMS } from "./navItems";
 
 export default function SiteFooter() {
   return (

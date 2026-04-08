@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
-import { NAV_ITEMS } from "./nav-items";
+import { NAV_ITEMS } from "./navItems";
 
 function isActivePath(pathname: string, href: string) {
   if (href === "/") {
