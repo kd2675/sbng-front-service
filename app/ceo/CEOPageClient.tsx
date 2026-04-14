@@ -1,364 +1,231 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion } from "motion/react";
+import { ceoBiography, ceoCurrentStatus, externalPhotoCredit, publicTimeline } from "../companyProfile";
 import LightboxImage from "../components/LightboxImage";
-import SourceLink from "../components/SourceLink";
+import PageHero from "../components/PageHero";
+import Reveal from "../components/Reveal";
 import SiteFooter from "../components/SiteFooter";
 import SiteNav from "../components/SiteNav";
-import {
-  ceoBiography,
-  ceoCurrentStatus,
-  externalPhotoCredit,
-  publicTimeline,
-} from "../companyProfile";
+import SourceLink from "../components/SourceLink";
 
-const roleCards = [
+const leadershipTimeline = publicTimeline.filter((item) =>
+  [
+    "2014.07.09",
+    "2014.07.14",
+    "2016.09.05",
+    "2020.02.03",
+    "2021.02.24",
+    "2024.08.25",
+  ].includes(item.date),
+);
+
+const leadershipRoles = [
   {
-    title: "대표 역할",
-    description: "(유)수북농업 대표이사",
-    detail: "수북농업의 공개 기사와 회사 정보에서 함께 안내되는 현재 역할입니다.",
+    label: "Current Public Role",
+    value: "(유)수북농업 대표이사",
   },
   {
-    title: "겸임 이력",
-    description: "수북환경개발 대표이사",
-    detail: "공개 기사 기준으로 함께 소개된 이력입니다.",
+    label: "Concurrent Record",
+    value: "수북환경개발 대표이사",
   },
   {
-    title: "조합 활동",
-    description: "한국유기질비료산업협동조합 제3·4대 이사장",
-    detail: "조합 공개 연혁과 기사 자료를 바탕으로 정리했습니다.",
+    label: "Industry Leadership",
+    value: "한국유기질비료산업협동조합 제3·4대 이사장",
   },
 ] as const;
 
-const ceoTimelineDates = new Set([
-  "2014.07.09",
-  "2014.07.14",
-  "2016.09.05",
-  "2020.02.03",
-  "2020.08.07",
-  "2021.02.24",
-  "2024.08.25",
-]);
-const ceoTimelineItems = publicTimeline.filter((item) => ceoTimelineDates.has(item.date));
-
 export default function CEOPageClient() {
-  const reduceMotion = useReducedMotion();
-  const revealInitial = reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 22 };
-  const revealWhileInView = { opacity: 1, y: 0 };
-
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[var(--agri-paper)] text-[var(--agri-ink)]">
+    <div className="page-shell bg-background text-foreground">
       <SiteNav />
 
       <main>
-        <section className="relative overflow-hidden bg-[#112614] px-5 pb-20 pt-28 md:px-10 lg:px-20">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(122,240,83,0.18),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(255,232,154,0.12),transparent_32%)]" />
-          <div className="relative mx-auto max-w-7xl">
-            <motion.p
-              initial={revealInitial}
-              animate={revealWhileInView}
-              transition={{ delay: 0.04, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-              className="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--agri-primary)]"
-            >
-              대표 소개
-            </motion.p>
-            <motion.h1
-              initial={revealInitial}
-              animate={revealWhileInView}
-              transition={{ delay: 0.1, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-              className="font-display mt-5 max-w-4xl text-4xl font-bold leading-tight text-white md:text-6xl"
-            >
-              김종수 대표의 주요 활동과
-              <br className="hidden sm:block" /> 공개 이력을 소개합니다
-            </motion.h1>
-            <motion.p
-              initial={revealInitial}
-              animate={revealWhileInView}
-              transition={{ delay: 0.16, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-6 max-w-3xl text-base leading-relaxed text-white/78 md:text-lg"
-            >
-              수북농업과 수북환경개발을 이끌며 현장과 산업을 함께 살펴온 김종수 대표의
-              공개 기사와 연혁 흐름을 정리했습니다.
-            </motion.p>
+        <PageHero
+          eyebrow="Leadership"
+          title="김종수 대표의 활동 이력과 현재 공개 기준을 다시 정리했습니다"
+          description="대표 페이지는 미화보다 기록 정리에 집중해야 합니다. 조합 활동, 인터뷰, 현재 공개 체계를 한 흐름으로 압축해 읽히게 재구성했습니다."
+          imageSrc="/image/kim-jong-su-portrait.jpg"
+          imageAlt="김종수 대표 인물 사진"
+          imageClassName="object-cover object-top"
+          actions={[
+            { href: "/history", label: "공개 연혁 보기" },
+            { href: "/contact", label: "상담 문의", kind: "secondary" },
+          ]}
+          facts={[
+            { label: "Role", value: "(유)수북농업 대표이사" },
+            { label: "Leadership", value: "조합 제3·4대 이사장" },
+            { label: "Public Record", value: "2024.08.25 기준 현재 체계 확인" },
+            { label: "Coverage", value: "농민신문 · 영농자재신문 · 주간인물" },
+          ]}
+        />
 
-            <div className="mt-10 grid gap-5 lg:grid-cols-[1.02fr_0.98fr]">
-              <div className="grid gap-4 sm:grid-cols-2">
-                {roleCards.map((role, index) => (
-                  <motion.article
-                    key={role.title}
-                    initial={revealInitial}
-                    animate={revealWhileInView}
-                    transition={{
-                      delay: 0.22 + index * 0.06,
-                      duration: 0.45,
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
-                    className="rounded-3xl border border-white/12 bg-white/6 p-5 backdrop-blur-sm"
-                  >
-                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--agri-primary)]">
-                      {role.title}
+        <section className="section-rule">
+          <div className="section-wrap py-18 md:py-24">
+            <div className="grid gap-12 lg:grid-cols-[0.88fr_1.12fr]">
+              <Reveal>
+                <p className="section-kicker">Role Summary</p>
+                <h2 className="section-title max-w-[10ch] text-balance">
+                  대표 개인 소개보다 역할과 공적 흐름을 먼저 배치했습니다
+                </h2>
+                <p className="section-copy mt-6">
+                  수북농업과 수북환경개발, 조합 활동 이력, 현재 공개 연혁의 기준점을 분리해서
+                  읽을 수 있도록 섹션을 정리했습니다.
+                </p>
+              </Reveal>
+
+              <div className="grid gap-5">
+                {leadershipRoles.map((role, index) => (
+                  <Reveal key={role.label} delay={index * 0.07} className="border-t border-[var(--line)] pt-5">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--muted)]">
+                      {role.label}
                     </p>
-                    <h2 className="mt-3 text-2xl font-bold text-white">{role.description}</h2>
-                    <p className="mt-3 text-sm leading-relaxed text-white/74">{role.detail}</p>
-                  </motion.article>
+                    <p className="mt-3 font-display text-3xl leading-tight text-foreground">
+                      {role.value}
+                    </p>
+                  </Reveal>
                 ))}
-              </div>
-
-              <motion.figure
-                initial={revealInitial}
-                animate={revealWhileInView}
-                transition={{ duration: 0.45, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-                className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/8 shadow-[0_30px_80px_rgba(0,0,0,0.26)]"
-              >
-                <div className="relative aspect-[4/5]">
+                <Reveal delay={0.24} className="relative mt-2 aspect-[4/5] overflow-hidden rounded-[8px]">
                   <LightboxImage
-                    alt="농민신문 기사에 실린 김종수 대표 인물 사진"
                     src="/image/kim-jong-su-portrait.jpg"
+                    alt="김종수 대표 인물 사진"
                     fill
                     priority
-                    sizes="(min-width: 1024px) 42vw, 100vw"
-                    className="object-cover"
+                    sizes="(min-width: 1024px) 44vw, 100vw"
+                    className="object-cover object-top"
+                    hintClassName="bottom-4 left-4 right-auto"
                   />
-                </div>
-                <figcaption className="border-t border-white/10 px-5 py-4 text-sm leading-relaxed text-white/74">
-                  {externalPhotoCredit.description}
-                </figcaption>
-              </motion.figure>
+                </Reveal>
+                <Reveal delay={0.28}>
+                  <SourceLink
+                    href={externalPhotoCredit.url}
+                    className="inline-flex text-sm font-medium text-foreground underline decoration-[var(--line-strong)] underline-offset-4 hover:decoration-foreground"
+                  >
+                    {externalPhotoCredit.description} 관련 기사 보기
+                  </SourceLink>
+                </Reveal>
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="bg-white px-5 py-18 md:px-10 lg:px-20">
-          <div className="mx-auto grid w-full max-w-7xl gap-8 lg:grid-cols-[0.88fr_1.12fr]">
-            <motion.article
-              initial={revealInitial}
-              whileInView={revealWhileInView}
-              viewport={{ once: true, amount: 0.3 }}
-              className="rounded-[2rem] border border-black/8 bg-[#f7faf4] p-8"
-            >
-              <p className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--agri-primary-deep)]">
-                대표 활동
-              </p>
-              <h2 className="font-display mt-4 text-4xl font-bold text-[var(--agri-ink)]">
-                대표 소개
-              </h2>
-              <div className="mt-6 space-y-4 leading-relaxed text-[#516950]">
-                <p>
-                  김종수 대표는 수북농업과 수북환경개발을 이끌며 유기질비료 산업과 현장
-                  중심의 농업 활동을 이어오고 있습니다.
-                </p>
-                <p>
-                  조합 활동과 지역 농업 관련 역할을 함께 맡으며 현장과 산업을 연결하는
-                  흐름을 이어왔습니다.
-                </p>
-                <p className="rounded-2xl bg-white px-5 py-4 text-sm leading-relaxed text-[#556d54]">
-                  한국유기질비료산업협동조합 공개 연혁 기준 현재 조합 체계는 2024년 8월
-                  25일 제6대 김방식 이사장 취임 이후 기준으로 안내되며, 김종수 대표의
-                  조합 이력은 제3·4대 이사장 기록으로 확인됩니다.
-                </p>
+        <section className="section-rule bg-[var(--surface)]">
+          <div className="section-wrap py-18 md:py-24">
+            <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+              <Reveal>
+                <p className="section-kicker">Biography</p>
+                <h2 className="section-title max-w-[10ch] text-balance">
+                  기사와 연혁에 드러난 주요 활동을 직선적으로 나열했습니다
+                </h2>
+              </Reveal>
+
+              <div className="grid gap-5">
+                {ceoBiography.map((item, index) => (
+                  <Reveal key={item} delay={Math.min(index * 0.04, 0.2)} className="border-t border-[var(--line)] pt-5">
+                    <p className="text-sm leading-8 text-[var(--muted)]">{item}</p>
+                  </Reveal>
+                ))}
               </div>
-              <div className="mt-8 space-y-3">
-                {ceoCurrentStatus.map((item) => (
-                  <SourceLink
+            </div>
+          </div>
+        </section>
+
+        <section className="section-rule">
+          <div className="section-wrap py-18 md:py-24">
+            <div className="grid gap-12 lg:grid-cols-[0.88fr_1.12fr]">
+              <Reveal>
+                <p className="section-kicker">Current Record</p>
+                <h2 className="section-title max-w-[10ch] text-balance">
+                  현재 공개 기준을 별도 섹션으로 분리했습니다
+                </h2>
+                <p className="section-copy mt-6">
+                  과거 이력과 현재 체계는 같은 문장 안에 섞이면 해석이 흐려집니다. 그래서 최신
+                  공개 기준만 따로 묶었습니다.
+                </p>
+              </Reveal>
+
+              <div className="grid gap-5">
+                {ceoCurrentStatus.map((item, index) => (
+                  <Reveal
                     key={item.date}
-                    href={item.sourceUrl}
-                    className="block rounded-[1.6rem] border border-black/8 bg-white px-5 py-4 transition hover:-translate-y-0.5"
+                    delay={index * 0.08}
+                    className="grid gap-4 border-t border-[var(--line)] pt-5 md:grid-cols-[8rem_1fr]"
                   >
-                    <p className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--agri-primary-deep)]">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--muted)]">
                       {item.date}
                     </p>
-                    <p className="mt-2 text-lg font-bold text-[var(--agri-ink)]">{item.title}</p>
-                    <p className="mt-2 text-sm leading-relaxed text-[#556d54]">
-                      {item.description}
-                    </p>
-                    <p className="mt-3 text-sm font-bold text-[var(--agri-primary-deep)]">
-                      {item.sourceLabel} →
-                    </p>
-                  </SourceLink>
+                    <div>
+                      <h3 className="font-display text-2xl leading-tight text-foreground">
+                        {item.title}
+                      </h3>
+                      <p className="mt-3 text-sm leading-8 text-[var(--muted)]">
+                        {item.description}
+                      </p>
+                      <SourceLink
+                        href={item.sourceUrl}
+                        className="mt-4 inline-flex text-sm font-medium text-foreground underline decoration-[var(--line-strong)] underline-offset-4 hover:decoration-foreground"
+                      >
+                        {item.sourceLabel}
+                      </SourceLink>
+                    </div>
+                  </Reveal>
                 ))}
               </div>
-              <div className="mt-8 space-y-3">
-                <SourceLink
-                  href={externalPhotoCredit.url}
-                  className="inline-flex text-sm font-bold text-[var(--agri-primary-deep)]"
-                >
-                  관련 기사 보기 →
-                </SourceLink>
-              </div>
-            </motion.article>
-
-            <motion.article
-              initial={revealInitial}
-              whileInView={revealWhileInView}
-              viewport={{ once: true, amount: 0.25 }}
-              className="rounded-[2rem] border border-black/8 bg-white p-8 shadow-[0_18px_46px_rgba(12,26,12,0.06)]"
-            >
-              <h2 className="font-display text-4xl font-bold text-[var(--agri-ink)]">
-                주요 활동
-              </h2>
-              <ul className="mt-7 space-y-4">
-                {ceoBiography.map((item, index) => (
-                  <motion.li
-                    key={item}
-                    initial={revealInitial}
-                    whileInView={revealWhileInView}
-                    viewport={{ once: true, amount: 0.35 }}
-                    transition={{ delay: Math.min(index * 0.05, 0.16) }}
-                    className="flex gap-3 rounded-2xl bg-[#f5f8f1] px-5 py-4 text-sm leading-relaxed text-[#556d54]"
-                  >
-                    <span className="mt-1 h-2.5 w-2.5 rounded-full bg-[var(--agri-primary-deep)]" />
-                    <span>{item}</span>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.article>
-          </div>
-        </section>
-
-        <section className="bg-[#eef3ea] px-5 py-18 md:px-10 lg:px-20">
-          <div className="mx-auto max-w-6xl">
-            <div className="mb-10">
-              <p className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--agri-primary-deep)]">
-                공개 연혁
-              </p>
-              <h2 className="font-display mt-4 text-4xl font-bold text-[var(--agri-ink)] md:text-5xl">
-                대표 연혁
-              </h2>
-              <p className="mt-4 max-w-3xl leading-relaxed text-[#556d54]">
-                2014년 이사장 선출부터 이후 공개 기록 흐름까지 함께 살펴보실 수
-                있습니다.
-              </p>
-            </div>
-
-            <div className="space-y-5">
-              {ceoTimelineItems.map((item, index) => (
-                <motion.article
-                  key={item.date}
-                  initial={revealInitial}
-                  whileInView={revealWhileInView}
-                  viewport={{ once: true, amount: 0.25 }}
-                  transition={{ delay: Math.min(index * 0.05, 0.16) }}
-                  className="grid gap-4 rounded-[2rem] border border-black/8 bg-white px-6 py-6 shadow-[0_16px_40px_rgba(12,26,12,0.05)] md:grid-cols-[8.5rem_1fr_auto]"
-                >
-                  <p className="text-sm font-bold text-[var(--agri-primary-deep)]">{item.date}</p>
-                  <div>
-                    <h3 className="text-2xl font-bold text-[var(--agri-ink)]">{item.title}</h3>
-                    <p className="mt-3 leading-relaxed text-[#526951]">{item.description}</p>
-                  </div>
-                  <SourceLink
-                    href={item.sourceUrl}
-                    className="w-fit self-start rounded-full border border-black/10 px-4 py-2 text-sm font-bold text-[var(--agri-ink)] transition hover:bg-black/4"
-                  >
-                    {item.sourceLabel}
-                  </SourceLink>
-                </motion.article>
-              ))}
             </div>
           </div>
         </section>
 
-        <section className="bg-white px-5 py-18 md:px-10 lg:px-20">
-          <div className="mx-auto grid w-full max-w-7xl gap-8 lg:grid-cols-3">
-            <motion.article
-              initial={revealInitial}
-              whileInView={revealWhileInView}
-              viewport={{ once: true, amount: 0.25 }}
-              className="overflow-hidden rounded-[2rem] border border-black/8 bg-white shadow-[0_18px_46px_rgba(12,26,12,0.06)]"
-            >
-              <div className="relative aspect-[4/3] bg-[#edf2e8]">
-                <LightboxImage
-                  alt="2019년 비료품질관리교육 행사 사진"
-                  src="/image/kim-jong-su-assembly.jpg"
-                  fill
-                  sizes="(min-width: 1024px) 30vw, 100vw"
-                  className="object-cover"
-                />
-              </div>
-              <div className="px-6 py-6">
-                <p className="text-sm font-bold uppercase tracking-[0.18em] text-[var(--agri-primary-deep)]">
-                  현장 기록
-                </p>
-                <h3 className="mt-3 text-2xl font-bold text-[var(--agri-ink)]">
-                  행사 현장
-                </h3>
-                <p className="mt-4 leading-relaxed text-[#536b52]">
-                  비료품질관리교육 행사 현장을 통해 산업과 현장을 함께 살피는 활동 흐름을
-                  전합니다.
-                </p>
-              </div>
-            </motion.article>
+        <section className="section-rule bg-[#101610] text-white">
+          <div className="section-wrap py-18 md:py-24">
+            <div className="grid gap-12 lg:grid-cols-[0.92fr_1.08fr]">
+              <Reveal>
+                <p className="section-kicker text-white/52">Leadership Timeline</p>
+                <h2 className="section-title max-w-[10ch] text-white">
+                  조합 활동과 기사 공개 시점을 한 줄기 흐름으로 정리했습니다
+                </h2>
+              </Reveal>
 
-            <motion.article
-              initial={revealInitial}
-              whileInView={revealWhileInView}
-              viewport={{ once: true, amount: 0.25 }}
-              className="overflow-hidden rounded-[2rem] border border-black/8 bg-white shadow-[0_18px_46px_rgba(12,26,12,0.06)]"
-            >
-              <div className="relative aspect-[4/3] bg-[#edf2e8]">
-                <LightboxImage
-                  alt="한국유기질비료산업협동조합 연혁 기록 캡처"
-                  src="/image/history/history-kofic-2024-08-25.png"
-                  fill
-                  sizes="(min-width: 1024px) 42vw, 100vw"
-                  className="object-cover"
-                />
+              <div className="grid gap-5">
+                {leadershipTimeline.map((item, index) => (
+                  <Reveal
+                    key={`${item.date}-${item.title}`}
+                    delay={index * 0.05}
+                    className="grid gap-4 border-t border-white/10 pt-5 md:grid-cols-[8rem_1fr]"
+                  >
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/46">
+                      {item.date}
+                    </p>
+                    <div>
+                      <h3 className="font-display text-2xl leading-tight text-white">{item.title}</h3>
+                      <p className="mt-3 text-sm leading-8 text-white/62">{item.description}</p>
+                      <SourceLink
+                        href={item.sourceUrl}
+                        className="mt-4 inline-flex text-sm font-medium text-white underline decoration-white/22 underline-offset-4 hover:decoration-[var(--accent)]"
+                      >
+                        {item.sourceLabel}
+                      </SourceLink>
+                    </div>
+                  </Reveal>
+                ))}
               </div>
-              <div className="px-6 py-6">
-                <p className="text-sm font-bold uppercase tracking-[0.18em] text-[var(--agri-primary-deep)]">
-                  공개 기록
-                </p>
-                <h3 className="mt-3 text-2xl font-bold text-[var(--agri-ink)]">
-                  연혁 흐름 이어 보기
-                </h3>
-                <p className="mt-4 leading-relaxed text-[#536b52]">
-                  기사 캡처와 공개 기록을 따라 연혁 흐름을 사진과 함께 자세히 보실 수
-                  있습니다.
-                </p>
+            </div>
+
+            <Reveal className="mt-12 border-t border-white/10 pt-6">
+              <div className="flex flex-wrap gap-3">
                 <Link
                   href="/history"
-                  className="mt-5 inline-flex rounded-full bg-[var(--agri-ink)] px-5 py-2.5 text-sm font-bold text-white transition hover:bg-[var(--agri-primary-deep)]"
+                  className="inline-flex min-h-12 items-center justify-center rounded-[8px] bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[#101611] hover:bg-[var(--signal)]"
                 >
-                  사진 연혁 보기
+                  전체 연혁 보기
                 </Link>
-              </div>
-            </motion.article>
-
-            <motion.article
-              initial={revealInitial}
-              whileInView={revealWhileInView}
-              viewport={{ once: true, amount: 0.25 }}
-              className="rounded-[2rem] bg-[#112614] px-8 py-10 text-white"
-            >
-              <p className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--agri-primary)]">
-                함께 보기
-              </p>
-              <h3 className="font-display mt-4 text-4xl font-bold">다른 정보도 이어집니다</h3>
-              <p className="mt-7 text-base leading-relaxed text-white/84">
-                회사 개요와 사업장 정보, 제품 자료, 문의 페이지로 바로 이동하실 수
-                있습니다.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   href="/about"
-                  className="rounded-full bg-white px-6 py-3 text-sm font-bold text-[var(--agri-ink)] transition hover:bg-[var(--agri-primary)]"
+                  className="inline-flex min-h-12 items-center justify-center rounded-[8px] border border-white/14 px-5 py-3 text-sm font-medium text-white hover:border-white/26"
                 >
-                  회사 정보
-                </Link>
-                <Link
-                  href="/products"
-                  className="rounded-full border border-white/18 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10"
-                >
-                  제품 안내
-                </Link>
-                <Link
-                  href="/contact"
-                  className="rounded-full border border-white/18 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10"
-                >
-                  문의 페이지
+                  회사 정보 보기
                 </Link>
               </div>
-            </motion.article>
+            </Reveal>
           </div>
         </section>
       </main>

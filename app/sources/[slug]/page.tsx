@@ -6,6 +6,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import BackButton from "../../components/BackButton";
 import LightboxImage from "../../components/LightboxImage";
+import PageHero from "../../components/PageHero";
+import Reveal from "../../components/Reveal";
 import SiteFooter from "../../components/SiteFooter";
 import SiteNav from "../../components/SiteNav";
 import SourceLink from "../../components/SourceLink";
@@ -75,160 +77,170 @@ export default async function SourceArchivePage({ params }: SourcePageProps) {
       : "자료";
 
   return (
-    <div className="min-h-screen bg-[#f4f6ef] text-[var(--agri-ink)]">
+    <div className="page-shell bg-background text-foreground">
       <SiteNav />
 
-      <main className="px-5 pb-18 pt-28 md:px-10 lg:px-20">
-        <section className="mx-auto max-w-6xl rounded-[2rem] bg-[#112614] px-8 py-10 text-white shadow-[0_22px_54px_rgba(12,26,12,0.16)]">
+      <main>
+        <PageHero
+          eyebrow="Archive Source"
+          title={`${entry.sourceLabel} 보관본과 현재 상태를 함께 안내합니다`}
+          description={entry.summary}
+          imageSrc={captureExists ? entry.captureImage : "/image/history/history-kofic-2024-08-25.png"}
+          imageAlt={`${entry.sourceLabel} 보관 이미지`}
+          imageClassName="object-cover object-top"
+          actions={[
+            { href: entry.url, label: `${sourceNoun} 보기` },
+            ...(snapshotExists
+              ? [{ href: entry.snapshotHtml, label: "보관 HTML 보기", kind: "secondary" as const }]
+              : []),
+          ]}
+          note={status.reason}
+          facts={[
+            { label: "Published", value: entry.publishedAt },
+            { label: "Status", value: status.available ? `${sourceNoun} 확인 가능` : "보관본 우선 제공" },
+            { label: "Capture", value: captureExists ? "저장됨" : "없음" },
+            { label: "Archive HTML", value: snapshotExists ? "저장됨" : "없음" },
+          ]}
+        />
+
+        <section className="section-wrap py-8">
           <BackButton
             fallbackHref="/history"
-            className="inline-flex rounded-full border border-white/16 bg-white/10 px-4 py-2 text-sm font-bold text-white/92 transition hover:bg-white/16"
+            className="inline-flex min-h-11 items-center justify-center rounded-[8px] border border-[var(--line-strong)] px-4 py-3 text-sm font-medium text-foreground hover:border-foreground"
           >
-            ← 뒤로가기
+            뒤로가기
           </BackButton>
-          <p className="mt-5 text-sm font-bold uppercase tracking-[0.2em] text-[var(--agri-primary)]">
-            자료 보관본
-          </p>
-          <h1 className="font-display mt-4 max-w-4xl text-4xl font-bold leading-tight md:text-5xl">
-            {entry.title}
-          </h1>
-          <p className="mt-5 max-w-3xl leading-relaxed text-white/82">{entry.summary}</p>
+        </section>
 
-          <div className="mt-7 flex flex-wrap gap-3">
-            <span className="rounded-full border border-white/14 bg-white/10 px-4 py-2 text-sm font-semibold text-white/88">
-              {entry.sourceLabel}
-            </span>
-            <span className="rounded-full border border-white/14 bg-white/10 px-4 py-2 text-sm font-semibold text-white/88">
-              게시일 {entry.publishedAt}
-            </span>
-            <span
-              className={`rounded-full px-4 py-2 text-sm font-semibold ${
-                status.available
-                  ? "bg-[#d5f5c6] text-[#173019]"
-                  : "bg-[#fff0c4] text-[#4e3600]"
-              }`}
-            >
-              {status.available ? `${sourceNoun} 확인 가능` : "보관본 우선 제공"}
-            </span>
-          </div>
+        <section className="section-rule">
+          <div className="section-wrap py-18 md:py-24">
+            <div className="grid gap-12 lg:grid-cols-[0.86fr_1.14fr]">
+              <Reveal>
+                <p className="section-kicker">Archive Summary</p>
+                <h2 className="section-title max-w-[10ch] text-balance">
+                  핵심 요약과 저장 상태를 나란히 배치했습니다
+                </h2>
+                <p className="section-copy mt-6">
+                  원문이 유지되는 경우에는 원문 우선, 접속이 어려운 경우에는 보관본 우선이라는
+                  기준을 이 페이지에서 바로 확인할 수 있습니다.
+                </p>
+              </Reveal>
 
-          <p className="mt-4 text-sm leading-relaxed text-white/74">{status.reason}</p>
-
-          <div className="mt-8 flex flex-wrap gap-3">
-            <SourceLink
-              href={entry.url}
-              className="rounded-full bg-[var(--agri-primary)] px-6 py-3 text-sm font-bold text-[var(--agri-ink)] transition hover:-translate-y-0.5"
-            >
-              {sourceNoun} 보기
-            </SourceLink>
-            {snapshotExists ? (
-              <SourceLink
-                href={entry.snapshotHtml}
-                className="rounded-full border border-white/18 bg-white/10 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/16"
-              >
-                보관 HTML 보기
-              </SourceLink>
-            ) : null}
-            {captureExists ? (
-              <SourceLink
-                href={entry.captureImage}
-                className="rounded-full border border-white/18 bg-white/10 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/16"
-              >
-                캡처 이미지 보기
-              </SourceLink>
-            ) : null}
+              <div className="grid gap-5">
+                {entry.excerptBullets.map((bullet, index) => (
+                  <Reveal key={bullet} delay={index * 0.05} className="border-t border-[var(--line)] pt-5">
+                    <p className="text-sm leading-8 text-[var(--muted)]">{bullet}</p>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
-        <section className="mx-auto mt-10 grid max-w-6xl gap-8 lg:grid-cols-[1.02fr_0.98fr]">
-          <article className="rounded-[2rem] border border-black/8 bg-white p-8 shadow-[0_18px_46px_rgba(12,26,12,0.06)]">
-            <p className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--agri-primary-deep)]">
-              보관 요약
-            </p>
-            <h2 className="font-display mt-4 text-3xl font-bold text-[var(--agri-ink)]">
-              기사 핵심 정리
-            </h2>
-            <ul className="mt-7 space-y-4">
-              {entry.excerptBullets.map((bullet) => (
-                <li
-                  key={bullet}
-                  className="flex gap-3 rounded-2xl bg-[#f5f8f1] px-5 py-4 text-sm leading-relaxed text-[#556d54]"
-                >
-                  <span className="mt-1.5 h-2 w-2 rounded-full bg-[var(--agri-primary-deep)]" />
-                  <span>{bullet}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="mt-8 rounded-[1.6rem] border border-[#dfe7d8] bg-[#f8fbf5] px-5 py-5">
-              <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#6b8169]">
-                안내
-              </p>
-              <p className="mt-3 text-sm leading-relaxed text-[#536a52]">
-                {sourceNoun} 상태는 페이지 접속 시점에 다시 확인합니다. {sourceNoun} 접속이 되지 않거나
-                삭제 문구가 확인되면 이 보관본을 기준으로 계속 살펴보실 수 있습니다.
-              </p>
-            </div>
-          </article>
-
-          <article className="rounded-[2rem] border border-black/8 bg-white p-8 shadow-[0_18px_46px_rgba(12,26,12,0.06)]">
-            <p className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--agri-primary-deep)]">
-              저장 자료
-            </p>
-            <h2 className="font-display mt-4 text-3xl font-bold text-[var(--agri-ink)]">
-              캡처와 보관 파일
-            </h2>
-
-            {captureExists ? (
-              <div className="mt-6 overflow-hidden rounded-[1.6rem] border border-black/8 bg-[#eef3e8]">
-                <div className="relative aspect-[4/3]">
-                  <LightboxImage
-                    alt={`${entry.sourceLabel} 기사 캡처 이미지`}
-                    src={entry.captureImage}
-                    fill
-                    sizes="(min-width: 1024px) 42vw, 100vw"
-                    className="object-cover"
-                  />
+        <section className="section-rule bg-[var(--surface)]">
+          <div className="section-wrap py-18 md:py-24">
+            <div className="grid gap-12 lg:grid-cols-[1.02fr_0.98fr]">
+              <Reveal>
+                <div className="relative aspect-[16/10] overflow-hidden rounded-[8px]">
+                  {captureExists ? (
+                    <LightboxImage
+                      src={entry.captureImage}
+                      alt={`${entry.sourceLabel} 저장 캡처 이미지`}
+                      fill
+                      sizes="(min-width: 1024px) 52vw, 100vw"
+                      className="object-cover"
+                      hintClassName="bottom-4 left-4 right-auto"
+                    />
+                  ) : (
+                    <div className="flex h-full items-center justify-center bg-white px-6 text-sm leading-7 text-[var(--muted)]">
+                      현재 저장된 캡처 이미지가 없습니다.
+                    </div>
+                  )}
                 </div>
-              </div>
-            ) : (
-              <div className="mt-6 rounded-[1.6rem] border border-dashed border-black/12 bg-[#f7faf4] px-5 py-10 text-sm leading-relaxed text-[#566d55]">
-                현재 저장된 캡처 이미지는 아직 준비되지 않았습니다.
-              </div>
-            )}
+              </Reveal>
 
-            <div className="mt-6 grid gap-3 sm:grid-cols-2">
-              <div className="rounded-2xl bg-[#f5f8f1] px-5 py-4">
-                <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#6b8169]">
-                  보관 HTML
-                </p>
-                <p className="mt-2 text-sm leading-relaxed text-[#536a52]">
-                  {snapshotExists
-                    ? `스크랩한 ${sourceNoun} HTML 파일을 바로 열어보실 수 있습니다.`
-                    : `${sourceNoun} HTML 보관 파일은 아직 저장되지 않았습니다.`}
-                </p>
-              </div>
-              <div className="rounded-2xl bg-[#f5f8f1] px-5 py-4">
-                <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#6b8169]">
-                  캡처 이미지
-                </p>
-                <p className="mt-2 text-sm leading-relaxed text-[#536a52]">
-                  {captureExists
-                    ? `${sourceNoun} 화면을 로컬 이미지로 보관해 ${sourceNoun}가 사라져도 확인할 수 있습니다.`
-                    : "캡처 이미지는 아직 저장되지 않았습니다."}
-                </p>
+              <div className="grid gap-5">
+                <Reveal className="border-t border-[var(--line)] pt-5">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--muted)]">
+                    원문 상태
+                  </p>
+                  <p className="mt-3 text-lg font-medium text-foreground">
+                    {status.available ? `${sourceNoun} 확인 가능` : "보관본 우선 제공"}
+                  </p>
+                  <p className="mt-3 text-sm leading-8 text-[var(--muted)]">{status.reason}</p>
+                </Reveal>
+
+                <Reveal delay={0.06} className="border-t border-[var(--line)] pt-5">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--muted)]">
+                    저장 항목
+                  </p>
+                  <div className="mt-4 grid gap-3 text-sm leading-7 text-[var(--muted)]">
+                    <p>캡처 이미지 {captureExists ? "저장됨" : "없음"}</p>
+                    <p>보관 HTML {snapshotExists ? "저장됨" : "없음"}</p>
+                  </div>
+                </Reveal>
+
+                <Reveal delay={0.12} className="flex flex-wrap gap-3 border-t border-[var(--line)] pt-5">
+                  <SourceLink
+                    href={entry.url}
+                    className="inline-flex min-h-11 items-center justify-center rounded-[8px] border border-[var(--line-strong)] px-4 py-3 text-sm font-medium text-foreground hover:border-foreground"
+                  >
+                    {sourceNoun} 보기
+                  </SourceLink>
+                  {snapshotExists ? (
+                    <SourceLink
+                      href={entry.snapshotHtml}
+                      className="inline-flex min-h-11 items-center justify-center rounded-[8px] border border-[var(--line)] px-4 py-3 text-sm font-medium text-[var(--muted)] hover:border-[var(--line-strong)] hover:text-foreground"
+                    >
+                      보관 HTML 열기
+                    </SourceLink>
+                  ) : null}
+                  {captureExists ? (
+                    <SourceLink
+                      href={entry.captureImage}
+                      className="inline-flex min-h-11 items-center justify-center rounded-[8px] border border-[var(--line)] px-4 py-3 text-sm font-medium text-[var(--muted)] hover:border-[var(--line-strong)] hover:text-foreground"
+                    >
+                      캡처 열기
+                    </SourceLink>
+                  ) : null}
+                </Reveal>
               </div>
             </div>
-          </article>
+          </div>
         </section>
 
-        <section className="mx-auto mt-10 max-w-6xl">
-          <Link
-            href="/history"
-            className="inline-flex rounded-full bg-[var(--agri-ink)] px-6 py-3 text-sm font-bold text-white transition hover:bg-[var(--agri-primary-deep)]"
-          >
-            연혁 페이지로 돌아가기
-          </Link>
+        <section className="section-rule bg-[#101610] text-white">
+          <div className="section-wrap py-18 md:py-24">
+            <div className="grid gap-12 lg:grid-cols-[0.92fr_1.08fr]">
+              <Reveal>
+                <p className="section-kicker text-white/52">Continue</p>
+                <h2 className="section-title max-w-[10ch] text-white">
+                  보관 자료에서 다시 연혁 흐름으로 돌아갈 수 있습니다
+                </h2>
+              </Reveal>
+
+              <Reveal className="grid gap-4 border-t border-white/10 pt-5">
+                <p className="text-sm leading-8 text-white/62">
+                  자료 보관본은 연혁과 회사 정보 페이지에서 다시 이어집니다. 원문 상태가 바뀌더라도
+                  확인 흐름이 끊기지 않도록 내부 보관 링크를 남겨 두었습니다.
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <Link
+                    href="/history"
+                    className="inline-flex min-h-12 items-center justify-center rounded-[8px] bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[#101611] hover:bg-[var(--signal)]"
+                  >
+                    연혁으로 돌아가기
+                  </Link>
+                  <Link
+                    href="/about"
+                    className="inline-flex min-h-12 items-center justify-center rounded-[8px] border border-white/14 px-5 py-3 text-sm font-medium text-white hover:border-white/26"
+                  >
+                    회사 정보 보기
+                  </Link>
+                </div>
+              </Reveal>
+            </div>
+          </div>
         </section>
       </main>
 

@@ -1,180 +1,200 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useScroll, useSpring } from "motion/react";
 import { NAV_ITEMS } from "./navItems";
 
 function isActivePath(pathname: string, href: string) {
   if (href === "/") {
     return pathname === "/";
   }
+
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
 export default function SiteNav() {
   const pathname = usePathname();
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 180,
+    damping: 26,
+    mass: 0.16,
+  });
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const useDarkText = pathname.startsWith("/admin") || pathname.startsWith("/sources");
-  const useSolidShell = useDarkText;
+  const closeMobileMenu = () => setMobileOpen(false);
 
   useEffect(() => {
-    const previous = document.body.style.overflow;
-    document.body.style.overflow = mobileOpen ? "hidden" : previous;
+    const onScroll = () => {
+      setIsScrolled(window.scrollY > 24);
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = mobileOpen ? "hidden" : previousOverflow;
+
     return () => {
-      document.body.style.overflow = previous;
+      document.body.style.overflow = previousOverflow;
     };
   }, [mobileOpen]);
 
-  useEffect(() => {
-    const scrollRoot = document.querySelector<HTMLElement>('[data-nav-scroll-root="true"]');
-
-    const onScroll = () => {
-      const windowScrolled = window.scrollY > 8;
-      const rootScrolled = scrollRoot ? scrollRoot.scrollTop > 8 : false;
-      setIsScrolled(windowScrolled || rootScrolled);
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    scrollRoot?.addEventListener("scroll", onScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      scrollRoot?.removeEventListener("scroll", onScroll);
-    };
-  }, [pathname]);
-
   return (
-    <header
-      className="fixed inset-x-0 top-0 z-50 px-4 pb-3 md:px-10 lg:px-20"
-      style={{ paddingTop: "max(env(safe-area-inset-top), 0.5rem)" }}
-    >
-      <div
-        className={`mx-auto flex w-full max-w-7xl items-center justify-between rounded-full px-4 py-2.5 transition-all duration-300 md:px-6 ${
-          isScrolled
-            ? "border border-white/20 bg-black/55 shadow-[0_12px_30px_rgba(4,12,4,0.24)] backdrop-blur-xl"
-            : useSolidShell
-              ? "border border-black/8 bg-white/88 shadow-[0_10px_26px_rgba(12,26,12,0.08)] backdrop-blur-xl"
-              : ""
-        }`}
+    <>
+      <header
+        className="fixed inset-x-0 top-0 z-50"
+        style={{ paddingTop: "max(env(safe-area-inset-top), 0px)" }}
       >
-        <Link href="/" className="flex items-center gap-3" onClick={() => setMobileOpen(false)}>
-          <Image
-            alt="수북농업 브랜드 마크"
-            src="/image/logo-only-svg.svg"
-            width={40}
-            height={40}
-            sizes="40px"
-            className="h-10 w-10 shrink-0 object-contain"
-          />
-          <span
-            className={`text-lg font-semibold tracking-[-0.04em] ${
+        <div className="section-wrap">
+          <div
+            className={`mt-4 flex items-center justify-between rounded-[8px] border px-4 py-3 backdrop-blur-xl md:px-5 ${
               isScrolled
-                ? "text-white"
-                : useDarkText
-                ? "text-[var(--agri-ink)]"
-                : "text-white"
+                ? "border-white/12 bg-[rgba(7,10,8,0.84)] shadow-[0_18px_48px_rgba(7,10,8,0.24)]"
+                : "border-white/10 bg-[rgba(7,10,8,0.56)]"
             }`}
           >
-            수북농업
-          </span>
-        </Link>
+            <Link href="/" onClick={closeMobileMenu} className="flex items-center gap-3 text-white">
+              <Image
+                alt="수북농업 브랜드 마크"
+                src="/image/logo-only-svg.svg"
+                width={38}
+                height={38}
+                sizes="38px"
+                className="h-9 w-9 shrink-0 object-contain"
+              />
+              <div className="leading-none">
+                <p className="font-display text-lg font-semibold">수북농업</p>
+                <p className="mt-1 text-[11px] uppercase tracking-[0.22em] text-white/56">
+                  Damyang Organic Soil Care
+                </p>
+              </div>
+            </Link>
 
-        <nav className="hidden items-center gap-8 text-sm font-semibold md:flex">
-          {NAV_ITEMS.map((item) => {
-            const active = isActivePath(pathname, item.href);
+            <nav className="hidden items-center gap-7 text-sm text-white/82 md:flex">
+              {NAV_ITEMS.map((item) => {
+                const active = isActivePath(pathname, item.href);
 
-            return (
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={closeMobileMenu}
+                    className={`relative pb-1 ${
+                      active ? "text-white" : "hover:text-[var(--accent-soft)]"
+                    }`}
+                  >
+                    {item.label}
+                    <span
+                      className={`absolute inset-x-0 -bottom-0.5 h-px origin-left bg-[var(--accent)] transition-transform duration-200 ${
+                        active ? "scale-x-100" : "scale-x-0"
+                      }`}
+                    />
+                  </Link>
+                );
+              })}
               <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setMobileOpen(false)}
-                className={
-                  active
-                    ? "text-[var(--agri-primary)]"
-                    : isScrolled
-                      ? "text-white/90 transition-colors hover:text-[var(--agri-primary)]"
-                      : useDarkText
-                      ? "text-[var(--agri-ink)]/85 transition-colors hover:text-[var(--agri-primary-deep)]"
-                      : "text-white/90 transition-colors hover:text-[var(--agri-primary)]"
-                }
+                href="/contact"
+                onClick={closeMobileMenu}
+                className="inline-flex min-h-11 items-center justify-center rounded-[8px] border border-white/14 bg-white/8 px-4 py-2 text-sm font-medium text-white hover:border-white/26 hover:bg-white/12"
               >
-                {item.label}
+                상담 문의
               </Link>
-            );
-          })}
-        </nav>
+            </nav>
 
-        <button
-          type="button"
-          aria-expanded={mobileOpen}
-          aria-controls="mobile-nav-panel"
-          aria-label="Toggle navigation menu"
-          onClick={() => setMobileOpen((prev) => !prev)}
-          className={`rounded-full border p-2 md:hidden ${
-            isScrolled
-              ? "border-white/20 bg-white/10 text-white"
-              : useDarkText
-              ? "border-black/20 bg-white/85 text-[var(--agri-ink)]"
-              : "border-white/20 bg-white/10 text-white"
-          }`}
-        >
-          <span
-            className={`block h-0.5 w-5 bg-current transition-transform ${mobileOpen ? "translate-y-1.5 rotate-45" : ""}`}
-          />
-          <span
-            className={`mt-1 block h-0.5 w-5 bg-current transition-opacity ${mobileOpen ? "opacity-0" : "opacity-100"}`}
-          />
-          <span
-            className={`mt-1 block h-0.5 w-5 bg-current transition-transform ${mobileOpen ? "-translate-y-1.5 -rotate-45" : ""}`}
-          />
-        </button>
-      </div>
+            <button
+              type="button"
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-site-nav"
+              aria-label="네비게이션 열기"
+              onClick={() => setMobileOpen((current) => !current)}
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-[8px] border border-white/14 bg-white/8 text-white md:hidden"
+            >
+              <span className="relative block h-4 w-5">
+                <span
+                  className={`absolute left-0 top-0 h-0.5 w-5 bg-current transition-transform ${
+                    mobileOpen ? "translate-y-[7px] rotate-45" : ""
+                  }`}
+                />
+                <span
+                  className={`absolute left-0 top-[7px] h-0.5 w-5 bg-current transition-opacity ${
+                    mobileOpen ? "opacity-0" : "opacity-100"
+                  }`}
+                />
+                <span
+                  className={`absolute left-0 top-[14px] h-0.5 w-5 bg-current transition-transform ${
+                    mobileOpen ? "-translate-y-[7px] -rotate-45" : ""
+                  }`}
+                />
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <motion.div
+          style={{ scaleX }}
+          className="mt-3 h-px origin-left bg-[var(--accent)]/75"
+        />
+      </header>
 
       <AnimatePresence initial={false}>
         {mobileOpen ? (
           <>
             <motion.button
               type="button"
-              aria-label="Close navigation overlay"
+              aria-label="메뉴 닫기"
               onClick={() => setMobileOpen(false)}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-20 bg-black/35 md:hidden"
+              className="fixed inset-0 z-40 bg-[rgba(7,10,8,0.62)] md:hidden"
             />
             <motion.nav
-              id="mobile-nav-panel"
-              initial={{ opacity: 0, y: -8 }}
+              id="mobile-site-nav"
+              initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="relative z-30 mt-3 max-h-[calc(100dvh-7.5rem)] overflow-y-auto rounded-2xl border border-white/20 bg-black/75 p-3 shadow-[0_16px_40px_rgba(4,12,4,0.35)] backdrop-blur-xl md:hidden"
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+              className="fixed inset-x-5 top-24 z-50 rounded-[8px] border border-white/10 bg-[#0d120d] p-4 text-white shadow-[0_24px_60px_rgba(7,10,8,0.3)] md:hidden"
             >
-              {NAV_ITEMS.map((item) => {
-                const active = isActivePath(pathname, item.href);
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setMobileOpen(false)}
-                    className={
-                      active
-                        ? "block rounded-xl bg-white/10 px-3 py-2 text-sm font-semibold text-[var(--agri-primary)]"
-                        : "block rounded-xl px-3 py-2 text-sm font-semibold text-white/90 transition-colors hover:bg-white/10 hover:text-[var(--agri-primary)]"
-                    }
-                  >
-                    {item.label}
-                  </Link>
-                );
-              })}
+              <div className="grid gap-2">
+                {NAV_ITEMS.map((item) => {
+                  const active = isActivePath(pathname, item.href);
+
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={closeMobileMenu}
+                      className={`rounded-[8px] px-3 py-3 text-sm ${
+                        active
+                          ? "bg-white/10 text-white"
+                          : "text-white/76 hover:bg-white/6 hover:text-white"
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                })}
+              </div>
+              <Link
+                href="/contact"
+                onClick={closeMobileMenu}
+                className="mt-4 inline-flex min-h-11 w-full items-center justify-center rounded-[8px] bg-[var(--accent)] px-4 py-3 text-sm font-semibold text-[#101611]"
+              >
+                상담 문의
+              </Link>
             </motion.nav>
           </>
         ) : null}
       </AnimatePresence>
-    </header>
+    </>
   );
 }

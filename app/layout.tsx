@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
-import { Manrope, Playfair_Display } from "next/font/google";
+import { IBM_Plex_Sans_KR, Noto_Serif_KR } from "next/font/google";
 import { companyInfo } from "./companyInfo";
 import { absoluteUrl, siteConfig } from "./siteConfig";
 import "./globals.css";
 
-const manrope = Manrope({
-  variable: "--font-manrope",
+const plexSansKr = IBM_Plex_Sans_KR({
+  variable: "--font-plex-sans-kr",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const notoSerifKr = Noto_Serif_KR({
+  variable: "--font-noto-serif-kr",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -44,14 +46,14 @@ export const metadata: Metadata = {
     title: siteConfig.defaultTitle,
     description: siteConfig.defaultDescription,
     images: [
-        {
-          url: absoluteUrl("/opengraph-image"),
-          width: 1200,
-          height: 630,
-          alt: "수북농업 로고",
-        },
-      ],
-    },
+      {
+        url: absoluteUrl("/opengraph-image"),
+        width: 1200,
+        height: 630,
+        alt: "수북농업 브랜드 이미지",
+      },
+    ],
+  },
   twitter: {
     card: "summary_large_image",
     title: siteConfig.defaultTitle,
@@ -122,7 +124,7 @@ export default function RootLayout({
 
   return (
     <html lang="ko">
-      <body className={`${manrope.variable} ${playfair.variable} antialiased`}>
+      <body className={`${plexSansKr.variable} ${notoSerifKr.variable} antialiased`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}

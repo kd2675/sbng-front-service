@@ -1,38 +1,146 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f4f8ee;
-  --foreground: #1c2c1a;
-  --agri-primary: #57db31;
-  --agri-primary-deep: #2f8a1d;
-  --agri-paper: #f6f8f4;
-  --agri-ink: #0f1b0e;
+  --background: #f3f4ef;
+  --foreground: #101611;
+  --surface: #e8ece3;
+  --surface-strong: #d7ddd1;
+  --line: rgba(16, 22, 17, 0.12);
+  --line-strong: rgba(16, 22, 17, 0.22);
+  --muted: #596459;
+  --accent: #8fcb4f;
+  --accent-strong: #6ea63a;
+  --accent-soft: #dcedb8;
+  --signal: #cfd776;
+  --panel: rgba(243, 244, 239, 0.84);
+  --shadow: 0 24px 60px rgba(7, 10, 8, 0.08);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-manrope);
+  --font-sans: var(--font-plex-sans-kr);
+  --font-serif: var(--font-noto-serif-kr);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
+  min-width: 320px;
+  background:
+    radial-gradient(circle at top left, rgba(143, 203, 79, 0.14), transparent 28%),
+    linear-gradient(180deg, #f6f7f2 0%, #f1f3ed 48%, #edf0e8 100%);
   color: var(--foreground);
-  font-family: var(--font-manrope), sans-serif;
+  font-family: var(--font-plex-sans-kr), sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+a,
+button,
+input,
+textarea {
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+::selection {
+  background: rgba(143, 203, 79, 0.28);
+  color: #0b100b;
 }
 
 .font-display {
-  font-family: var(--font-playfair), serif;
+  font-family: var(--font-noto-serif-kr), serif;
 }
 
-.hero-grain {
+.page-shell {
+  position: relative;
+  overflow-x: clip;
+}
+
+.section-wrap {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 80rem;
+  padding-inline: 1.25rem;
+}
+
+.section-rule {
+  border-top: 1px solid var(--line);
+}
+
+.section-kicker {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.section-title {
+  margin-top: 0.875rem;
+  max-width: 14ch;
+  font-family: var(--font-noto-serif-kr), serif;
+  font-size: clamp(2rem, 4vw, 4.5rem);
+  line-height: 1.02;
+}
+
+.section-copy {
+  max-width: 42rem;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.editorial-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.grain-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0.28;
+  mix-blend-mode: soft-light;
   background-image:
     linear-gradient(
-      115deg,
-      rgba(13, 22, 10, 0.85),
-      rgba(13, 22, 10, 0.5) 35%,
-      rgba(13, 22, 10, 0.65) 100%
+      125deg,
+      rgba(255, 255, 255, 0.08),
+      transparent 28%,
+      rgba(255, 255, 255, 0.04) 62%,
+      transparent 100%
     ),
-    radial-gradient(circle at 85% 15%, rgba(87, 219, 49, 0.33), transparent 40%),
-    radial-gradient(circle at 20% 80%, rgba(41, 115, 27, 0.48), transparent 35%);
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.05) 0,
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px,
+      transparent 5px
+    );
+  pointer-events: none;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+@media (min-width: 768px) {
+  .section-wrap {
+    padding-inline: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-wrap {
+    padding-inline: 4rem;
+  }
+
+  .editorial-grid {
+    gap: 2rem;
+  }
 }

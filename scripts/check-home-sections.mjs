@@ -4,7 +4,7 @@ import path from "node:path";
 import { chromium } from "playwright";
 
 const OUTPUT_DIR = path.join(process.cwd(), "artifacts", "home-section-check");
-const TARGET_URL = "http://127.0.0.1:3004";
+const TARGET_URL = process.env.TARGET_URL ?? "http://127.0.0.1:3004";
 
 const viewports = [
   { name: "desktop", width: 1440, height: 900 },
