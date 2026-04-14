@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { MotionConfig, motion, useReducedMotion } from "motion/react";
@@ -13,6 +12,7 @@ import {
   verifiedFactCards,
 } from "./companyProfile";
 import { companyInfo } from "./companyInfo";
+import LightboxImage from "./components/LightboxImage";
 import SourceLink from "./components/SourceLink";
 import SiteNav from "./components/SiteNav";
 import { productCatalog } from "./productCatalog";
@@ -262,28 +262,36 @@ export default function HomePageClient() {
             data-section-index={0}
             className="relative isolate flex min-h-[100svh] items-end overflow-hidden px-5 pb-16 pt-28 md:snap-start md:snap-always md:px-10 lg:px-20"
           >
-            <Image
+            <LightboxImage
               alt="수북농업 현장 활동 이미지"
               src="/image/kim-jong-su-assembly.jpg"
               fill
               priority
               sizes="100vw"
               className="object-cover"
+              hideHint
             />
-            <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(9,18,8,0.86),rgba(13,22,10,0.52)_42%,rgba(13,22,10,0.82)_100%)]" />
-            <div className="absolute left-[-4rem] top-32 h-56 w-56 rounded-full bg-[#ffe89a]/12 blur-3xl md:h-72 md:w-72" />
-            <div className="absolute bottom-16 right-[-4rem] h-56 w-56 rounded-full bg-[var(--agri-primary)]/14 blur-3xl md:h-80 md:w-80" />
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(115deg,rgba(9,18,8,0.86),rgba(13,22,10,0.52)_42%,rgba(13,22,10,0.82)_100%)]" />
+            <div className="pointer-events-none absolute left-[-4rem] top-32 h-56 w-56 rounded-full bg-[#ffe89a]/12 blur-3xl md:h-72 md:w-72" />
+            <div className="pointer-events-none absolute bottom-16 right-[-4rem] h-56 w-56 rounded-full bg-[var(--agri-primary)]/14 blur-3xl md:h-80 md:w-80" />
 
             <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-start">
-              <motion.p
+              <motion.div
                 initial={revealInitial}
                 animate={revealAnimate}
                 transition={{ delay: 0.04 }}
-                className="inline-flex items-center gap-2 rounded-full border border-white/18 bg-white/10 px-4 py-1.5 text-sm font-semibold text-white/86 backdrop-blur"
+                className="flex flex-wrap gap-2"
               >
-                <span className="h-2 w-2 rounded-full bg-[var(--agri-primary)]" />
-                토양과 작물을 함께 살피는 수북농업
-              </motion.p>
+                {["흙손", "무등산", "흙보약"].map((item) => (
+                  <span
+                    key={item}
+                    className="inline-flex items-center gap-2 rounded-full border border-white/18 bg-white/10 px-4 py-1.5 text-sm font-semibold text-white/86 backdrop-blur"
+                  >
+                    <span className="h-2 w-2 rounded-full bg-[var(--agri-primary)]" />
+                    {item}
+                  </span>
+                ))}
+              </motion.div>
 
               <motion.h1
                 initial={revealInitial}
@@ -291,9 +299,9 @@ export default function HomePageClient() {
                 transition={{ delay: 0.12 }}
                 className="font-display mt-6 max-w-5xl text-5xl font-bold leading-[0.98] text-white md:text-7xl lg:text-8xl"
               >
-                현장을 먼저 살피고
-                <br className="hidden sm:block" /> 농사의 힘을 키우는
-                <span className="text-[var(--agri-primary)]"> 수북농업</span>
+                농업회사법인(유)
+                <br className="hidden sm:block" />
+                <span className="text-[var(--agri-primary)]">수북농업</span>
               </motion.h1>
 
               <motion.p
@@ -302,7 +310,7 @@ export default function HomePageClient() {
                 transition={{ delay: 0.18 }}
                 className="mt-7 max-w-3xl text-base leading-relaxed text-white/86 md:text-xl"
               >
-                {companyProfile.summary}
+                회사 정보, 대표 소개, 제품 안내와 공개 연혁을 한곳에서 소개합니다.
               </motion.p>
 
               <motion.div
@@ -441,15 +449,15 @@ export default function HomePageClient() {
                     className="overflow-hidden rounded-3xl border border-black/8 bg-[#f8fbf6] shadow-[0_22px_54px_rgba(12,26,12,0.07)]"
                   >
                     <div className="relative h-64">
-                      <Image
+                      <LightboxImage
                         alt={`${item.name} 제품 실사`}
                         src={item.image}
                         fill
                         sizes="(min-width: 1024px) 28vw, 100vw"
                         className="object-cover"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/12 to-transparent" />
-                      <p className="absolute left-5 top-5 rounded-full bg-white/86 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--agri-ink)]">
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/12 to-transparent" />
+                      <p className="pointer-events-none absolute left-5 top-5 rounded-full bg-white/86 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--agri-ink)]">
                         {item.material}
                       </p>
                     </div>
@@ -479,7 +487,7 @@ export default function HomePageClient() {
                 className="overflow-hidden rounded-[2rem] border border-black/8 bg-white shadow-[0_26px_70px_rgba(12,26,12,0.12)]"
               >
                 <div className="relative aspect-[4/5] bg-[#e6ebdf]">
-                  <Image
+                  <LightboxImage
                     alt="농민신문 기사에 실린 김종수 대표 사진"
                     src="/image/kim-jong-su-portrait.jpg"
                     fill

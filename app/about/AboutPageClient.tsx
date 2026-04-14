@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
+import LightboxImage from "../components/LightboxImage";
 import SourceLink from "../components/SourceLink";
 import SiteFooter from "../components/SiteFooter";
 import SiteNav from "../components/SiteNav";
@@ -264,7 +264,7 @@ export default function AboutPageClient() {
                   className="overflow-hidden rounded-[1.75rem] border border-black/8 bg-white shadow-[0_18px_46px_rgba(12,26,12,0.06)]"
                 >
                   <div className="relative aspect-[4/3] bg-[#e8eee1]">
-                    <Image
+                    <LightboxImage
                       alt={item.alt}
                       src={item.src}
                       fill
@@ -272,7 +272,7 @@ export default function AboutPageClient() {
                       sizes="(min-width: 1024px) 30vw, 100vw"
                       className="object-cover"
                     />
-                    <div className="absolute left-4 top-4 rounded-full bg-white/92 px-3 py-1 text-[11px] font-bold tracking-[0.12em] text-[var(--agri-ink)] shadow-[0_8px_20px_rgba(12,26,12,0.14)]">
+                    <div className="pointer-events-none absolute left-4 top-4 rounded-full bg-white/92 px-3 py-1 text-[11px] font-bold tracking-[0.12em] text-[var(--agri-ink)] shadow-[0_8px_20px_rgba(12,26,12,0.14)]">
                       {item.date}
                     </div>
                   </div>
@@ -318,14 +318,14 @@ export default function AboutPageClient() {
                   className="overflow-hidden rounded-[1.75rem] border border-black/8 bg-white shadow-[0_18px_46px_rgba(12,26,12,0.06)]"
                 >
                   <div className="relative aspect-[4/3] bg-[#e8eee1]">
-                    <Image
+                    <LightboxImage
                       alt={item.alt}
                       src={item.src}
                       fill
                       sizes="(min-width: 1024px) 46vw, 100vw"
                       className="object-cover"
                     />
-                    <div className="absolute left-4 top-4 rounded-full bg-white/92 px-3 py-1 text-[11px] font-bold tracking-[0.12em] text-[var(--agri-ink)] shadow-[0_8px_20px_rgba(12,26,12,0.14)]">
+                    <div className="pointer-events-none absolute left-4 top-4 rounded-full bg-white/92 px-3 py-1 text-[11px] font-bold tracking-[0.12em] text-[var(--agri-ink)] shadow-[0_8px_20px_rgba(12,26,12,0.14)]">
                       {item.date}
                     </div>
                   </div>
@@ -398,7 +398,7 @@ export default function AboutPageClient() {
 
               <article className="overflow-hidden rounded-[2rem] border border-black/8 bg-white shadow-[0_18px_46px_rgba(12,26,12,0.06)]">
                 <div className="relative aspect-[4/3] bg-[#eff4ea]">
-                  <Image
+                  <LightboxImage
                     alt="수북농업 명함 이미지"
                     src="/image/ceo-card.png"
                     fill
@@ -446,7 +446,7 @@ export default function AboutPageClient() {
                   className="group overflow-hidden rounded-[2rem] border border-black/8 bg-white shadow-[0_18px_46px_rgba(12,26,12,0.06)] transition hover:-translate-y-1"
                 >
                   <div className="relative aspect-[4/3] bg-[#e7eee1]">
-                    <Image
+                    <LightboxImage
                       alt={item.alt}
                       src={item.image}
                       fill

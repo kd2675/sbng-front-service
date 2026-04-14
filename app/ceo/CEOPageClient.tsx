@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
+import LightboxImage from "../components/LightboxImage";
 import SourceLink from "../components/SourceLink";
 import SiteFooter from "../components/SiteFooter";
 import SiteNav from "../components/SiteNav";
@@ -112,7 +112,7 @@ export default function CEOPageClient() {
                 className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/8 shadow-[0_30px_80px_rgba(0,0,0,0.26)]"
               >
                 <div className="relative aspect-[4/5]">
-                  <Image
+                  <LightboxImage
                     alt="농민신문 기사에 실린 김종수 대표 인물 사진"
                     src="/image/kim-jong-su-portrait.jpg"
                     fill
@@ -267,7 +267,7 @@ export default function CEOPageClient() {
               className="overflow-hidden rounded-[2rem] border border-black/8 bg-white shadow-[0_18px_46px_rgba(12,26,12,0.06)]"
             >
               <div className="relative aspect-[4/3] bg-[#edf2e8]">
-                <Image
+                <LightboxImage
                   alt="2019년 비료품질관리교육 행사 사진"
                   src="/image/kim-jong-su-assembly.jpg"
                   fill
@@ -296,7 +296,7 @@ export default function CEOPageClient() {
               className="overflow-hidden rounded-[2rem] border border-black/8 bg-white shadow-[0_18px_46px_rgba(12,26,12,0.06)]"
             >
               <div className="relative aspect-[4/3] bg-[#edf2e8]">
-                <Image
+                <LightboxImage
                   alt="한국유기질비료산업협동조합 연혁 기록 캡처"
                   src="/image/history/history-kofic-2024-08-25.png"
                   fill

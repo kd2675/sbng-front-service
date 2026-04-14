@@ -2,10 +2,10 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import BackButton from "../../components/BackButton";
+import LightboxImage from "../../components/LightboxImage";
 import SiteFooter from "../../components/SiteFooter";
 import SiteNav from "../../components/SiteNav";
 import SourceLink from "../../components/SourceLink";
@@ -182,7 +182,7 @@ export default async function SourceArchivePage({ params }: SourcePageProps) {
             {captureExists ? (
               <div className="mt-6 overflow-hidden rounded-[1.6rem] border border-black/8 bg-[#eef3e8]">
                 <div className="relative aspect-[4/3]">
-                  <Image
+                  <LightboxImage
                     alt={`${entry.sourceLabel} 기사 캡처 이미지`}
                     src={entry.captureImage}
                     fill

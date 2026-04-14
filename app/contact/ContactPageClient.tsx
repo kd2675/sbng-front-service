@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { companyInfo } from "../companyInfo";
+import LightboxImage from "../components/LightboxImage";
 import SiteFooter from "../components/SiteFooter";
 import SiteNav from "../components/SiteNav";
 
@@ -238,7 +238,7 @@ export default function ContactPageClient() {
 
             <article className="overflow-hidden rounded-[2rem] border border-black/7 bg-white shadow-[0_18px_52px_rgba(12,26,12,0.06)]">
               <div className="relative aspect-[4/3] bg-[#eef3ea]">
-                <Image
+                <LightboxImage
                   alt="수북농업 명함 이미지"
                   src="/image/ceo-card.png"
                   fill

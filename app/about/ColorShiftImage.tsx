@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import LightboxImage from "../components/LightboxImage";
 
 type ColorShiftImageProps = {
   src: string;
@@ -56,7 +56,7 @@ export default function ColorShiftImage({
         isColored ? colorContainerClassName : grayContainerClassName
       }`}
     >
-      <Image
+      <LightboxImage
         alt={alt}
         src={src}
         fill
@@ -66,6 +66,7 @@ export default function ColorShiftImage({
             ? "grayscale-0 sepia-0 contrast-100 brightness-100 saturate-100"
             : "grayscale-[0.78] sepia-[0.36] contrast-70 brightness-75 saturate-40"
         } ${imageClassName}`}
+        hintClassName="bottom-4 right-4 bg-black/62"
       />
     </div>
   );

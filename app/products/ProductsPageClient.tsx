@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { MotionConfig, motion, useReducedMotion } from "motion/react";
 import { companyInfo } from "../companyInfo";
+import LightboxImage from "../components/LightboxImage";
 import { productCatalog } from "../productCatalog";
 import SiteFooter from "../components/SiteFooter";
 import SiteNav from "../components/SiteNav";
@@ -283,7 +283,7 @@ export default function ProductsPageClient() {
                         whileHover={reduceMotion ? undefined : { y: -6 }}
                         className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] border border-[#dce4d5] bg-[#eef4ea]"
                       >
-                        <Image
+                        <LightboxImage
                           alt={`${product.name} 제품 앞면`}
                           src={product.frontImage}
                           fill
@@ -296,7 +296,7 @@ export default function ProductsPageClient() {
                           whileHover={reduceMotion ? undefined : { y: -5 }}
                           className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] border border-[#dce4d5] bg-[#f7faf4]"
                         >
-                          <Image
+                          <LightboxImage
                             alt={`${product.name} 제품 안내 시트`}
                             src={product.sheetImage}
                             fill
@@ -309,7 +309,7 @@ export default function ProductsPageClient() {
                           whileHover={reduceMotion ? undefined : { y: -5 }}
                           className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] border border-[#dce4d5] bg-[#f7faf4]"
                         >
-                          <Image
+                          <LightboxImage
                             alt={`${product.name} 제품 뒷면`}
                             src={product.backImage}
                             fill
