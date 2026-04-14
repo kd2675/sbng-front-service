@@ -45,12 +45,14 @@ export const companyProfile = {
   summary:
     "수북농업의 회사 정보, 대표 이력, 공개 연혁, 제품 자료를 한 흐름으로 소개합니다.",
   verificationNote:
-    "회사 자료와 농민신문·농기자재신문·영농자재신문 기사, 한국유기질비료산업협동조합 공개 연혁, 2026년 유기질비료 계약현황, 114On·NICEbizinfo 공개 사업자 정보를 바탕으로 주요 내용을 안내합니다.",
+    "회사 자료와 농민신문·농기자재신문·영농자재신문·주간인물 기사, 한국유기질비료산업협동조합 공개 연혁, 2026년 유기질비료 계약현황, 114On·NICEbizinfo 공개 사업자 정보를 바탕으로 주요 내용을 안내합니다.",
   companyOverview: [
     `${companyInfo.legalName}은 전라남도 담양군 담양읍 추성로 1030을 기반으로 한 법인입니다.`,
     `NICEbizinfo 기업정보에는 설립일이 ${companyInfo.establishmentDate}, 표준산업분류는 ${companyInfo.industryLabel}(${companyInfo.industryCode})로 안내됩니다.`,
     `한국유기질비료산업협동조합 조합원 검색에는 수북농업이 전남 지역 조합원으로 등록되어 있고, 생산비종은 ${companyInfo.productionCategory}로 안내됩니다.`,
     "대표 제품은 흙손, 흙보약, 무등산 3종이며, 사이트에서는 포장 이미지와 안내 자료를 함께 전합니다.",
+    "2020년 2월 주간인물 인터뷰에는 김종수 대표가 1996년 수북농업을 설립했고, 1998년 농협중앙회 우수 퇴비생산업체 선정 이후 흙 살리기 운동에 참여해 온 흐름이 함께 소개됐습니다.",
+    "2023년 1월 담양군 장학금 기탁 기사에는 (유)수북농업이 지역 인재 육성을 위한 기탁에 참여한 내용이 소개됐습니다.",
     "2026년 유기질비료 계약현황 공개 자료에는 수북농업 제품으로 흙손 분상형, 흙손 입상형, 무등산 입상형, 흙보약 혼합유기질이 확인됩니다.",
     "2015년 농기자재신문 기사에는 담양 수북농업의 생산 시설과 과정이 공개 사진과 함께 소개됐습니다.",
     `${companyInfo.ceoName} 대표는 공개 기사에서 수북농업 대표이사와 수북환경개발 대표이사, 조합 활동과 지역 농업 단체 활동 이력으로 함께 소개됩니다.`,
@@ -99,6 +101,14 @@ export const verifiedLeadershipTimeline: readonly TimelineItem[] = [
     sourceUrl: "https://www.newsfm.kr/news/article_print.html?no=3557",
   },
   {
+    date: "2020.02.03",
+    title: "주간인물 인터뷰에 수북농업 설립과 산업 활동이 함께 소개된 시기",
+    description:
+      "주간인물 인터뷰는 김종수 대표가 1996년 수북농업을 설립했고, 1998년 농협중앙회 우수 퇴비생산업체 선정 이후 흙 살리기 운동과 유기질비료 산업 활동을 이어온 흐름을 함께 소개했습니다.",
+    sourceLabel: "주간인물, 2020.02.03",
+    sourceUrl: "http://weeklypeople.co.kr/news/view.php?no=2086",
+  },
+  {
     date: "2020.08.07",
     title: "수북농업과 수북환경개발 대표 이력이 함께 소개된 시기",
     description:
@@ -117,6 +127,14 @@ export const verifiedLeadershipTimeline: readonly TimelineItem[] = [
 ] as const;
 
 export const latestPublicUpdates: readonly TimelineItem[] = [
+  {
+    date: "2023.01.19",
+    title: "담양군 장학금 기탁 기사에 수북농업 참여가 소개된 시기",
+    description:
+      "대한기자협회 광주전남협회 담양군지회 기사에는 가축분퇴비 생산업체 일동의 장학금 기탁이 소개됐고, (유)수북농업은 250만원 기탁 기업으로 함께 보도됐습니다.",
+    sourceLabel: "대한기자협회 광주전남협회, 2023.01.19",
+    sourceUrl: "http://www.jgkoreaja.com/article.asp?aid=167411243060801023",
+  },
   {
     date: "2024.08.25",
     title: "공식 조합 연혁 기준 제6대 김방식 이사장 취임",
@@ -237,6 +255,18 @@ export const historyFlowTimeline: readonly HistoryFlowItem[] = [
     sourceUrl: "https://www.newsfm.kr/news/article_print.html?no=3557",
   },
   {
+    period: "2020.02.03",
+    title: "주간인물 인터뷰에 수북농업 설립 흐름이 함께 소개된 시기",
+    description:
+      "주간인물은 김종수 대표 인터뷰에서 1996년 수북농업 설립, 1998년 농협중앙회 우수 퇴비생산업체 선정, 2012년 농림수산식품부 장관 표창, 2019년 환경부 장관 표창 이력을 함께 소개했습니다.",
+    image: {
+      src: "/image/history/history-weeklypeople-2020-02-03-main.jpg",
+      alt: "주간인물 2020년 2월 3일 김종수 인터뷰 기사에 실린 사진",
+    },
+    sourceLabel: "주간인물 2020.02.03",
+    sourceUrl: "http://weeklypeople.co.kr/news/view.php?no=2086",
+  },
+  {
     period: "2020.08.07",
     title: "수북농업과 수북환경개발 대표 이력이 함께 소개된 시기",
     description:
@@ -259,6 +289,18 @@ export const historyFlowTimeline: readonly HistoryFlowItem[] = [
     },
     sourceLabel: "농기자재신문 2021.02.24",
     sourceUrl: "https://www.newsam.co.kr/news/article.html?no=32817",
+  },
+  {
+    period: "2023.01.19",
+    title: "지역 인재 육성을 위한 장학금 기탁이 공개된 시기",
+    description:
+      "대한기자협회 광주전남협회 담양군지회 기사에는 가축분퇴비 생산업체 일동의 장학금 기탁이 보도됐고, (유)수북농업은 250만원 기탁 기업으로 함께 소개됐습니다.",
+    image: {
+      src: "/image/history/history-jgkoreaja-2023-01-19.jpg",
+      alt: "대한기자협회 광주전남협회 담양군지회 기사에 실린 장학금 기탁 사진",
+    },
+    sourceLabel: "대한기자협회 광주전남협회 2023.01.19",
+    sourceUrl: "http://www.jgkoreaja.com/article.asp?aid=167411243060801023",
   },
   {
     period: "2024.08.25",
@@ -343,6 +385,7 @@ export const ceoBiography = [
   "2015년 6월 18일 공개 기사에서 원료부터 제품까지 품질을 우선하겠다는 방향을 밝혔습니다.",
   "2016년 9월 5일 제3대에 이어 제4대 이사장으로 재선출됐습니다.",
   "2019년 3월 14일 영농자재신문 기사에서는 비료 공정규격과 이물질 기준 관련 업계 의견을 농촌진흥청에 전달한 내용이 소개됐습니다.",
+  "2020년 2월 3일 주간인물 인터뷰에는 1996년 수북농업 설립, 1998년 우수 퇴비생산업체 선정, 2012년 농림수산식품부 장관 표창, 2019년 환경부 장관 표창 이력이 함께 소개됐습니다.",
   "2020년 8월 기사에는 수북농업 대표이사와 수북환경개발 대표이사 이력이 함께 실렸습니다.",
   "2021년 2월 24일 전남도친환경농산업연합회 제2부회장 선출 소식이 공개 기사로 확인됩니다.",
   "한국유기질비료산업협동조합 공개 연혁 기준 2024년 8월 25일부터는 제6대 김방식 이사장 체제로 안내되며, 김종수 대표의 조합 이력은 제3·4대 이사장 기록으로 확인됩니다.",
@@ -385,6 +428,11 @@ export const publicSources: readonly PublicSource[] = [
     url: "https://www.newsam.co.kr/news/article.html?no=8732",
   },
   {
+    label: "대한기자협회 광주전남협회 2023.01.19",
+    detail: "담양군 장학금 기탁 기사에 (유)수북농업 250만원 기탁 내용이 소개된 자료",
+    url: "http://www.jgkoreaja.com/article.asp?aid=167411243060801023",
+  },
+  {
     label: "농기자재신문 2015.07.31",
     detail: "차세대리더들의 모임 기사에 김건영(수북농업) 참석이 확인되는 공개 사진 자료",
     url: "https://www.newsam.co.kr/news/article.html?no=8385",
@@ -398,6 +446,12 @@ export const publicSources: readonly PublicSource[] = [
     label: "영농자재신문 2019.03.14",
     detail: "비료 공정규격과 이물질 기준 관련 업계 의견 전달 기사",
     url: "https://www.newsfm.kr/news/article_print.html?no=3557",
+  },
+  {
+    label: "주간인물 2020.02.03",
+    detail:
+      "김종수 대표 인터뷰에 1996년 수북농업 설립, 1998년 우수 퇴비생산업체 선정, 정부 표창 이력이 함께 소개된 기사",
+    url: "http://weeklypeople.co.kr/news/view.php?no=2086",
   },
   {
     label: "영농자재신문 2020.08.07",

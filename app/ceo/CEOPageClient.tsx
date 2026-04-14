@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
+import { getArchivedSourceHref } from "../articleArchive";
 import SiteFooter from "../components/SiteFooter";
 import SiteNav from "../components/SiteNav";
 import {
@@ -31,6 +32,7 @@ const ceoTimelineDates = new Set([
   "2014.07.09",
   "2014.07.14",
   "2016.09.05",
+  "2020.02.03",
   "2020.08.07",
   "2021.02.24",
   "2024.08.25",
@@ -133,7 +135,7 @@ export default function CEOPageClient() {
                 {ceoCurrentStatus.map((item) => (
                   <a
                     key={item.date}
-                    href={item.sourceUrl}
+                    href={getArchivedSourceHref(item.sourceUrl)}
                     target="_blank"
                     rel="noreferrer"
                     className="block rounded-[1.6rem] border border-black/8 bg-white px-5 py-4 transition hover:-translate-y-0.5"
@@ -153,7 +155,7 @@ export default function CEOPageClient() {
               </div>
               <div className="mt-8 space-y-3">
                 <a
-                  href={externalPhotoCredit.url}
+                  href={getArchivedSourceHref(externalPhotoCredit.url)}
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex text-sm font-bold text-[var(--agri-primary-deep)]"
@@ -222,7 +224,7 @@ export default function CEOPageClient() {
                     <p className="mt-3 leading-relaxed text-[#526951]">{item.description}</p>
                   </div>
                   <a
-                    href={item.sourceUrl}
+                    href={getArchivedSourceHref(item.sourceUrl)}
                     target="_blank"
                     rel="noreferrer"
                     className="w-fit self-start rounded-full border border-black/10 px-4 py-2 text-sm font-bold text-[var(--agri-ink)] transition hover:bg-black/4"

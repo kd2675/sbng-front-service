@@ -10,6 +10,7 @@
 - `/products`
 - `/contact`
 - `/rss.xml`
+- `/sources/[slug]` 내부 기사 보관본
 
 ## 특징
 
@@ -28,6 +29,7 @@ npm run dev
 npm run build
 npm run start
 npm run lint
+npm run archive:articles
 ```
 
 ## 포트

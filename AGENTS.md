@@ -15,6 +15,8 @@
 | `app/layout.tsx` | 전역 metadata, structured data, verification 메타 |
 | `app/HomePageClient.tsx` | 메인 랜딩 클라이언트 |
 | `app/about/AboutPageClient.tsx` | 브랜드 소개 페이지 클라이언트 |
+| `app/articleArchive.ts` | 기사 보관본 매핑과 원문 상태 확인 helper |
+| `app/sources/[slug]/page.tsx` | 기사 원문 확인 후 보관본을 제공하는 내부 소스 페이지 |
 | `app/sitemap.ts` | 사이트맵 생성 |
 | `app/rss.xml/route.ts` | RSS 피드 생성 |
 | `app/components/SiteNav.tsx` | 공통 네비게이션 |
@@ -29,6 +31,7 @@
 - `/products`
 - `/contact`
 - `/rss.xml`
+- `/sources/[slug]` (내부 자료 보관본)
 
 ## Run / Check
 
@@ -38,6 +41,7 @@ npm run dev
 npm run build
 npm run start
 npm run lint
+npm run archive:articles
 ```
 
 ## Runtime Notes

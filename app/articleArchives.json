@@ -1,0 +1,200 @@
+[
+  {
+    "slug": "nongmin-2014-07-14",
+    "sourceName": "농민신문",
+    "sourceLabel": "농민신문 2014.07.14",
+    "title": "김종수 한국유기질비료산업협동조합 신임 이사장 인터뷰",
+    "publishedAt": "2014-07-14",
+    "url": "https://www.nongmin.com/article/20140713094869",
+    "summary": "조합원 화합과 질 좋은 제품 공급을 우선 과제로 소개한 신임 이사장 인터뷰 기사입니다.",
+    "excerptBullets": [
+      "2014년 7월 9일 임시총회에서 김종수 대표가 조합 이사장으로 선출된 흐름이 소개됩니다.",
+      "조합원 화합과 품질 좋은 제품 공급을 우선 과제로 제시한 발언이 기사 핵심으로 정리됩니다.",
+      "수북환경개발과 전남퇴비생산자협의회 관련 이력이 함께 실린 공개 기사입니다."
+    ],
+    "captureImage": "/archive/articles/nongmin-2014-07-14/capture.png",
+    "snapshotHtml": "/archive/articles/nongmin-2014-07-14/source.html",
+    "selectors": ["#contents .view_cont", "#contents .news_view", "article"],
+    "clip": { "width": 1160, "height": 900, "padX": 40, "padY": 40 }
+  },
+  {
+    "slug": "newsam-2014-07-17",
+    "sourceName": "농기자재신문",
+    "sourceLabel": "농기자재신문 2014.07.17",
+    "title": "한국유기질비료산업협동조합 제3대 이사장 선출 기사",
+    "publishedAt": "2014-07-17",
+    "url": "https://newsam.co.kr/news/article.html?no=7394",
+    "summary": "김종수 대표의 제3대 이사장 선출 소식을 전한 공개 기사입니다.",
+    "excerptBullets": [
+      "조합 임시총회 및 임원선거 결과로 김종수 대표가 제3대 이사장으로 선출된 내용이 실렸습니다.",
+      "수북농업 대표와 조합 활동이 공개 기사 기준으로 함께 연결되는 초기 기록입니다.",
+      "이후 농민신문 인터뷰 및 조합 연혁과 이어지는 출발점 기사입니다."
+    ],
+    "captureImage": "/archive/articles/newsam-2014-07-17/capture.png",
+    "snapshotHtml": "/archive/articles/newsam-2014-07-17/source.html",
+    "selectors": [".arv_001_01", ".art_top", ".cnt_view.news_body_area"],
+    "clip": { "width": 760, "height": 900, "padX": 40, "padY": 40 }
+  },
+  {
+    "slug": "newsam-2015-06-18",
+    "sourceName": "농기자재신문",
+    "sourceLabel": "농기자재신문 2015.06.18",
+    "title": "품질 우선 기조와 업계 과제를 다룬 인물포커스 기사",
+    "publishedAt": "2015-06-18",
+    "url": "https://www.newsam.co.kr/news/article.html?no=8253",
+    "summary": "원료부터 제품까지 품질을 우선하겠다는 방향과 업계 과제를 소개한 인물포커스 기사입니다.",
+    "excerptBullets": [
+      "품질을 우선해 신뢰를 쌓겠다는 방향이 기사 핵심으로 소개됩니다.",
+      "유통질서와 품질관리 기준을 함께 언급한 공개 기사입니다.",
+      "김종수 대표의 산업 현장 중심 시각을 보여주는 중간 시기 기사입니다."
+    ],
+    "captureImage": "/archive/articles/newsam-2015-06-18/capture.png",
+    "snapshotHtml": "/archive/articles/newsam-2015-06-18/source.html",
+    "selectors": [".arv_001_01", ".art_top", ".cnt_view.news_body_area"],
+    "clip": { "width": 760, "height": 900, "padX": 40, "padY": 40 }
+  },
+  {
+    "slug": "newsam-2015-07-31",
+    "sourceName": "농기자재신문",
+    "sourceLabel": "농기자재신문 2015.07.31",
+    "title": "차세대리더들의 모임 관련 공개 기사",
+    "publishedAt": "2015-07-31",
+    "url": "https://www.newsam.co.kr/news/article.html?no=8385",
+    "summary": "업계 차세대리더들의 모임 기사로, 참석자 명단에 김건영(수북농업)이 확인되는 공개 자료입니다.",
+    "excerptBullets": [
+      "수북농업 관련 인물이 공개 명단에 등장하는 업계 교류 기사입니다.",
+      "현장 단체 사진과 설명 장면이 함께 실린 공개 기사입니다.",
+      "회사 시설 기사와는 구분되는 업계 활동 자료로 보관합니다."
+    ],
+    "captureImage": "/archive/articles/newsam-2015-07-31/capture.png",
+    "snapshotHtml": "/archive/articles/newsam-2015-07-31/source.html",
+    "selectors": [".arv_001_01", ".art_top", ".cnt_view.news_body_area"],
+    "clip": { "width": 760, "height": 900, "padX": 40, "padY": 40 }
+  },
+  {
+    "slug": "newsam-2015-12-31",
+    "sourceName": "농기자재신문",
+    "sourceLabel": "농기자재신문 2015.12.31",
+    "title": "담양 수북농업 현장 탐방 기사",
+    "publishedAt": "2015-12-31",
+    "url": "https://www.newsam.co.kr/news/article.html?no=8732",
+    "summary": "수북농업의 생산 시설과 공정 사진이 공개된 현장 탐방 기사입니다.",
+    "excerptBullets": [
+      "퇴비 적치 시설과 생산 설비 내부 등 현장 사진이 함께 공개됐습니다.",
+      "현재 회사 소개 페이지의 현장 사진 영역 근거 자료로 사용 중인 기사입니다.",
+      "수북농업 관련 사진 자료 가운데 현장성이 가장 높은 공개 기사입니다."
+    ],
+    "captureImage": "/archive/articles/newsam-2015-12-31/capture.png",
+    "snapshotHtml": "/archive/articles/newsam-2015-12-31/source.html",
+    "selectors": [".arv_001_01", ".art_top", ".cnt_view.news_body_area"],
+    "clip": { "width": 760, "height": 900, "padX": 40, "padY": 40 }
+  },
+  {
+    "slug": "nongmin-2016-09-05",
+    "sourceName": "농민신문",
+    "sourceLabel": "농민신문 2016.09.05",
+    "title": "제4대 이사장 재선출 기사",
+    "publishedAt": "2016-09-05",
+    "url": "https://www.nongmin.com/article/20160903062432",
+    "summary": "김종수 대표의 제4대 이사장 재선출과 주요 발언을 다룬 기사입니다.",
+    "excerptBullets": [
+      "제3대에 이어 제4대 이사장으로 재선출된 내용이 공개 기사로 확인됩니다.",
+      "예산 증액과 환경시설 보조금 확보 관련 발언이 함께 소개됩니다.",
+      "대표 인물 사진의 출처로 사용 중인 기사입니다."
+    ],
+    "captureImage": "/archive/articles/nongmin-2016-09-05/capture.png",
+    "snapshotHtml": "/archive/articles/nongmin-2016-09-05/source.html",
+    "selectors": ["#contents .view_cont", "#contents .news_view", "article"],
+    "clip": { "width": 1160, "height": 900, "padX": 40, "padY": 40 }
+  },
+  {
+    "slug": "newsfm-2019-03-14",
+    "sourceName": "영농자재신문",
+    "sourceLabel": "영농자재신문 2019.03.14",
+    "title": "비료 공정규격 관련 업계 의견 전달 기사",
+    "publishedAt": "2019-03-14",
+    "url": "https://www.newsfm.kr/news/article_print.html?no=3557",
+    "summary": "농촌진흥청에 업계 의견을 전달한 흐름을 다룬 공개 기사입니다.",
+    "excerptBullets": [
+      "비료 공정규격과 이물질 기준 관련 업계 의견 전달 내용이 정리됐습니다.",
+      "김종수 이사장의 업계 대응 흐름이 확인되는 기사입니다.",
+      "연혁 페이지의 2019년 구간 근거 기사입니다."
+    ],
+    "captureImage": "/archive/articles/newsfm-2019-03-14/capture.png",
+    "snapshotHtml": "/archive/articles/newsfm-2019-03-14/source.html",
+    "selectors": [".art_tit", ".cnt_view", "body"],
+    "clip": { "width": 760, "height": 900, "padX": 40, "padY": 30 }
+  },
+  {
+    "slug": "weeklypeople-2020-02-03",
+    "sourceName": "주간인물",
+    "sourceLabel": "주간인물 2020.02.03",
+    "title": "유기질비료와 수북농업 설립 흐름을 다룬 인터뷰 기사",
+    "publishedAt": "2020-02-03",
+    "url": "http://weeklypeople.co.kr/news/view.php?no=2086",
+    "summary": "김종수 대표 인터뷰 형식으로 수북농업 설립과 표창, 산업 활동 이력이 함께 정리된 기사입니다.",
+    "excerptBullets": [
+      "1996년 수북농업 설립과 1998년 우수 퇴비생산업체 선정 흐름이 함께 소개됩니다.",
+      "2012년 농림수산식품부 장관 표창, 2019년 환경부 장관 표창 이력이 기사에 포함됩니다.",
+      "대표 소개와 회사 개요 페이지에 반영한 추가 근거 기사입니다."
+    ],
+    "captureImage": "/archive/articles/weeklypeople-2020-02-03/capture.png",
+    "snapshotHtml": "/archive/articles/weeklypeople-2020-02-03/source.html",
+    "selectors": ["img[src*='15807021629762.jpg']", ".view_con", ".article", "body"],
+    "clip": { "width": 900, "height": 900, "padX": 40, "padY": 40 }
+  },
+  {
+    "slug": "newsfm-2020-08-07",
+    "sourceName": "영농자재신문",
+    "sourceLabel": "영농자재신문 2020.08.07",
+    "title": "수북농업·수북환경개발 대표 이력이 소개된 기사",
+    "publishedAt": "2020-08-07",
+    "url": "https://www.newsfm.kr/news/article_print.html?no=4987",
+    "summary": "제5대 이사장 선거 기사 속 주요 약력으로 수북농업과 수북환경개발 대표 이력이 함께 소개된 기사입니다.",
+    "excerptBullets": [
+      "김종수 대표의 회사 이력이 한 기사 안에서 함께 정리됩니다.",
+      "전남친환경농산업연합회와 퇴비생산자협의회 관련 경력도 같이 소개됩니다.",
+      "대표 연혁과 회사 소개 페이지의 핵심 교차 근거 기사입니다."
+    ],
+    "captureImage": "/archive/articles/newsfm-2020-08-07/capture.png",
+    "snapshotHtml": "/archive/articles/newsfm-2020-08-07/source.html",
+    "selectors": [".art_tit", ".cnt_view", "body"],
+    "clip": { "width": 760, "height": 900, "padX": 40, "padY": 30 }
+  },
+  {
+    "slug": "newsam-2021-02-24",
+    "sourceName": "농기자재신문",
+    "sourceLabel": "농기자재신문 2021.02.24",
+    "title": "전남도친환경농산업연합회 제2부회장 선출 기사",
+    "publishedAt": "2021-02-24",
+    "url": "https://www.newsam.co.kr/news/article.html?no=32817",
+    "summary": "김종수 대표의 전남 지역 친환경농업 단체 활동이 확인되는 기사입니다.",
+    "excerptBullets": [
+      "전남도친환경농산업연합회 새 집행부에서 제2부회장으로 선출된 내용이 실렸습니다.",
+      "대표 활동 범위가 조합 외 지역 단체로 확장된 시기를 보여줍니다.",
+      "연혁과 대표 소개 페이지에 공통으로 연결되는 기사입니다."
+    ],
+    "captureImage": "/archive/articles/newsam-2021-02-24/capture.png",
+    "snapshotHtml": "/archive/articles/newsam-2021-02-24/source.html",
+    "selectors": [".arv_001_01", ".art_top", ".cnt_view.news_body_area"],
+    "clip": { "width": 760, "height": 900, "padX": 40, "padY": 40 }
+  },
+  {
+    "slug": "jgkoreaja-2023-01-19",
+    "sourceName": "대한기자협회 광주전남협회",
+    "sourceLabel": "대한기자협회 광주전남협회 2023.01.19",
+    "title": "담양군 장학금 기탁 기사",
+    "publishedAt": "2023-01-19",
+    "url": "http://www.jgkoreaja.com/article.asp?aid=167411243060801023",
+    "summary": "가축분퇴비 생산업체 일동의 장학금 기탁 기사로, 수북농업 참여가 공개 보도된 자료입니다.",
+    "excerptBullets": [
+      "(유)수북농업이 장학금 기탁 참여 기업으로 함께 소개됩니다.",
+      "지역 인재 육성 참여 흐름을 보여주는 비교적 최근 공개 기사입니다.",
+      "연혁 페이지의 2023년 구간 근거 자료입니다."
+    ],
+    "captureImage": "/archive/articles/jgkoreaja-2023-01-19/capture.png",
+    "snapshotHtml": "/archive/articles/jgkoreaja-2023-01-19/source.html",
+    "selectors": ["#content img", "#content", "body"],
+    "clip": { "width": 900, "height": 760, "padX": 40, "padY": 40 }
+  }
+]

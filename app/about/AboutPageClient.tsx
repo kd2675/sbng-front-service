@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { getArchivedSourceHref } from "../articleArchive";
 import SiteFooter from "../components/SiteFooter";
 import SiteNav from "../components/SiteNav";
 import {
@@ -195,7 +196,7 @@ export default function AboutPageClient() {
                 </h2>
               </div>
               <a
-                href="https://www.newsam.co.kr/news/article.html?no=8732"
+                href={getArchivedSourceHref("https://www.newsam.co.kr/news/article.html?no=8732")}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex rounded-full border border-black/10 px-5 py-3 text-sm font-bold text-[var(--agri-ink)] transition hover:bg-black/4"
@@ -226,7 +227,7 @@ export default function AboutPageClient() {
                     <p className="text-2xl font-bold text-[var(--agri-ink)]">{item.title}</p>
                     <p className="mt-3 leading-relaxed text-[#556d54]">{item.description}</p>
                     <a
-                      href={item.sourceUrl}
+                      href={getArchivedSourceHref(item.sourceUrl)}
                       target="_blank"
                       rel="noreferrer"
                       className="mt-5 inline-flex text-sm font-bold text-[var(--agri-primary-deep)]"
@@ -252,7 +253,7 @@ export default function AboutPageClient() {
                 </h2>
               </div>
               <a
-                href="https://www.newsam.co.kr/news/article.html?no=8385"
+                href={getArchivedSourceHref("https://www.newsam.co.kr/news/article.html?no=8385")}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex rounded-full border border-black/10 px-5 py-3 text-sm font-bold text-[var(--agri-ink)] transition hover:bg-black/4"
@@ -283,7 +284,7 @@ export default function AboutPageClient() {
                     <p className="text-2xl font-bold text-[var(--agri-ink)]">{item.title}</p>
                     <p className="mt-3 leading-relaxed text-[#556d54]">{item.description}</p>
                     <a
-                      href={item.sourceUrl}
+                      href={getArchivedSourceHref(item.sourceUrl)}
                       target="_blank"
                       rel="noreferrer"
                       className="mt-5 inline-flex text-sm font-bold text-[var(--agri-primary-deep)]"

@@ -43,6 +43,13 @@ const targets = [
     clip: { width: 760, height: 900, padX: 40, padY: 30 },
   },
   {
+    id: "history-weeklypeople-2020-02-03-main.jpg",
+    url: "http://weeklypeople.co.kr/news/view.php?no=2086",
+    type: "selector",
+    selectors: ["img[src*='15807021629762.jpg']", ".view_con img", ".article img"],
+    clip: { width: 760, height: 760, padX: 40, padY: 40 },
+  },
+  {
     id: "history-newsfm-2020-08-07.png",
     url: "https://www.newsfm.kr/news/article_print.html?no=4987",
     type: "selector",
@@ -55,6 +62,13 @@ const targets = [
     type: "selector",
     selectors: [".arv_001_01", ".art_top", ".cnt_view.news_body_area"],
     clip: { width: 760, height: 900, padX: 40, padY: 40 },
+  },
+  {
+    id: "history-jgkoreaja-2023-01-19.jpg",
+    url: "http://www.jgkoreaja.com/article.asp?aid=167411243060801023",
+    type: "selector",
+    selectors: ["#content img", "img[src*='60801_s.jpg']"],
+    clip: { width: 760, height: 520, padX: 40, padY: 40 },
   },
   {
     id: "history-kofic-2024-08-25.png",
