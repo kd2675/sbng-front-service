@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import ColorShiftImage from "../about/ColorShiftImage";
-import { getArchivedSourceHref } from "../articleArchive";
+import SourceLink from "../components/SourceLink";
 import { historyFlowTimeline } from "../companyProfile";
 import SiteFooter from "../components/SiteFooter";
 import SiteNav from "../components/SiteNav";
@@ -75,14 +75,12 @@ export default function HistoryPageClient() {
                           {item.description}
                         </p>
                         {item.sourceUrl && item.sourceLabel ? (
-                          <a
-                            href={getArchivedSourceHref(item.sourceUrl)}
-                            target="_blank"
-                            rel="noreferrer"
+                          <SourceLink
+                            href={item.sourceUrl}
                             className="mt-5 inline-flex rounded-full border border-black/10 px-4 py-2 text-sm font-bold text-[var(--agri-ink)] transition hover:bg-black/4"
                           >
                             {item.sourceLabel}
-                          </a>
+                          </SourceLink>
                         ) : null}
                       </div>
 

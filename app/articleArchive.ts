@@ -67,7 +67,7 @@ export async function checkRemoteSourceStatus(entry: ArticleArchiveEntry): Promi
     if (!response.ok) {
         return {
           available: false,
-          reason: `기사 응답 코드 ${response.status}`,
+          reason: `응답 코드 ${response.status}`,
         };
     }
 
@@ -76,7 +76,7 @@ export async function checkRemoteSourceStatus(entry: ArticleArchiveEntry): Promi
     if (!contentType.includes("text/html")) {
       return {
         available: true,
-        reason: "기사 응답 확인",
+        reason: "응답 확인",
       };
     }
 
@@ -88,18 +88,18 @@ export async function checkRemoteSourceStatus(entry: ArticleArchiveEntry): Promi
     if (matchedSignal) {
       return {
         available: false,
-        reason: `기사 페이지에 '${matchedSignal}' 문구가 확인됐습니다.`,
+        reason: `페이지에 '${matchedSignal}' 문구가 확인됐습니다.`,
       };
     }
 
     return {
       available: true,
-      reason: "기사 응답 확인",
+      reason: "응답 확인",
     };
   } catch {
     return {
       available: false,
-      reason: "기사 확인 중 응답이 불안정해 보관본을 우선 제공합니다.",
+      reason: "확인 중 응답이 불안정해 보관본을 우선 제공합니다.",
     };
   }
 }

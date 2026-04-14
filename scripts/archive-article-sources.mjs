@@ -28,17 +28,36 @@ function buildClip(box, clipConfig) {
   };
 }
 
-async function findBox(page, selectors) {
-  for (const selector of selectors) {
-    const locator = page.locator(selector).first();
-    const count = await page.locator(selector).count();
+async function findLocatorBox(locator) {
+  const count = await locator.count();
 
-    if (count === 0) {
-      continue;
+  if (count === 0) {
+    return null;
+  }
+
+  const target = locator.first();
+  await target.scrollIntoViewIfNeeded();
+
+  return target.boundingBox();
+}
+
+async function findBox(page, entry) {
+  if (entry.targetText) {
+    const textLocator = page.getByText(entry.targetText, {
+      exact: entry.targetExact ?? false,
+    });
+    const indexedLocator = textLocator.nth(entry.targetIndex ?? 0);
+    const box = await findLocatorBox(indexedLocator);
+
+    if (box) {
+      return box;
     }
+  }
 
-    await locator.scrollIntoViewIfNeeded();
-    const box = await locator.boundingBox();
+  const selectors = entry.selectors ?? [];
+
+  for (const selector of selectors) {
+    const box = await findLocatorBox(page.locator(selector));
 
     if (box) {
       return box;
@@ -82,7 +101,7 @@ async function capturePage(page, entry, capturePath) {
   await page.goto(entry.url, { waitUntil: "domcontentloaded", timeout: 60000 });
   await page.waitForTimeout(1800);
 
-  const box = await findBox(page, entry.selectors);
+  const box = await findBox(page, entry);
 
   if (box) {
     const clip = buildClip(box, entry.clip);

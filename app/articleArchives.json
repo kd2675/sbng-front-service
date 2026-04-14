@@ -86,8 +86,9 @@
     ],
     "captureImage": "/archive/articles/newsam-2015-12-31/capture.png",
     "snapshotHtml": "/archive/articles/newsam-2015-12-31/source.html",
+    "targetText": "수북농업의 생산 시설과 과정을 둘러보고",
     "selectors": [".arv_001_01", ".art_top", ".cnt_view.news_body_area"],
-    "clip": { "width": 760, "height": 900, "padX": 40, "padY": 40 }
+    "clip": { "width": 760, "height": 760, "padX": 40, "padY": 180 }
   },
   {
     "slug": "nongmin-2016-09-05",
@@ -194,7 +195,83 @@
     ],
     "captureImage": "/archive/articles/jgkoreaja-2023-01-19/capture.png",
     "snapshotHtml": "/archive/articles/jgkoreaja-2023-01-19/source.html",
-    "selectors": ["#content img", "#content", "body"],
-    "clip": { "width": 900, "height": 760, "padX": 40, "padY": 40 }
+    "selectors": ["img[src*='60801_s.jpg']", "#content img", "#content", "body"],
+    "clip": { "width": 760, "height": 760, "padX": 40, "padY": 220 }
+  },
+  {
+    "slug": "kofic-history",
+    "sourceName": "한국유기질비료산업협동조합",
+    "sourceLabel": "한국유기질비료산업협동조합 연혁",
+    "title": "한국유기질비료산업협동조합 공개 연혁 자료",
+    "publishedAt": "공개 연혁 기준",
+    "url": "https://kofic92.or.kr/about/sub02",
+    "summary": "조합 역대 이사장과 주요 공개 기록을 확인할 수 있는 공식 연혁 자료입니다.",
+    "excerptBullets": [
+      "2014년 7월 9일 제3대 김종수 이사장 취임 기록이 포함됩니다.",
+      "2016년 제4대 이사장 취임과 2024년 제6대 김방식 이사장 취임 기록이 함께 이어집니다.",
+      "연혁 페이지와 대표 소개 페이지에서 반복 인용하는 공식 공개 자료입니다."
+    ],
+    "captureImage": "/archive/articles/kofic-history/capture.png",
+    "snapshotHtml": "/archive/articles/kofic-history/source.html",
+    "targetText": "2014.07.09",
+    "selectors": [".sub-contents", "#container", "body"],
+    "clip": { "width": 980, "height": 680, "padX": 360, "padY": 220 }
+  },
+  {
+    "slug": "kofic-members-jeonnam",
+    "sourceName": "한국유기질비료산업협동조합",
+    "sourceLabel": "한국유기질비료산업협동조합 조합원 검색",
+    "title": "한국유기질비료산업협동조합 전남 조합원 공개 자료",
+    "publishedAt": "공개 조합원 검색 기준",
+    "url": "https://kofic92.or.kr/about/sub11?location=%EC%A0%84%EB%82%A8",
+    "summary": "수북농업의 주소, 연락처, 생산비종이 공개된 조합원 검색 자료입니다.",
+    "excerptBullets": [
+      "수북농업이 전남 지역 조합원으로 공개 안내됩니다.",
+      "주소, 연락처, 생산비종 기준 자료로 회사 개요 페이지에서 사용 중입니다.",
+      "조합 공식 사이트 기준의 공개 사업장 참고 자료입니다."
+    ],
+    "captureImage": "/archive/articles/kofic-members-jeonnam/capture.png",
+    "snapshotHtml": "/archive/articles/kofic-members-jeonnam/source.html",
+    "targetText": "수북농업",
+    "selectors": ["table", ".sub-contents", "#container", "body"],
+    "clip": { "width": 1160, "height": 520, "padX": 300, "padY": 140 }
+  },
+  {
+    "slug": "114on-business-info",
+    "sourceName": "114On",
+    "sourceLabel": "114On 공개 사업자 정보",
+    "title": "114On 공개 사업자 정보",
+    "publishedAt": "공개 사업자 정보 기준",
+    "url": "https://www.114.co.kr/biznumber/detail/f27099f463c1",
+    "summary": "수북농업 상호, 도로명 주소, 사업자등록번호를 확인할 수 있는 공개 사업자 정보입니다.",
+    "excerptBullets": [
+      "도로명 주소와 사업자등록번호가 공개 자료 기준으로 안내됩니다.",
+      "회사 정보와 연혁 페이지에서 현재 사업장 정보 근거로 사용하는 자료입니다.",
+      "민감한 수치 없이 기본 사업자 식별 정보만 확인하는 공개 자료입니다."
+    ],
+    "captureImage": "/archive/articles/114on-business-info/capture.png",
+    "snapshotHtml": "/archive/articles/114on-business-info/source.html",
+    "targetText": "기본정보",
+    "selectors": ["table.tbl2.row", ".tbl2.row", "body"],
+    "clip": { "width": 1160, "height": 560, "padX": 40, "padY": 20 }
+  },
+  {
+    "slug": "nicebizinfo-company",
+    "sourceName": "NICEbizinfo",
+    "sourceLabel": "NICEbizinfo 기업정보",
+    "title": "NICEbizinfo 수북농업 기업 개요",
+    "publishedAt": "공개 기업정보 기준",
+    "url": "https://m.nicebizinfo.com/ep/EP0100M002GE.nice?kiscode=670760",
+    "summary": "설립일자, 대표자, 표준산업분류 등을 확인할 수 있는 공개 기업 개요 자료입니다.",
+    "excerptBullets": [
+      "설립일자와 표준산업분류가 공개 기업정보 기준으로 안내됩니다.",
+      "회사 개요 페이지에서 기업 기본 정보 확인 근거로 사용 중입니다.",
+      "사업장 기본 정보와 조합 자료를 교차 확인하는 보조 공개 자료입니다."
+    ],
+    "captureImage": "/archive/articles/nicebizinfo-company/capture.png",
+    "snapshotHtml": "/archive/articles/nicebizinfo-company/source.html",
+    "targetText": "기업 정보",
+    "selectors": ["table", ".tbl_type", "body"],
+    "clip": { "width": 1100, "height": 520, "padX": 40, "padY": 20 }
   }
 ]

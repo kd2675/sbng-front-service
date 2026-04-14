@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { MotionConfig, motion, useReducedMotion } from "motion/react";
-import { getArchivedSourceHref } from "./articleArchive";
 import {
   ceoBiography,
   ceoCurrentStatus,
@@ -14,6 +13,7 @@ import {
   verifiedFactCards,
 } from "./companyProfile";
 import { companyInfo } from "./companyInfo";
+import SourceLink from "./components/SourceLink";
 import SiteNav from "./components/SiteNav";
 import { productCatalog } from "./productCatalog";
 
@@ -509,11 +509,9 @@ export default function HomePageClient() {
                 </p>
                 <div className="mt-6 grid gap-3 md:grid-cols-2">
                   {homeCeoCurrentStatus.map((item) => (
-                    <a
+                    <SourceLink
                       key={item.date}
-                      href={getArchivedSourceHref(item.sourceUrl)}
-                      target="_blank"
-                      rel="noreferrer"
+                      href={item.sourceUrl}
                       className="rounded-[1.4rem] border border-black/8 bg-[#f5f8f1] px-5 py-4 text-left shadow-[0_16px_36px_rgba(12,26,12,0.05)] transition hover:-translate-y-0.5"
                     >
                       <p className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--agri-primary-deep)]">
@@ -525,7 +523,7 @@ export default function HomePageClient() {
                       <p className="mt-2 text-sm leading-relaxed text-[#536b52]">
                         {item.description}
                       </p>
-                    </a>
+                    </SourceLink>
                   ))}
                 </div>
                 <ul className="mt-8 space-y-4">
@@ -590,14 +588,12 @@ export default function HomePageClient() {
                       <h3 className="text-xl font-bold text-[var(--agri-ink)]">{item.title}</h3>
                       <p className="mt-3 leading-relaxed text-[#516851]">{item.description}</p>
                     </div>
-                    <a
-                      href={getArchivedSourceHref(item.sourceUrl)}
-                      target="_blank"
-                      rel="noreferrer"
+                    <SourceLink
+                      href={item.sourceUrl}
                       className="w-fit self-start rounded-full border border-black/10 px-4 py-2 text-sm font-bold text-[var(--agri-ink)] transition hover:bg-black/4"
                     >
                       {item.sourceLabel}
-                    </a>
+                    </SourceLink>
                   </motion.article>
                 ))}
               </div>
@@ -644,14 +640,12 @@ export default function HomePageClient() {
                     <h3 className="text-xl font-bold text-[var(--agri-ink)]">{source.label}</h3>
                     <p className="mt-3 flex-1 leading-relaxed text-[#526952]">{source.detail}</p>
                     {source.url ? (
-                      <a
-                        href={getArchivedSourceHref(source.url)}
-                        target="_blank"
-                        rel="noreferrer"
+                      <SourceLink
+                        href={source.url}
                         className="mt-6 text-sm font-bold text-[var(--agri-primary-deep)]"
                       >
                         자료 보기 →
-                      </a>
+                      </SourceLink>
                     ) : (
                       <p className="mt-6 text-sm font-semibold text-[#647b63]">사이트 자료</p>
                     )}

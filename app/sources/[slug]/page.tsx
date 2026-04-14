@@ -5,8 +5,10 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import BackButton from "../../components/BackButton";
 import SiteFooter from "../../components/SiteFooter";
 import SiteNav from "../../components/SiteNav";
+import SourceLink from "../../components/SourceLink";
 import { articleArchiveBySlug, checkRemoteSourceStatus } from "../../articleArchive";
 
 type SourcePageProps = {
@@ -65,6 +67,12 @@ export default async function SourceArchivePage({ params }: SourcePageProps) {
     fileExists(entry.captureImage),
     fileExists(entry.snapshotHtml),
   ]);
+  const sourceNoun =
+    entry.sourceName.includes("신문") ||
+    entry.sourceName.includes("주간인물") ||
+    entry.sourceName.includes("기자협회")
+      ? "기사"
+      : "자료";
 
   return (
     <div className="min-h-screen bg-[#f4f6ef] text-[var(--agri-ink)]">
@@ -72,7 +80,13 @@ export default async function SourceArchivePage({ params }: SourcePageProps) {
 
       <main className="px-5 pb-18 pt-28 md:px-10 lg:px-20">
         <section className="mx-auto max-w-6xl rounded-[2rem] bg-[#112614] px-8 py-10 text-white shadow-[0_22px_54px_rgba(12,26,12,0.16)]">
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--agri-primary)]">
+          <BackButton
+            fallbackHref="/history"
+            className="inline-flex rounded-full border border-white/16 bg-white/10 px-4 py-2 text-sm font-bold text-white/92 transition hover:bg-white/16"
+          >
+            ← 뒤로가기
+          </BackButton>
+          <p className="mt-5 text-sm font-bold uppercase tracking-[0.2em] text-[var(--agri-primary)]">
             자료 보관본
           </p>
           <h1 className="font-display mt-4 max-w-4xl text-4xl font-bold leading-tight md:text-5xl">
@@ -94,40 +108,34 @@ export default async function SourceArchivePage({ params }: SourcePageProps) {
                   : "bg-[#fff0c4] text-[#4e3600]"
               }`}
             >
-              {status.available ? "기사 확인 가능" : "보관본 우선 제공"}
+              {status.available ? `${sourceNoun} 확인 가능` : "보관본 우선 제공"}
             </span>
           </div>
 
           <p className="mt-4 text-sm leading-relaxed text-white/74">{status.reason}</p>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <a
+            <SourceLink
               href={entry.url}
-              target="_blank"
-              rel="noreferrer"
               className="rounded-full bg-[var(--agri-primary)] px-6 py-3 text-sm font-bold text-[var(--agri-ink)] transition hover:-translate-y-0.5"
             >
-              기사 보기
-            </a>
+              {sourceNoun} 보기
+            </SourceLink>
             {snapshotExists ? (
-              <a
+              <SourceLink
                 href={entry.snapshotHtml}
-                target="_blank"
-                rel="noreferrer"
                 className="rounded-full border border-white/18 bg-white/10 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/16"
               >
                 보관 HTML 보기
-              </a>
+              </SourceLink>
             ) : null}
             {captureExists ? (
-              <a
+              <SourceLink
                 href={entry.captureImage}
-                target="_blank"
-                rel="noreferrer"
                 className="rounded-full border border-white/18 bg-white/10 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/16"
               >
                 캡처 이미지 보기
-              </a>
+              </SourceLink>
             ) : null}
           </div>
         </section>
@@ -157,7 +165,7 @@ export default async function SourceArchivePage({ params }: SourcePageProps) {
                 안내
               </p>
               <p className="mt-3 text-sm leading-relaxed text-[#536a52]">
-                기사 상태는 페이지 접속 시점에 다시 확인합니다. 기사 접속이 되지 않거나
+                {sourceNoun} 상태는 페이지 접속 시점에 다시 확인합니다. {sourceNoun} 접속이 되지 않거나
                 삭제 문구가 확인되면 이 보관본을 기준으로 계속 살펴보실 수 있습니다.
               </p>
             </div>
@@ -196,8 +204,8 @@ export default async function SourceArchivePage({ params }: SourcePageProps) {
                 </p>
                 <p className="mt-2 text-sm leading-relaxed text-[#536a52]">
                   {snapshotExists
-                    ? "스크랩한 기사 HTML 파일을 바로 열어보실 수 있습니다."
-                    : "기사 HTML 보관 파일은 아직 저장되지 않았습니다."}
+                    ? `스크랩한 ${sourceNoun} HTML 파일을 바로 열어보실 수 있습니다.`
+                    : `${sourceNoun} HTML 보관 파일은 아직 저장되지 않았습니다.`}
                 </p>
               </div>
               <div className="rounded-2xl bg-[#f5f8f1] px-5 py-4">
@@ -206,7 +214,7 @@ export default async function SourceArchivePage({ params }: SourcePageProps) {
                 </p>
                 <p className="mt-2 text-sm leading-relaxed text-[#536a52]">
                   {captureExists
-                    ? "기사 화면을 로컬 이미지로 보관해 기사가 사라져도 확인할 수 있습니다."
+                    ? `${sourceNoun} 화면을 로컬 이미지로 보관해 ${sourceNoun}가 사라져도 확인할 수 있습니다.`
                     : "캡처 이미지는 아직 저장되지 않았습니다."}
                 </p>
               </div>

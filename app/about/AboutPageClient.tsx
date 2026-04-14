@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { getArchivedSourceHref } from "../articleArchive";
+import SourceLink from "../components/SourceLink";
 import SiteFooter from "../components/SiteFooter";
 import SiteNav from "../components/SiteNav";
 import {
@@ -195,14 +195,12 @@ export default function AboutPageClient() {
                   공개 기사로 본 수북농업 현장
                 </h2>
               </div>
-              <a
-                href={getArchivedSourceHref("https://www.newsam.co.kr/news/article.html?no=8732")}
-                target="_blank"
-                rel="noreferrer"
+              <SourceLink
+                href="https://www.newsam.co.kr/news/article.html?no=8732"
                 className="inline-flex rounded-full border border-black/10 px-5 py-3 text-sm font-bold text-[var(--agri-ink)] transition hover:bg-black/4"
               >
                 현장 탐방 기사 보기
-              </a>
+              </SourceLink>
             </div>
 
             <div className="grid gap-6 md:grid-cols-3">
@@ -216,6 +214,7 @@ export default function AboutPageClient() {
                       alt={item.alt}
                       src={item.src}
                       fill
+                      loading={item.src === "/image/company/subuk-facility-2015-group-1.jpg" ? "eager" : undefined}
                       sizes="(min-width: 1024px) 30vw, 100vw"
                       className="object-cover"
                     />
@@ -226,14 +225,12 @@ export default function AboutPageClient() {
                   <figcaption className="px-6 py-6">
                     <p className="text-2xl font-bold text-[var(--agri-ink)]">{item.title}</p>
                     <p className="mt-3 leading-relaxed text-[#556d54]">{item.description}</p>
-                    <a
-                      href={getArchivedSourceHref(item.sourceUrl)}
-                      target="_blank"
-                      rel="noreferrer"
+                    <SourceLink
+                      href={item.sourceUrl}
                       className="mt-5 inline-flex text-sm font-bold text-[var(--agri-primary-deep)]"
                     >
                       출처: {item.sourceLabel} →
-                    </a>
+                    </SourceLink>
                   </figcaption>
                 </figure>
               ))}
@@ -252,14 +249,12 @@ export default function AboutPageClient() {
                   차세대리더들의 모임 공개 사진
                 </h2>
               </div>
-              <a
-                href={getArchivedSourceHref("https://www.newsam.co.kr/news/article.html?no=8385")}
-                target="_blank"
-                rel="noreferrer"
+              <SourceLink
+                href="https://www.newsam.co.kr/news/article.html?no=8385"
                 className="inline-flex rounded-full border border-black/10 px-5 py-3 text-sm font-bold text-[var(--agri-ink)] transition hover:bg-black/4"
               >
                 관련 기사 보기
-              </a>
+              </SourceLink>
             </div>
 
             <div className="grid gap-6 md:grid-cols-2">
@@ -283,14 +278,12 @@ export default function AboutPageClient() {
                   <figcaption className="px-6 py-6">
                     <p className="text-2xl font-bold text-[var(--agri-ink)]">{item.title}</p>
                     <p className="mt-3 leading-relaxed text-[#556d54]">{item.description}</p>
-                    <a
-                      href={getArchivedSourceHref(item.sourceUrl)}
-                      target="_blank"
-                      rel="noreferrer"
+                    <SourceLink
+                      href={item.sourceUrl}
                       className="mt-5 inline-flex text-sm font-bold text-[var(--agri-primary-deep)]"
                     >
                       출처: {item.sourceLabel} →
-                    </a>
+                    </SourceLink>
                   </figcaption>
                 </figure>
               ))}

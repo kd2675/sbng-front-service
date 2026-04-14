@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
-import { getArchivedSourceHref } from "../articleArchive";
+import SourceLink from "../components/SourceLink";
 import SiteFooter from "../components/SiteFooter";
 import SiteNav from "../components/SiteNav";
 import {
@@ -133,11 +133,9 @@ export default function CEOPageClient() {
               </div>
               <div className="mt-8 space-y-3">
                 {ceoCurrentStatus.map((item) => (
-                  <a
+                  <SourceLink
                     key={item.date}
-                    href={getArchivedSourceHref(item.sourceUrl)}
-                    target="_blank"
-                    rel="noreferrer"
+                    href={item.sourceUrl}
                     className="block rounded-[1.6rem] border border-black/8 bg-white px-5 py-4 transition hover:-translate-y-0.5"
                   >
                     <p className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--agri-primary-deep)]">
@@ -150,18 +148,16 @@ export default function CEOPageClient() {
                     <p className="mt-3 text-sm font-bold text-[var(--agri-primary-deep)]">
                       {item.sourceLabel} →
                     </p>
-                  </a>
+                  </SourceLink>
                 ))}
               </div>
               <div className="mt-8 space-y-3">
-                <a
-                  href={getArchivedSourceHref(externalPhotoCredit.url)}
-                  target="_blank"
-                  rel="noreferrer"
+                <SourceLink
+                  href={externalPhotoCredit.url}
                   className="inline-flex text-sm font-bold text-[var(--agri-primary-deep)]"
                 >
                   관련 기사 보기 →
-                </a>
+                </SourceLink>
               </div>
             </motion.article>
 
@@ -223,14 +219,12 @@ export default function CEOPageClient() {
                     <h3 className="text-2xl font-bold text-[var(--agri-ink)]">{item.title}</h3>
                     <p className="mt-3 leading-relaxed text-[#526951]">{item.description}</p>
                   </div>
-                  <a
-                    href={getArchivedSourceHref(item.sourceUrl)}
-                    target="_blank"
-                    rel="noreferrer"
+                  <SourceLink
+                    href={item.sourceUrl}
                     className="w-fit self-start rounded-full border border-black/10 px-4 py-2 text-sm font-bold text-[var(--agri-ink)] transition hover:bg-black/4"
                   >
                     {item.sourceLabel}
-                  </a>
+                  </SourceLink>
                 </motion.article>
               ))}
             </div>

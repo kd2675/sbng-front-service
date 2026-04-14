@@ -18,7 +18,11 @@ export default function SiteNav() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const useDarkText = pathname.startsWith("/contact") || pathname.startsWith("/admin");
+  const useDarkText =
+    pathname.startsWith("/contact") ||
+    pathname.startsWith("/admin") ||
+    pathname.startsWith("/sources");
+  const useSolidShell = useDarkText;
 
   useEffect(() => {
     const previous = document.body.style.overflow;
@@ -55,7 +59,9 @@ export default function SiteNav() {
         className={`mx-auto flex w-full max-w-7xl items-center justify-between rounded-full px-4 py-2.5 transition-all duration-300 md:px-6 ${
           isScrolled
             ? "border border-white/20 bg-black/55 shadow-[0_12px_30px_rgba(4,12,4,0.24)] backdrop-blur-xl"
-            : ""
+            : useSolidShell
+              ? "border border-black/8 bg-white/88 shadow-[0_10px_26px_rgba(12,26,12,0.08)] backdrop-blur-xl"
+              : ""
         }`}
       >
         <Link href="/" className="flex items-center gap-3" onClick={() => setMobileOpen(false)}>

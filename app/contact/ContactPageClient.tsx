@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { companyInfo } from "../companyInfo";
 import SiteFooter from "../components/SiteFooter";
 import SiteNav from "../components/SiteNav";
@@ -137,22 +138,34 @@ export default function ContactPageClient() {
                 <p>{companyInfo.address}</p>
                 <p>
                   전화{" "}
-                  <a href={companyInfo.telephoneHref} className="font-semibold text-[var(--agri-ink)]">
+                  <Link
+                    href={companyInfo.telephoneHref}
+                    prefetch={false}
+                    className="font-semibold text-[var(--agri-ink)]"
+                  >
                     {companyInfo.telephoneDisplay}
-                  </a>
+                  </Link>
                 </p>
                 <p>팩스 {companyInfo.faxDisplay}</p>
                 <p>
                   휴대전화{" "}
-                  <a href={companyInfo.mobileHref} className="font-semibold text-[var(--agri-ink)]">
+                  <Link
+                    href={companyInfo.mobileHref}
+                    prefetch={false}
+                    className="font-semibold text-[var(--agri-ink)]"
+                  >
                     {companyInfo.mobileDisplay}
-                  </a>
+                  </Link>
                 </p>
                 <p>
                   이메일{" "}
-                  <a href={companyInfo.emailHref} className="font-semibold text-[var(--agri-ink)] break-all">
+                  <Link
+                    href={companyInfo.emailHref}
+                    prefetch={false}
+                    className="font-semibold text-[var(--agri-ink)] break-all"
+                  >
                     {companyInfo.emailDisplay}
-                  </a>
+                  </Link>
                 </p>
               </div>
               <p className="mt-6 rounded-2xl bg-[var(--agri-paper)] p-4 text-sm text-[#506350]">
@@ -175,12 +188,12 @@ export default function ContactPageClient() {
                 <p className="mt-3 leading-relaxed text-[#536652]">
                   주소와 전화, 팩스, 휴대전화, 이메일을 한눈에 안내합니다.
                 </p>
-                <a
+                <Link
                   href="/admin"
                   className="mt-5 inline-flex rounded-full border border-black/12 px-4 py-2 text-sm font-bold text-[var(--agri-ink)] transition hover:bg-black/4"
                 >
                   관리자 페이지 열기
-                </a>
+                </Link>
               </div>
             </article>
           </div>
