@@ -102,9 +102,13 @@ export default function LightboxImage({
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="absolute right-3 top-3 z-20 rounded-full border border-white/12 bg-black/40 px-3 py-1.5 text-xs font-bold text-white transition hover:bg-black/55 md:right-4 md:top-4"
+                aria-label="이미지 크게 보기 닫기"
+                className="absolute right-3 top-3 z-20 inline-flex min-h-12 min-w-12 items-center justify-center gap-2 rounded-full border border-white/22 bg-[#c62828] px-4 py-3 text-sm font-extrabold text-white shadow-[0_18px_42px_rgba(88,14,14,0.42)] transition hover:scale-[1.02] hover:bg-[#a61f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 md:right-4 md:top-4 md:min-h-14 md:min-w-14 md:px-5 md:text-base"
               >
-                닫기
+                <span aria-hidden="true" className="text-lg leading-none md:text-xl">
+                  ×
+                </span>
+                <span>닫기</span>
               </button>
 
               <div className="relative h-[min(80vh,1100px)] w-full overflow-hidden rounded-[1rem] bg-[#081006]">
