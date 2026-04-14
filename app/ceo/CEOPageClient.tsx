@@ -11,7 +11,6 @@ import {
   externalPhotoCredit,
   publicTimeline,
 } from "../companyProfile";
-import { companyInfo } from "../companyInfo";
 
 const roleCards = [
   {
@@ -27,6 +26,16 @@ const roleCards = [
     description: "한국유기질비료산업협동조합 제3·4대 이사장",
   },
 ] as const;
+
+const ceoTimelineDates = new Set([
+  "2014.07.09",
+  "2014.07.14",
+  "2016.09.05",
+  "2020.08.07",
+  "2021.02.24",
+  "2024.08.25",
+]);
+const ceoTimelineItems = publicTimeline.filter((item) => ceoTimelineDates.has(item.date));
 
 export default function CEOPageClient() {
   const reduceMotion = useReducedMotion();
@@ -198,7 +207,7 @@ export default function CEOPageClient() {
             </div>
 
             <div className="space-y-5">
-              {publicTimeline.map((item, index) => (
+              {ceoTimelineItems.map((item, index) => (
                 <motion.article
                   key={item.date}
                   initial={revealInitial}
@@ -265,8 +274,8 @@ export default function CEOPageClient() {
             >
               <div className="relative aspect-[4/3] bg-[#edf2e8]">
                 <Image
-                  alt="수북농업 명함 이미지"
-                  src="/image/ceo-card.png"
+                  alt="한국유기질비료산업협동조합 연혁 기록 캡처"
+                  src="/image/history/history-kofic-2024-08-25.png"
                   fill
                   sizes="(min-width: 1024px) 42vw, 100vw"
                   className="object-cover"
@@ -274,14 +283,21 @@ export default function CEOPageClient() {
               </div>
               <div className="px-6 py-6">
                 <p className="text-sm font-bold uppercase tracking-[0.18em] text-[var(--agri-primary-deep)]">
-                  회사 안내
+                  공개 기록
                 </p>
                 <h3 className="mt-3 text-2xl font-bold text-[var(--agri-ink)]">
-                  회사 연락처
+                  연혁 흐름 이어 보기
                 </h3>
                 <p className="mt-4 leading-relaxed text-[#536b52]">
-                  담양 본사 주소와 전화, 팩스, 휴대전화, 이메일을 함께 안내합니다.
+                  기사 캡처와 공개 기록을 따라 연혁 흐름을 사진과 함께 자세히 보실 수
+                  있습니다.
                 </p>
+                <Link
+                  href="/history"
+                  className="mt-5 inline-flex rounded-full bg-[var(--agri-ink)] px-5 py-2.5 text-sm font-bold text-white transition hover:bg-[var(--agri-primary-deep)]"
+                >
+                  사진 연혁 보기
+                </Link>
               </div>
             </motion.article>
 
@@ -292,33 +308,26 @@ export default function CEOPageClient() {
               className="rounded-[2rem] bg-[#112614] px-8 py-10 text-white"
             >
               <p className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--agri-primary)]">
-                연락 정보
+                함께 보기
               </p>
-              <h3 className="font-display mt-4 text-4xl font-bold">대표 연락 정보</h3>
-              <div className="mt-7 space-y-5 text-base leading-relaxed text-white/84">
-                <p>
-                  {companyInfo.legalName}
-                  <br />
-                  {companyInfo.address}
-                </p>
-                <p>
-                  전화 {companyInfo.telephoneDisplay}
-                  <br />
-                  팩스 {companyInfo.faxDisplay}
-                </p>
-                <p>
-                  휴대전화 {companyInfo.mobileDisplay}
-                  <br />
-                  이메일 {companyInfo.emailDisplay}
-                </p>
-              </div>
+              <h3 className="font-display mt-4 text-4xl font-bold">다른 정보도 이어집니다</h3>
+              <p className="mt-7 text-base leading-relaxed text-white/84">
+                회사 개요와 사업장 정보, 제품 자료, 문의 페이지로 바로 이동하실 수
+                있습니다.
+              </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <a
-                  href={companyInfo.telephoneHref}
+                <Link
+                  href="/about"
                   className="rounded-full bg-white px-6 py-3 text-sm font-bold text-[var(--agri-ink)] transition hover:bg-[var(--agri-primary)]"
                 >
-                  본사 전화
-                </a>
+                  회사 정보
+                </Link>
+                <Link
+                  href="/products"
+                  className="rounded-full border border-white/18 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10"
+                >
+                  제품 안내
+                </Link>
                 <Link
                   href="/contact"
                   className="rounded-full border border-white/18 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10"
