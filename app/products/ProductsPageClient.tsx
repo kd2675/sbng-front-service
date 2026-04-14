@@ -137,11 +137,12 @@ export default function ProductsPageClient() {
               return (
                 <motion.article
                   key={product.id}
+                  id={`product-${product.id}`}
                   initial={revealInitial}
                   whileInView={revealAnimate}
                   viewport={{ once: true, amount: 0.16 }}
                   transition={{ delay: Math.min(index * 0.06, 0.18) }}
-                  className="rounded-[2rem] border border-[#dce5d5] bg-white p-6 shadow-[0_26px_80px_rgba(12,26,12,0.08)] md:p-8 lg:p-10"
+                  className="scroll-mt-32 rounded-[2rem] border border-[#dce5d5] bg-white p-6 shadow-[0_26px_80px_rgba(12,26,12,0.08)] md:p-8 lg:p-10"
                 >
                   <div className="grid items-start gap-8 lg:grid-cols-2">
                     <motion.div

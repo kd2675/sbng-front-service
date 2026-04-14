@@ -1,9 +1,9 @@
 import type { MetadataRoute } from "next";
-import { absoluteUrl } from "./siteConfig";
+import { absoluteUrl, siteConfig } from "./siteConfig";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = ["", "/ceo", "/history", "/products", "/about", "/contact"];
-  const lastModified = new Date("2026-04-14T00:00:00+09:00");
+  const lastModified = new Date(siteConfig.siteUpdatedAt);
 
   return routes.map((route) => ({
     url: absoluteUrl(route || "/"),

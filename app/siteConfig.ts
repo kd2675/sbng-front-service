@@ -22,6 +22,7 @@ export const siteConfig = {
     "무등산",
     "수북환경개발",
   ],
+  siteUpdatedAt: "2026-04-14T09:00:00+09:00",
 } as const;
 
 export function absoluteUrl(path = "/"): string {
@@ -38,6 +39,8 @@ type BuildPageMetadataInput = {
   description: string;
   path: string;
   keywords?: string[];
+  imagePath?: string;
+  imageAlt?: string;
 };
 
 export function buildPageMetadata({
@@ -45,9 +48,11 @@ export function buildPageMetadata({
   description,
   path,
   keywords = [],
+  imagePath = "/opengraph-image",
+  imageAlt = `${siteConfig.siteName} 대표 이미지`,
 }: BuildPageMetadataInput): Metadata {
   const url = absoluteUrl(path);
-  const socialImage = absoluteUrl("/opengraph-image");
+  const socialImage = absoluteUrl(imagePath);
 
   return {
     title,
@@ -68,7 +73,7 @@ export function buildPageMetadata({
           url: socialImage,
           width: 1200,
           height: 630,
-          alt: `${siteConfig.siteName} 대표 소개와 제품 안내`,
+          alt: imageAlt,
         },
       ],
     },

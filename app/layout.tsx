@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Playfair_Display } from "next/font/google";
 import { companyInfo } from "./companyInfo";
-import { siteConfig } from "./siteConfig";
+import { absoluteUrl, siteConfig } from "./siteConfig";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -29,12 +29,12 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.webmanifest",
   icons: {
-    shortcut: [{ url: "/favicon-32x32.png", type: "image/png" }],
+    shortcut: [{ url: absoluteUrl("/favicon-32x32.png"), type: "image/png" }],
     icon: [
-      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
-      { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
+      { url: absoluteUrl("/favicon-32x32.png"), type: "image/png", sizes: "32x32" },
+      { url: absoluteUrl("/favicon-16x16.png"), type: "image/png", sizes: "16x16" },
     ],
-    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+    apple: [{ url: absoluteUrl("/apple-touch-icon.png"), sizes: "180x180" }],
   },
   openGraph: {
     type: "website",
@@ -45,10 +45,10 @@ export const metadata: Metadata = {
     description: siteConfig.defaultDescription,
     images: [
       {
-        url: "/opengraph-image",
+        url: absoluteUrl("/opengraph-image"),
         width: 1200,
         height: 630,
-        alt: "수북농업 대표 소개와 제품 안내",
+        alt: "수북농업 김종수 대표 사진",
       },
     ],
   },
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.defaultTitle,
     description: siteConfig.defaultDescription,
-    images: ["/twitter-image"],
+    images: [absoluteUrl("/twitter-image")],
   },
   robots: {
     index: true,
@@ -89,6 +89,7 @@ export default function RootLayout({
     description: siteConfig.defaultDescription,
     url: siteConfig.siteUrl,
     logo: `${siteConfig.siteUrl}/icon.svg`,
+    image: absoluteUrl("/image/company/subuk-facility-2015-share.jpg"),
     foundingDate: "1996-03-30",
     knowsAbout: ["유기질비료", "퇴비", "토양개량", "농업 자재"],
     telephone: companyInfo.telephoneDisplay,

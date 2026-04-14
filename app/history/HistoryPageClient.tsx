@@ -106,6 +106,7 @@ export default function HistoryPageClient() {
                   return (
                     <article
                       key={item.period}
+                      id={`history-${item.period.replaceAll(".", "-")}`}
                       className="relative grid items-center gap-8 md:grid-cols-2 md:gap-16"
                     >
                       <div
