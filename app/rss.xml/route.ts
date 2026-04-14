@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
+import { absoluteUrl, siteConfig } from "../siteConfig";
 
-const siteUrl = "https://www.subuknongeop.com";
-const feedUrl = `${siteUrl}/rss.xml`;
+const feedUrl = absoluteUrl("/rss.xml");
 
 type FeedItem = {
   title: string;
@@ -63,7 +63,7 @@ export function GET() {
 
   const itemsXml = feedItems
     .map((item) => {
-      const itemUrl = `${siteUrl}${item.path}`;
+      const itemUrl = absoluteUrl(item.path);
 
       return `
       <item>
@@ -81,7 +81,7 @@ export function GET() {
   <channel>
     <title>수북농업 RSS Feed</title>
     <description>수북농업 회사 소개, 대표 정보, 제품 자료 업데이트 안내</description>
-    <link>${siteUrl}</link>
+    <link>${siteConfig.siteUrl}</link>
     <language>ko-kr</language>
     <lastBuildDate>${lastBuildDate}</lastBuildDate>
     <atom:link href="${feedUrl}" rel="self" type="application/rss+xml" />

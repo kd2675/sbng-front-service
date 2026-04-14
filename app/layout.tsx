@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Manrope, Playfair_Display } from "next/font/google";
 import { companyInfo } from "./companyInfo";
+import { siteConfig } from "./siteConfig";
 import "./globals.css";
-
-const siteUrl = "https://www.subuknongeop.com";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -16,26 +15,17 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(siteConfig.siteUrl),
+  applicationName: siteConfig.siteName,
   title: {
-    default: "수북농업",
-    template: "%s | 수북농업",
+    default: siteConfig.defaultTitle,
+    template: `%s | ${siteConfig.siteName}`,
   },
-  description:
-    "수북농업은 전남 담양을 기반으로 흙손, 흙보약, 무등산 제품과 회사 정보를 안내합니다.",
-  keywords: [
-    "수북농업",
-    "subuknongeop",
-    "김종수",
-    "담양 수북농업",
-    "유기질비료",
-    "흙손",
-    "흙보약",
-    "무등산",
-    "수북환경개발",
-  ],
+  description: siteConfig.defaultDescription,
+  keywords: [...siteConfig.defaultKeywords],
+  category: "business",
   alternates: {
-    canonical: "/",
+    canonical: siteConfig.siteUrl,
   },
   manifest: "/manifest.webmanifest",
   icons: {
@@ -49,25 +39,24 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "ko_KR",
-    url: siteUrl,
-    siteName: "수북농업",
-    title: "수북농업",
-    description:
-      "전남 담양을 기반으로 한 수북농업의 회사 소개와 제품 정보를 소개합니다.",
+    url: siteConfig.siteUrl,
+    siteName: siteConfig.siteName,
+    title: siteConfig.defaultTitle,
+    description: siteConfig.defaultDescription,
     images: [
       {
-        url: "/image/heukboyak-front.jpeg",
+        url: "/opengraph-image",
         width: 1200,
-        height: 1200,
-        alt: "수북농업 대표 제품 흙보약 포장 이미지",
+        height: 630,
+        alt: "수북농업 대표 소개와 제품 안내",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "수북농업",
-    description:
-      "전남 담양을 기반으로 한 수북농업의 회사 소개와 제품 정보를 소개합니다.",
+    title: siteConfig.defaultTitle,
+    description: siteConfig.defaultDescription,
+    images: ["/twitter-image"],
   },
   robots: {
     index: true,
@@ -95,11 +84,16 @@ export default function RootLayout({
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "수북농업",
-    url: siteUrl,
-    logo: `${siteUrl}/icon.svg`,
+    name: siteConfig.siteName,
+    alternateName: companyInfo.legalName,
+    description: siteConfig.defaultDescription,
+    url: siteConfig.siteUrl,
+    logo: `${siteConfig.siteUrl}/icon.svg`,
+    foundingDate: "1996-03-30",
+    knowsAbout: ["유기질비료", "퇴비", "토양개량", "농업 자재"],
     telephone: companyInfo.telephoneDisplay,
     email: companyInfo.emailDisplay,
+    identifier: companyInfo.businessRegistrationNumber,
     address: {
       "@type": "PostalAddress",
       streetAddress: companyInfo.address,
@@ -120,8 +114,9 @@ export default function RootLayout({
   const webSiteJsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "수북농업",
-    url: siteUrl,
+    name: siteConfig.siteName,
+    url: siteConfig.siteUrl,
+    inLanguage: "ko-KR",
   };
 
   return (

@@ -34,8 +34,8 @@ export default function ProductsPageClient() {
               transition={{ delay: 0.1 }}
               className="font-display mt-5 max-w-4xl text-4xl font-bold leading-tight text-white md:text-6xl"
             >
-              수북농업이 소개하는
-              <br className="hidden sm:block" /> 수북농업 대표 제품 3종
+              흙손, 흙보약, 무등산
+              <br className="hidden sm:block" /> 제품을 소개합니다
             </motion.h1>
             <motion.p
               initial={revealInitial}

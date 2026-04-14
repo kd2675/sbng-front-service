@@ -3,11 +3,15 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion, useReducedMotion } from "motion/react";
 import { companyInfo } from "../companyInfo";
 import SiteFooter from "../components/SiteFooter";
 import SiteNav from "../components/SiteNav";
 
 export default function ContactPageClient() {
+  const reduceMotion = useReducedMotion();
+  const revealInitial = reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 };
+  const revealWhileInView = { opacity: 1, y: 0 };
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -58,20 +62,79 @@ export default function ContactPageClient() {
     <div className="min-h-screen bg-[var(--agri-paper)]">
       <SiteNav />
 
-      <main className="px-5 pb-24 pt-20 md:px-10 lg:px-20">
-        <section className="mx-auto max-w-7xl">
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--agri-primary-deep)]">
+      <section className="relative overflow-hidden bg-[#112614] px-5 pb-20 pt-28 md:px-10 lg:px-20">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(122,240,83,0.2),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(255,232,154,0.12),transparent_34%)]" />
+        <div className="relative mx-auto max-w-7xl">
+          <motion.p
+            initial={revealInitial}
+            animate={revealWhileInView}
+            transition={{ delay: 0.04, duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+            className="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--agri-primary)]"
+          >
             문의 안내
-          </p>
-          <h1 className="font-display mt-3 text-4xl font-bold tracking-tight text-[var(--agri-ink)] md:text-6xl">
-            수북농업 문의
-          </h1>
-          <p className="mt-4 max-w-3xl leading-relaxed text-[#506350]">
+          </motion.p>
+          <motion.h1
+            initial={revealInitial}
+            animate={revealWhileInView}
+            transition={{ delay: 0.1, duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+            className="font-display mt-5 max-w-4xl text-4xl font-bold leading-tight text-white md:text-6xl"
+          >
+            수북농업 상담과 문의를
+            <br className="hidden sm:block" /> 접수합니다
+          </motion.h1>
+          <motion.p
+            initial={revealInitial}
+            animate={revealWhileInView}
+            transition={{ delay: 0.16, duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-6 max-w-3xl text-base leading-relaxed text-white/78 md:text-lg"
+          >
             제품 상담, 회사 문의, 자료 요청이 필요하시면 편한 방법으로 연락해 주세요.
             남겨주신 내용은 확인 후 순차적으로 안내해 드립니다.
-          </p>
-        </section>
+          </motion.p>
 
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {[
+              {
+                title: "대표 전화",
+                value: companyInfo.telephoneDisplay,
+                description: "본사 대표 번호로 제품 상담과 회사 문의를 접수합니다.",
+              },
+              {
+                title: "휴대전화",
+                value: companyInfo.mobileDisplay,
+                description: "현장 상담이 필요한 경우 휴대전화로도 연결하실 수 있습니다.",
+              },
+              {
+                title: "이메일",
+                value: companyInfo.emailDisplay,
+                description: "자료 요청이나 상담 내용을 이메일로 남기실 수 있습니다.",
+              },
+            ].map((card, index) => (
+              <motion.article
+                key={card.title}
+                initial={revealInitial}
+                animate={revealWhileInView}
+                transition={{
+                  delay: 0.22 + index * 0.06,
+                  duration: 0.42,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="rounded-3xl border border-white/12 bg-white/6 p-5 backdrop-blur-sm"
+              >
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--agri-primary)]">
+                  {card.title}
+                </p>
+                <h2 className="mt-3 break-all text-2xl font-bold text-white">{card.value}</h2>
+                <p className="mt-3 text-sm leading-relaxed text-white/74">
+                  {card.description}
+                </p>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <main className="px-5 pb-24 pt-14 md:px-10 lg:px-20">
         <section className="mx-auto mt-10 grid max-w-7xl gap-7 lg:grid-cols-[1.02fr_0.98fr]">
           <div className="rounded-[2rem] border border-black/7 bg-white p-8 shadow-[0_18px_52px_rgba(12,26,12,0.06)]">
             <h2 className="text-2xl font-bold text-[var(--agri-ink)]">상담 요청 남기기</h2>

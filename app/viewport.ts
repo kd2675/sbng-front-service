@@ -1,5 +1,6 @@
 import type { Viewport } from "next";
+import { siteConfig } from "./siteConfig";
 
 export const viewport: Viewport = {
-  themeColor: "#a42d2d",
+  themeColor: siteConfig.themeColor,
 };

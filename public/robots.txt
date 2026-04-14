@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /sources/
+Host: https://www.subuknongeop.com
 Sitemap: https://www.subuknongeop.com/sitemap.xml
 Sitemap: https://www.subuknongeop.com/rss.xml
 

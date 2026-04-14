@@ -18,10 +18,7 @@ export default function SiteNav() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const useDarkText =
-    pathname.startsWith("/contact") ||
-    pathname.startsWith("/admin") ||
-    pathname.startsWith("/sources");
+  const useDarkText = pathname.startsWith("/admin") || pathname.startsWith("/sources");
   const useSolidShell = useDarkText;
 
   useEffect(() => {

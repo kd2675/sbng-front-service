@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { motion, useReducedMotion } from "motion/react";
 import SourceLink from "../components/SourceLink";
 import SiteFooter from "../components/SiteFooter";
 import SiteNav from "../components/SiteNav";
@@ -11,6 +12,24 @@ import {
   verifiedFactCards,
 } from "../companyProfile";
 import { companyInfo } from "../companyInfo";
+
+const aboutHeroCards = [
+  {
+    title: "법인명",
+    value: companyInfo.legalName,
+    description: "담양 본사를 기반으로 회사 정보와 제품 자료를 함께 안내합니다.",
+  },
+  {
+    title: "대표자",
+    value: companyInfo.ceoName,
+    description: "공개 기사와 사업자 정보에 함께 소개된 대표자입니다.",
+  },
+  {
+    title: "제품 안내",
+    value: "흙손 · 흙보약 · 무등산",
+    description: "대표 제품 3종의 포장 이미지와 안내 자료를 이어서 살펴보실 수 있습니다.",
+  },
+] as const;
 
 const detailLinks = [
   {
@@ -90,33 +109,68 @@ const industryActivityCards = [
 ] as const;
 
 export default function AboutPageClient() {
+  const reduceMotion = useReducedMotion();
+  const revealInitial = reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 };
+  const revealWhileInView = { opacity: 1, y: 0 };
+
   return (
     <div className="min-h-screen bg-[linear-gradient(180deg,#eef2e9_0%,#f6f8f4_42%,#eef2e8_100%)]">
       <SiteNav />
 
       <main className="overflow-x-hidden">
-        <section className="relative flex min-h-[72svh] items-end overflow-hidden px-5 pb-16 pt-28 md:px-10 lg:px-20">
-          <Image
-            alt="수북농업 제품 무등산 포장 이미지"
-            src="/image/mudeungsan-front.jpeg"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(9,18,8,0.86),rgba(13,22,10,0.48)_42%,rgba(13,22,10,0.82)_100%)]" />
+        <section className="relative overflow-hidden bg-[#112614] px-5 pb-20 pt-28 md:px-10 lg:px-20">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(122,240,83,0.22),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(93,140,84,0.18),transparent_36%)]" />
 
-          <div className="relative z-10 mx-auto w-full max-w-6xl">
-            <span className="mb-4 inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-semibold text-white/82 backdrop-blur">
-              수북농업 소개
-            </span>
-            <h1 className="font-display max-w-4xl text-5xl font-bold leading-[1.02] text-white md:text-7xl">
-              수북농업의 길과
-              <br className="hidden sm:block" /> 제품을 소개합니다
-            </h1>
-            <p className="mt-6 max-w-3xl text-lg leading-relaxed text-white/84 md:text-xl">
+          <div className="relative mx-auto max-w-7xl">
+            <motion.p
+              initial={revealInitial}
+              animate={revealWhileInView}
+              transition={{ delay: 0.04, duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+              className="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--agri-primary)]"
+            >
+              회사 소개
+            </motion.p>
+            <motion.h1
+              initial={revealInitial}
+              animate={revealWhileInView}
+              transition={{ delay: 0.1, duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+              className="font-display mt-5 max-w-4xl text-4xl font-bold leading-tight text-white md:text-6xl"
+            >
+              수북농업의 회사 정보와
+              <br className="hidden sm:block" /> 공개 기록을 소개합니다
+            </motion.h1>
+            <motion.p
+              initial={revealInitial}
+              animate={revealWhileInView}
+              transition={{ delay: 0.16, duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-6 max-w-3xl text-base leading-relaxed text-white/78 md:text-lg"
+            >
               {companyProfile.summary}
-            </p>
+            </motion.p>
+
+            <div className="mt-10 grid gap-4 md:grid-cols-3">
+              {aboutHeroCards.map((card, index) => (
+                <motion.article
+                  key={card.title}
+                  initial={revealInitial}
+                  animate={revealWhileInView}
+                  transition={{
+                    delay: 0.22 + index * 0.06,
+                    duration: 0.42,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="rounded-3xl border border-white/12 bg-white/6 p-5 backdrop-blur-sm"
+                >
+                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--agri-primary)]">
+                    {card.title}
+                  </p>
+                  <h2 className="mt-3 text-2xl font-bold text-white">{card.value}</h2>
+                  <p className="mt-3 text-sm leading-relaxed text-white/74">
+                    {card.description}
+                  </p>
+                </motion.article>
+              ))}
+            </div>
           </div>
         </section>
 

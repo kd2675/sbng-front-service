@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import { motion, useReducedMotion } from "motion/react";
 import ColorShiftImage from "../about/ColorShiftImage";
 import SourceLink from "../components/SourceLink";
 import { historyFlowTimeline } from "../companyProfile";
@@ -9,37 +9,87 @@ import SiteFooter from "../components/SiteFooter";
 import SiteNav from "../components/SiteNav";
 
 export default function HistoryPageClient() {
+  const reduceMotion = useReducedMotion();
+  const revealInitial = reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 };
+  const revealWhileInView = { opacity: 1, y: 0 };
+
+  const historyHeroCards = [
+    {
+      title: "정리 기준",
+      value: "기사와 공개 자료",
+      description: "수북농업과 김종수 대표 관련 공개 기록을 날짜 순으로 정리했습니다.",
+    },
+    {
+      title: "사진 흐름",
+      value: "기사 캡처 중심",
+      description: "각 시점에 맞는 기사 화면과 공개 자료 이미지를 함께 배치했습니다.",
+    },
+    {
+      title: "이어 보기",
+      value: "대표 소개 · 회사 정보",
+      description: "연혁에서 본 흐름을 대표 소개와 회사 정보 페이지로 이어서 살펴보실 수 있습니다.",
+    },
+  ] as const;
+
   return (
     <div className="min-h-screen bg-[linear-gradient(180deg,#ebe8dd_0%,#f3f0e6_34%,#eeebdf_100%)]">
       <SiteNav />
 
       <main className="overflow-x-hidden">
-        <section className="relative flex h-[60vh] w-full flex-col items-center justify-center px-4">
-          <div className="absolute inset-0 z-0 h-full w-full">
-            <div className="absolute inset-0 z-10 bg-[#0f2814]/50" />
-            <Image
-              alt="수북농업 현장 사진"
-              src="/image/kim-jong-su-assembly.jpg"
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover sepia-[0.3] contrast-75 grayscale-[0.2]"
-            />
-          </div>
+        <section className="relative overflow-hidden bg-[#112614] px-5 pb-20 pt-28 md:px-10 lg:px-20">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(122,240,83,0.22),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(255,232,154,0.12),transparent_34%)]" />
 
-          <div className="relative z-10 mx-auto mt-16 max-w-4xl px-4 text-center">
-            <span className="mb-4 block text-sm font-bold uppercase tracking-[0.2em] text-green-200">
+          <div className="relative mx-auto max-w-7xl">
+            <motion.p
+              initial={revealInitial}
+              animate={revealWhileInView}
+              transition={{ delay: 0.04, duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+              className="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--agri-primary)]"
+            >
               공개 연혁
-            </span>
-            <h1 className="font-display mb-6 text-5xl font-bold leading-tight text-white md:text-7xl">
+            </motion.p>
+            <motion.h1
+              initial={revealInitial}
+              animate={revealWhileInView}
+              transition={{ delay: 0.1, duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+              className="font-display mt-5 max-w-4xl text-4xl font-bold leading-tight text-white md:text-6xl"
+            >
               공개 기록으로 다시 보는
               <br className="hidden sm:block" /> 수북농업 연혁
-            </h1>
-            <p className="mx-auto max-w-2xl text-lg font-light text-gray-200 md:text-xl">
+            </motion.h1>
+            <motion.p
+              initial={revealInitial}
+              animate={revealWhileInView}
+              transition={{ delay: 0.16, duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-6 max-w-3xl text-base leading-relaxed text-white/78 md:text-lg"
+            >
               김종수 대표와 수북농업에 관한 기사, 공개 사업자 정보, 회사 자료를 바탕으로
-              주요 흐름을 사진과 함께 소개합니다. 공개 기록과 기사 흐름을 시간 순서에
-              따라 이어서 보실 수 있습니다.
-            </p>
+              주요 흐름을 사진과 함께 소개합니다.
+            </motion.p>
+
+            <div className="mt-10 grid gap-4 md:grid-cols-3">
+              {historyHeroCards.map((card, index) => (
+                <motion.article
+                  key={card.title}
+                  initial={revealInitial}
+                  animate={revealWhileInView}
+                  transition={{
+                    delay: 0.22 + index * 0.06,
+                    duration: 0.42,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="rounded-3xl border border-white/12 bg-white/6 p-5 backdrop-blur-sm"
+                >
+                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--agri-primary)]">
+                    {card.title}
+                  </p>
+                  <h2 className="mt-3 text-2xl font-bold text-white">{card.value}</h2>
+                  <p className="mt-3 text-sm leading-relaxed text-white/74">
+                    {card.description}
+                  </p>
+                </motion.article>
+              ))}
+            </div>
           </div>
         </section>
 

@@ -17,14 +17,17 @@ const roleCards = [
   {
     title: "대표 역할",
     description: "(유)수북농업 대표이사",
+    detail: "수북농업의 공개 기사와 회사 정보에서 함께 안내되는 현재 역할입니다.",
   },
   {
     title: "겸임 이력",
     description: "수북환경개발 대표이사",
+    detail: "공개 기사 기준으로 함께 소개된 이력입니다.",
   },
   {
     title: "조합 활동",
     description: "한국유기질비료산업협동조합 제3·4대 이사장",
+    detail: "조합 공개 연혁과 기사 자료를 바탕으로 정리했습니다.",
   },
 ] as const;
 
@@ -49,56 +52,80 @@ export default function CEOPageClient() {
       <SiteNav />
 
       <main>
-        <section className="relative overflow-hidden bg-[#101d0f] px-5 pb-18 pt-28 md:px-10 lg:px-20">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(122,240,83,0.16),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(255,232,154,0.12),transparent_30%)]" />
-          <div className="relative mx-auto grid w-full max-w-7xl items-center gap-10 lg:grid-cols-[0.95fr_1.05fr]">
-            <motion.div
+        <section className="relative overflow-hidden bg-[#112614] px-5 pb-20 pt-28 md:px-10 lg:px-20">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(122,240,83,0.18),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(255,232,154,0.12),transparent_32%)]" />
+          <div className="relative mx-auto max-w-7xl">
+            <motion.p
               initial={revealInitial}
               animate={revealWhileInView}
-              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ delay: 0.04, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              className="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--agri-primary)]"
             >
-              <span className="inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-1 text-sm font-semibold text-white/82">
-                대표 소개
-              </span>
-              <h1 className="font-display mt-6 text-5xl font-bold leading-[1.02] text-white md:text-7xl">
-                김종수 대표
-              </h1>
-              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/82 md:text-xl">
-                수북농업과 수북환경개발을 이끌며 현장과 산업을 함께 살펴온 김종수 대표의
-                주요 활동을 소개합니다.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                {roleCards.map((role) => (
-                  <span
+              대표 소개
+            </motion.p>
+            <motion.h1
+              initial={revealInitial}
+              animate={revealWhileInView}
+              transition={{ delay: 0.1, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              className="font-display mt-5 max-w-4xl text-4xl font-bold leading-tight text-white md:text-6xl"
+            >
+              김종수 대표의 주요 활동과
+              <br className="hidden sm:block" /> 공개 이력을 소개합니다
+            </motion.h1>
+            <motion.p
+              initial={revealInitial}
+              animate={revealWhileInView}
+              transition={{ delay: 0.16, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-6 max-w-3xl text-base leading-relaxed text-white/78 md:text-lg"
+            >
+              수북농업과 수북환경개발을 이끌며 현장과 산업을 함께 살펴온 김종수 대표의
+              공개 기사와 연혁 흐름을 정리했습니다.
+            </motion.p>
+
+            <div className="mt-10 grid gap-5 lg:grid-cols-[1.02fr_0.98fr]">
+              <div className="grid gap-4 sm:grid-cols-2">
+                {roleCards.map((role, index) => (
+                  <motion.article
                     key={role.title}
-                    className="rounded-full border border-white/12 bg-white/10 px-4 py-2 text-sm font-semibold text-white/86"
+                    initial={revealInitial}
+                    animate={revealWhileInView}
+                    transition={{
+                      delay: 0.22 + index * 0.06,
+                      duration: 0.45,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className="rounded-3xl border border-white/12 bg-white/6 p-5 backdrop-blur-sm"
                   >
-                    {role.description}
-                  </span>
+                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--agri-primary)]">
+                      {role.title}
+                    </p>
+                    <h2 className="mt-3 text-2xl font-bold text-white">{role.description}</h2>
+                    <p className="mt-3 text-sm leading-relaxed text-white/74">{role.detail}</p>
+                  </motion.article>
                 ))}
               </div>
-            </motion.div>
 
-            <motion.figure
-              initial={revealInitial}
-              animate={revealWhileInView}
-              transition={{ duration: 0.45, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-              className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/8 shadow-[0_30px_80px_rgba(0,0,0,0.26)]"
-            >
-              <div className="relative aspect-[4/5]">
-                <Image
-                  alt="농민신문 기사에 실린 김종수 대표 인물 사진"
-                  src="/image/kim-jong-su-portrait.jpg"
-                  fill
-                  priority
-                  sizes="(min-width: 1024px) 42vw, 100vw"
-                  className="object-cover"
-                />
-              </div>
-              <figcaption className="border-t border-white/10 px-5 py-4 text-sm leading-relaxed text-white/74">
-                {externalPhotoCredit.description}
-              </figcaption>
-            </motion.figure>
+              <motion.figure
+                initial={revealInitial}
+                animate={revealWhileInView}
+                transition={{ duration: 0.45, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+                className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/8 shadow-[0_30px_80px_rgba(0,0,0,0.26)]"
+              >
+                <div className="relative aspect-[4/5]">
+                  <Image
+                    alt="농민신문 기사에 실린 김종수 대표 인물 사진"
+                    src="/image/kim-jong-su-portrait.jpg"
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 42vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+                <figcaption className="border-t border-white/10 px-5 py-4 text-sm leading-relaxed text-white/74">
+                  {externalPhotoCredit.description}
+                </figcaption>
+              </motion.figure>
+            </div>
           </div>
         </section>
 
