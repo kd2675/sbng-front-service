@@ -35,6 +35,59 @@ const detailLinks = [
   },
 ] as const;
 
+const companyPhotoCards = [
+  {
+    src: "/image/company/subuk-facility-2015-group-1.jpg",
+    alt: "농기자재신문 기사에 실린 수북농업 퇴비 적치 시설 사진",
+    date: "2015.12.31",
+    sourceLabel: "농기자재신문 2015.12.31",
+    sourceUrl: "https://www.newsam.co.kr/news/article.html?no=8732",
+    title: "퇴비 적치 시설",
+    description: "농기자재신문 2015년 12월 31일 기사에 소개된 수북농업 현장 사진입니다.",
+  },
+  {
+    src: "/image/company/subuk-facility-2015-side.jpg",
+    alt: "농기자재신문 기사에 실린 수북농업 생산 설비 사진",
+    date: "2015.12.31",
+    sourceLabel: "농기자재신문 2015.12.31",
+    sourceUrl: "https://www.newsam.co.kr/news/article.html?no=8732",
+    title: "생산 설비 내부",
+    description: "포장과 생산 공정 일부가 공개 기사 사진으로 확인됩니다.",
+  },
+  {
+    src: "/image/company/subuk-facility-2015-group-2.jpg",
+    alt: "농기자재신문 기사에 실린 수북농업 시설 내부 사진",
+    date: "2015.12.31",
+    sourceLabel: "농기자재신문 2015.12.31",
+    sourceUrl: "https://www.newsam.co.kr/news/article.html?no=8732",
+    title: "시설 내부 현장",
+    description: "담양 수북농업 탐방 기사에서 확인되는 시설 내부 장면입니다.",
+  },
+] as const;
+
+const industryActivityCards = [
+  {
+    src: "/image/company/subuk-nextgen-2015-group-1.jpg",
+    alt: "농기자재신문 기사에 실린 차세대리더들의 모임 단체 사진",
+    date: "2015.07.31",
+    sourceLabel: "농기자재신문 2015.07.31",
+    sourceUrl: "https://www.newsam.co.kr/news/article.html?no=8385",
+    title: "차세대리더들의 모임 현장",
+    description:
+      "2015년 7월 농기자재신문 기사에 실린 현장 사진입니다. 기사 참석자 명단에는 김건영(수북농업)이 포함되어 있습니다.",
+  },
+  {
+    src: "/image/company/subuk-nextgen-2015-group-2.jpg",
+    alt: "농기자재신문 기사에 실린 차세대리더들의 모임 설명 장면",
+    date: "2015.07.31",
+    sourceLabel: "농기자재신문 2015.07.31",
+    sourceUrl: "https://www.newsam.co.kr/news/article.html?no=8385",
+    title: "교류와 설명 장면",
+    description:
+      "차세대리더들의 모임 기사에 실린 공개 사진으로, 수북농업이 참여한 업계 교류 흐름을 함께 보여줍니다.",
+  },
+] as const;
+
 export default function AboutPageClient() {
   return (
     <div className="min-h-screen bg-[linear-gradient(180deg,#eef2e9_0%,#f6f8f4_42%,#eef2e8_100%)]">
@@ -125,6 +178,120 @@ export default function AboutPageClient() {
                   <p className="mt-3 text-2xl font-bold text-[var(--agri-ink)]">{card.value}</p>
                   <p className="mt-3 text-sm leading-relaxed text-[#566d55]">{card.description}</p>
                 </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="px-5 py-18 md:px-10 lg:px-20">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className="text-sm font-bold uppercase tracking-[0.22em] text-[var(--agri-primary-deep)]">
+                  현장 사진
+                </p>
+                <h2 className="font-display mt-4 text-4xl font-bold text-[var(--agri-ink)] md:text-5xl">
+                  공개 기사로 본 수북농업 현장
+                </h2>
+              </div>
+              <a
+                href="https://www.newsam.co.kr/news/article.html?no=8732"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex rounded-full border border-black/10 px-5 py-3 text-sm font-bold text-[var(--agri-ink)] transition hover:bg-black/4"
+              >
+                현장 탐방 기사 보기
+              </a>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-3">
+              {companyPhotoCards.map((item) => (
+                <figure
+                  key={item.src}
+                  className="overflow-hidden rounded-[1.75rem] border border-black/8 bg-white shadow-[0_18px_46px_rgba(12,26,12,0.06)]"
+                >
+                  <div className="relative aspect-[4/3] bg-[#e8eee1]">
+                    <Image
+                      alt={item.alt}
+                      src={item.src}
+                      fill
+                      sizes="(min-width: 1024px) 30vw, 100vw"
+                      className="object-cover"
+                    />
+                    <div className="absolute left-4 top-4 rounded-full bg-white/92 px-3 py-1 text-[11px] font-bold tracking-[0.12em] text-[var(--agri-ink)] shadow-[0_8px_20px_rgba(12,26,12,0.14)]">
+                      {item.date}
+                    </div>
+                  </div>
+                  <figcaption className="px-6 py-6">
+                    <p className="text-2xl font-bold text-[var(--agri-ink)]">{item.title}</p>
+                    <p className="mt-3 leading-relaxed text-[#556d54]">{item.description}</p>
+                    <a
+                      href={item.sourceUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-5 inline-flex text-sm font-bold text-[var(--agri-primary-deep)]"
+                    >
+                      출처: {item.sourceLabel} →
+                    </a>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="px-5 py-4 md:px-10 lg:px-20">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className="text-sm font-bold uppercase tracking-[0.22em] text-[var(--agri-primary-deep)]">
+                  업계 교류
+                </p>
+                <h2 className="font-display mt-4 text-4xl font-bold text-[var(--agri-ink)] md:text-5xl">
+                  차세대리더들의 모임 공개 사진
+                </h2>
+              </div>
+              <a
+                href="https://www.newsam.co.kr/news/article.html?no=8385"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex rounded-full border border-black/10 px-5 py-3 text-sm font-bold text-[var(--agri-ink)] transition hover:bg-black/4"
+              >
+                관련 기사 보기
+              </a>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2">
+              {industryActivityCards.map((item) => (
+                <figure
+                  key={item.src}
+                  className="overflow-hidden rounded-[1.75rem] border border-black/8 bg-white shadow-[0_18px_46px_rgba(12,26,12,0.06)]"
+                >
+                  <div className="relative aspect-[4/3] bg-[#e8eee1]">
+                    <Image
+                      alt={item.alt}
+                      src={item.src}
+                      fill
+                      sizes="(min-width: 1024px) 46vw, 100vw"
+                      className="object-cover"
+                    />
+                    <div className="absolute left-4 top-4 rounded-full bg-white/92 px-3 py-1 text-[11px] font-bold tracking-[0.12em] text-[var(--agri-ink)] shadow-[0_8px_20px_rgba(12,26,12,0.14)]">
+                      {item.date}
+                    </div>
+                  </div>
+                  <figcaption className="px-6 py-6">
+                    <p className="text-2xl font-bold text-[var(--agri-ink)]">{item.title}</p>
+                    <p className="mt-3 leading-relaxed text-[#556d54]">{item.description}</p>
+                    <a
+                      href={item.sourceUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-5 inline-flex text-sm font-bold text-[var(--agri-primary-deep)]"
+                    >
+                      출처: {item.sourceLabel} →
+                    </a>
+                  </figcaption>
+                </figure>
               ))}
             </div>
           </div>

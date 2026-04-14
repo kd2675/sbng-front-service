@@ -36,8 +36,8 @@ export default function HistoryPageClient() {
             </h1>
             <p className="mx-auto max-w-2xl text-lg font-light text-gray-200 md:text-xl">
               김종수 대표와 수북농업에 관한 기사, 공개 사업자 정보, 회사 자료를 바탕으로
-              주요 흐름을 사진과 함께 소개합니다. 2024년 공식 조합 체계 변화와
-              2026년 공개 사업자 정보까지 기존 연혁 흐름 안에 함께 담았습니다.
+              주요 흐름을 사진과 함께 소개합니다. 공개 기록과 기사 흐름을 시간 순서에
+              따라 이어서 보실 수 있습니다.
             </p>
           </div>
         </section>

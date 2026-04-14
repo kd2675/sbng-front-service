@@ -43,7 +43,7 @@ type CurrentStatusItem = {
 export const companyProfile = {
   headline: "담양을 기반으로 유기질비료와 퇴비 제품을 소개하는 수북농업 브랜드 사이트",
   summary:
-    "수북농업의 회사 정보, 대표 이력, 공개 연혁, 2024~2026 최신 공개 정보, 제품 자료를 한 흐름으로 소개합니다.",
+    "수북농업의 회사 정보, 대표 이력, 공개 연혁, 제품 자료를 한 흐름으로 소개합니다.",
   verificationNote:
     "회사 자료와 농민신문·농기자재신문·영농자재신문 기사, 한국유기질비료산업협동조합 공개 연혁, 2026년 유기질비료 계약현황, 114On·NICEbizinfo 공개 사업자 정보를 바탕으로 주요 내용을 안내합니다.",
   companyOverview: [
@@ -52,6 +52,7 @@ export const companyProfile = {
     `한국유기질비료산업협동조합 조합원 검색에는 수북농업이 전남 지역 조합원으로 등록되어 있고, 생산비종은 ${companyInfo.productionCategory}로 안내됩니다.`,
     "대표 제품은 흙손, 흙보약, 무등산 3종이며, 사이트에서는 포장 이미지와 안내 자료를 함께 전합니다.",
     "2026년 유기질비료 계약현황 공개 자료에는 수북농업 제품으로 흙손 분상형, 흙손 입상형, 무등산 입상형, 흙보약 혼합유기질이 확인됩니다.",
+    "2015년 농기자재신문 기사에는 담양 수북농업의 생산 시설과 과정이 공개 사진과 함께 소개됐습니다.",
     `${companyInfo.ceoName} 대표는 공개 기사에서 수북농업 대표이사와 수북환경개발 대표이사, 조합 활동과 지역 농업 단체 활동 이력으로 함께 소개됩니다.`,
   ],
 } as const;
@@ -126,9 +127,9 @@ export const latestPublicUpdates: readonly TimelineItem[] = [
   },
   {
     date: "2024.10.11",
-    title: "공식 연혁에 최신 위원회 구성 기록이 반영된 시기",
+    title: "공식 연혁에 위원회 구성 기록이 반영된 시기",
     description:
-      "한국유기질비료산업협동조합 공개 연혁은 2024년 10월 11일 인사위원회와 대기환경규제대책위원회 구성을 최신 기록으로 안내합니다.",
+      "한국유기질비료산업협동조합 공개 연혁은 2024년 10월 11일 인사위원회와 대기환경규제대책위원회 구성을 안내합니다.",
     sourceLabel: "한국유기질비료산업협동조합 연혁",
     sourceUrl: "https://kofic92.or.kr/about/sub02",
   },
@@ -377,6 +378,16 @@ export const publicSources: readonly PublicSource[] = [
     label: "농기자재신문 2015.06.18",
     detail: "품질 우선 기조와 업계 과제를 소개한 인물포커스 기사",
     url: "https://www.newsam.co.kr/news/article.html?no=8253",
+  },
+  {
+    label: "농기자재신문 2015.12.31",
+    detail: "담양 수북농업의 생산 시설과 과정을 담은 현장 탐방 기사",
+    url: "https://www.newsam.co.kr/news/article.html?no=8732",
+  },
+  {
+    label: "농기자재신문 2015.07.31",
+    detail: "차세대리더들의 모임 기사에 김건영(수북농업) 참석이 확인되는 공개 사진 자료",
+    url: "https://www.newsam.co.kr/news/article.html?no=8385",
   },
   {
     label: "농민신문 2016.09.05",

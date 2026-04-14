@@ -201,8 +201,8 @@ export default function CEOPageClient() {
                 대표 연혁
               </h2>
               <p className="mt-4 max-w-3xl leading-relaxed text-[#556d54]">
-                2014년 이사장 선출부터 2024년 공식 조합 체계 변화, 2026년 공개 사업자
-                정보까지 이어지는 최신 공개 기록을 함께 소개합니다.
+                2014년 이사장 선출부터 이후 공개 기록 흐름까지 함께 살펴보실 수
+                있습니다.
               </p>
             </div>
 
