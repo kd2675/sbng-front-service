@@ -13,33 +13,39 @@ type FeedItem = {
 const feedItems: FeedItem[] = [
   {
     title: "수북농업 공식 홈페이지",
-    description: "토양 중심 농업 솔루션과 대표 제품 3종 안내를 확인할 수 있습니다.",
+    description: "담양 기반 수북농업의 회사 정보와 대표 제품 3종 자료를 소개합니다.",
     path: "/",
-    publishedAt: "2026-02-18T00:00:00+09:00",
+    publishedAt: "2026-04-14T09:00:00+09:00",
   },
   {
-    title: "CEO 소개",
-    description: "수북농업 CEO의 경영 철학과 농업 혁신 비전을 소개합니다.",
+    title: "김종수 대표 소개",
+    description: "김종수 대표의 주요 활동과 회사 연락처를 소개합니다.",
     path: "/ceo",
-    publishedAt: "2026-01-29T00:00:00+09:00",
+    publishedAt: "2026-04-14T09:00:00+09:00",
   },
   {
     title: "제품 소개",
-    description: "흙손, 흙보약, 무등산 제품 라인업과 적용 방향을 확인할 수 있습니다.",
+    description: "흙손, 흙보약, 무등산 제품 라인업과 주요 사용 정보를 소개합니다.",
     path: "/products",
-    publishedAt: "2026-02-18T00:00:00+09:00",
+    publishedAt: "2026-04-14T09:00:00+09:00",
   },
   {
-    title: "회사 연혁",
-    description: "수북농업의 시작부터 현재까지의 농업 혁신 여정을 소개합니다.",
+    title: "수북농업 연혁",
+    description: "김종수 대표와 수북농업의 공개 기사, 사업자 정보 흐름을 사진과 함께 소개합니다.",
+    path: "/history",
+    publishedAt: "2026-04-14T09:00:00+09:00",
+  },
+  {
+    title: "회사 정보",
+    description: "수북농업의 회사 소개와 담양 사업장 정보, 주요 연혁을 소개합니다.",
     path: "/about",
-    publishedAt: "2026-01-10T00:00:00+09:00",
+    publishedAt: "2026-04-14T09:00:00+09:00",
   },
   {
     title: "문의하기",
-    description: "제품 및 농업 솔루션 상담 문의와 본사 연락처를 확인할 수 있습니다.",
+    description: "수북농업 본사 연락처, 이메일, 휴대전화와 문의 접수 창구를 안내합니다.",
     path: "/contact",
-    publishedAt: "2026-01-10T00:00:00+09:00",
+    publishedAt: "2026-04-14T09:00:00+09:00",
   },
 ];
 
@@ -74,7 +80,7 @@ export function GET() {
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>수북농업 RSS Feed</title>
-    <description>수북농업 홈페이지 주요 페이지 및 업데이트 안내</description>
+    <description>수북농업 회사 소개, 대표 정보, 제품 자료 업데이트 안내</description>
     <link>${siteUrl}</link>
     <language>ko-kr</language>
     <lastBuildDate>${lastBuildDate}</lastBuildDate>

@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "수북농업",
     short_name: "수북농업",
     description:
-      "수북농업은 흙손, 흙보약, 무등산 등 토양 중심 비료 솔루션과 농업 컨설팅을 제공합니다.",
+      "전남 담양을 기반으로 한 수북농업의 회사 소개와 제품 정보를 안내합니다.",
     start_url: "/",
     display: "standalone",
     background_color: "#a42d2d",

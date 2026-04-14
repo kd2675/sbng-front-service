@@ -1,117 +1,53 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { MotionConfig, motion, useReducedMotion } from "motion/react";
+import {
+  ceoBiography,
+  ceoCurrentStatus,
+  companyProfile,
+  publicSources,
+  publicTimeline,
+  verifiedFactCards,
+} from "./companyProfile";
 import { companyInfo } from "./companyInfo";
-import { productCatalog } from "./productCatalog";
 import SiteNav from "./components/SiteNav";
+import { productCatalog } from "./productCatalog";
 
 const productSummaries = productCatalog.map((product) => ({
   id: product.id,
   name: product.name,
   benefit: product.cardSummary,
-  crops: product.cropTags,
   image: product.frontImage,
-  label: product.material,
+  material: product.material,
+  usage: product.usage,
 }));
 
-const caseStudies = [
-  {
-    id: "seosan",
-    region: "충남 서산",
-    crop: "벼",
-    metric: "수확량",
-    change: "+19%",
-    before: "430kg / 10a",
-    after: "512kg / 10a",
-    summary: "질소 과다 구간을 줄이고 분얼기 생육 균일도를 확보했습니다.",
-  },
-  {
-    id: "mungyeong",
-    region: "경북 문경",
-    crop: "사과",
-    metric: "당도",
-    change: "+1.9 brix",
-    before: "14.2 brix",
-    after: "16.1 brix",
-    summary: "착색기 처방 최적화로 상품과 비율과 평균 당도가 개선되었습니다.",
-  },
-  {
-    id: "gimje",
-    region: "전북 김제",
-    crop: "감자",
-    metric: "상품 수율",
-    change: "+21%",
-    before: "2.8톤 / 10a",
-    after: "3.4톤 / 10a",
-    summary: "토양 통기성 개선 처방으로 괴경 비대와 균일도를 끌어올렸습니다.",
-  },
-];
+const homeCeoHighlights = [
+  ceoBiography[0],
+  ceoBiography[3],
+  ceoBiography[5],
+  ceoBiography[6],
+].filter(Boolean);
 
-const certificationItems = [
-  "ISO 9001",
-  "유기자재 인증",
-  "특허 등록 15건",
-  "농협 협력농가",
-  "지역 연구기관 공동실증",
-  "토양분석 파트너 랩",
-];
+const homeCeoCurrentStatus = ceoCurrentStatus.slice(0, 2);
 
-const faqItems = [
-  {
-    question: "대량 주문 시 가격 정책은 어떻게 되나요?",
-    answer:
-      "기준 물량 이상부터 단계별 단가가 적용됩니다. 작물과 면적 정보를 주시면 맞춤 견적서를 제공합니다.",
-  },
-  {
-    question: "제품 적용 시기는 언제가 가장 좋나요?",
-    answer:
-      "작물별 권장 시기가 다르지만 보통 정식 전 2주 내외 1차 적용 후 생육 중기 보강을 권장합니다.",
-  },
-  {
-    question: "최소 주문 수량이 있나요?",
-    answer:
-      "직배송 기준 최소 주문은 500kg입니다. 소량은 지역 대리점 또는 상담 후 공동 배송으로 안내합니다.",
-  },
-  {
-    question: "배송 기간은 얼마나 걸리나요?",
-    answer:
-      "국내 기준 평균 2~4영업일 내 출고됩니다. 산간 지역은 1~2일 추가될 수 있습니다.",
-  },
-  {
-    question: "현장 상담 범위는 어디까지인가요?",
-    answer:
-      "토양 상태, 작물 생육, 기존 투입 이력을 기반으로 진단-처방-적용 계획까지 안내합니다.",
-  },
-];
+const homeTimelineDates = new Set(["2014.07.09", "2016.09.05", "2024.08.25", "2026.03"]);
+const homeTimelineItems = publicTimeline.filter((item) => homeTimelineDates.has(item.date));
 
-const newsItems = [
-  {
-    category: "제품안내",
-    date: "2026.02.18",
-    title: "흙손·흙보약·무등산 제품 소개 페이지 공개",
-    summary: "실제 포장 실사와 안내 시트를 기반으로 대표 제품 3종 정보를 정리했습니다.",
-    href: "/products",
-  },
-  {
-    category: "상담안내",
-    date: "2026.01.29",
-    title: "담양 본사 상담 접수 안내",
-    summary: "작물 유형과 토양 상태에 따라 제품 적용 방향을 상담 중심으로 안내합니다.",
-    href: "/contact",
-  },
-  {
-    category: "브랜드",
-    date: "2025.12.11",
-    title: "수북농업 브랜드 사이트 운영 시작",
-    summary: "회사 소개, CEO 메시지, 제품 정보, 문의 채널을 한곳에서 확인할 수 있습니다.",
-    href: "/about",
-  },
-];
+const homeSourceLabels = new Set([
+  "회사 소개서",
+  "한국유기질비료산업협동조합 연혁",
+  "농민신문 2014.07.14",
+  "영농자재신문 2020.08.07",
+  "2026년 유기질비료 계약현황",
+  "114On 공개 사업자 정보",
+]);
+const homeSources = publicSources.filter((source) => homeSourceLabels.has(source.label));
 
-const sectionLabels = ["메인", "제품", "사례", "CEO", "인증", "FAQ", "뉴스"] as const;
+const sectionLabels = ["메인", "회사", "제품", "대표", "연혁", "자료", "문의"] as const;
 
 export default function HomePageClient() {
   const reduceMotion = useReducedMotion();
@@ -123,10 +59,10 @@ export default function HomePageClient() {
   const [activeSection, setActiveSection] = useState(0);
   const [isDesktopMode, setIsDesktopMode] = useState(false);
 
-  const fadeUpInitial = reduceMotion ? { opacity: 1 } : { opacity: 0, y: 24 };
-  const fadeUpAnimate = { opacity: 1, y: 0 };
+  const revealInitial = reduceMotion ? { opacity: 1 } : { opacity: 0, y: 24 };
+  const revealAnimate = { opacity: 1, y: 0 };
   const maxSectionIndex = sectionLabels.length - 1;
-  const isBottomSection = activeSection >= 1;
+  const showBottomBar = activeSection >= 1;
 
   useEffect(() => {
     activeSectionRef.current = activeSection;
@@ -135,9 +71,7 @@ export default function HomePageClient() {
   useEffect(() => {
     const widthMedia = window.matchMedia("(min-width: 1024px)");
     const pointerMedia = window.matchMedia("(any-pointer: fine)");
-    const sync = () => {
-      setIsDesktopMode(widthMedia.matches && pointerMedia.matches);
-    };
+    const sync = () => setIsDesktopMode(widthMedia.matches && pointerMedia.matches);
 
     sync();
     widthMedia.addEventListener("change", sync);
@@ -149,27 +83,30 @@ export default function HomePageClient() {
     };
   }, []);
 
-  const scrollToSection = useCallback((index: number) => {
-    const clampedIndex = Math.max(0, Math.min(maxSectionIndex, index));
+  const scrollToSection = useCallback(
+    (index: number) => {
+      const clampedIndex = Math.max(0, Math.min(maxSectionIndex, index));
 
-    if (isSwitchingRef.current || clampedIndex === activeSectionRef.current) {
-      return;
-    }
+      if (isSwitchingRef.current || clampedIndex === activeSectionRef.current) {
+        return;
+      }
 
-    isSwitchingRef.current = true;
-    activeSectionRef.current = clampedIndex;
-    setActiveSection(clampedIndex);
-    wheelAccumulatorRef.current = 0;
+      isSwitchingRef.current = true;
+      activeSectionRef.current = clampedIndex;
+      setActiveSection(clampedIndex);
+      wheelAccumulatorRef.current = 0;
 
-    sectionRefs.current[clampedIndex]?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+      sectionRefs.current[clampedIndex]?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
 
-    window.setTimeout(() => {
-      isSwitchingRef.current = false;
-    }, reduceMotion ? 140 : 620);
-  }, [maxSectionIndex, reduceMotion]);
+      window.setTimeout(() => {
+        isSwitchingRef.current = false;
+      }, reduceMotion ? 140 : 620);
+    },
+    [maxSectionIndex, reduceMotion],
+  );
 
   const registerSection =
     (index: number) =>
@@ -293,7 +230,9 @@ export default function HomePageClient() {
                     opacity: activeSection === index ? 1 : 0.58,
                   }}
                   transition={{ duration: 0.2 }}
-                  className="h-2 w-2 rounded-full bg-[var(--agri-primary-deep)] shadow-[0_0_0_1px_rgba(11,20,11,0.14)]"
+                  className={`h-2 w-2 rounded-full shadow-[0_0_0_1px_rgba(11,20,11,0.14)] ${
+                    activeSection === 0 ? "bg-white" : "bg-[var(--agri-primary-deep)]"
+                  }`}
                 />
               </button>
             ))}
@@ -320,73 +259,84 @@ export default function HomePageClient() {
           <section
             ref={registerSection(0)}
             data-section-index={0}
-            className="hero-grain relative isolate overflow-hidden flex min-h-[100svh] items-center justify-center px-5 pb-16 pt-28 md:snap-start md:snap-always md:px-10 lg:px-20"
+            className="relative isolate flex min-h-[100svh] items-end overflow-hidden px-5 pb-16 pt-28 md:snap-start md:snap-always md:px-10 lg:px-20"
           >
-            <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_top,_rgba(255,244,220,0.2),_transparent_36%),linear-gradient(135deg,_#431414_0%,_#7a2323_42%,_#a42d2d_100%)]" />
-            <div className="absolute inset-x-0 top-0 -z-10 h-64 bg-[linear-gradient(180deg,rgba(255,255,255,0.18),transparent)]" />
-            <div className="absolute left-[-4rem] top-28 -z-10 h-56 w-56 rounded-full bg-[#f3e6c6]/10 blur-3xl md:-left-24 md:h-72 md:w-72" />
-            <div className="absolute bottom-16 right-[-3rem] -z-10 h-60 w-60 rounded-full bg-[#d8ff8d]/10 blur-3xl md:right-[-6rem] md:h-80 md:w-80" />
+            <Image
+              alt="수북농업 현장 활동 이미지"
+              src="/image/kim-jong-su-assembly.jpg"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(9,18,8,0.86),rgba(13,22,10,0.52)_42%,rgba(13,22,10,0.82)_100%)]" />
+            <div className="absolute left-[-4rem] top-32 h-56 w-56 rounded-full bg-[#ffe89a]/12 blur-3xl md:h-72 md:w-72" />
+            <div className="absolute bottom-16 right-[-4rem] h-56 w-56 rounded-full bg-[var(--agri-primary)]/14 blur-3xl md:h-80 md:w-80" />
 
-            <div className="mx-auto flex w-full max-w-5xl flex-col items-center text-center">
-              <motion.div
-                initial={fadeUpInitial}
-                animate={fadeUpAnimate}
-                transition={{ delay: 0.05 }}
-                className="mb-7 inline-flex items-center gap-2 rounded-full border border-[var(--agri-primary)]/30 bg-[var(--agri-primary)]/12 px-4 py-1.5 text-sm font-semibold text-[var(--agri-primary)] backdrop-blur"
+            <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-start">
+              <motion.p
+                initial={revealInitial}
+                animate={revealAnimate}
+                transition={{ delay: 0.04 }}
+                className="inline-flex items-center gap-2 rounded-full border border-white/18 bg-white/10 px-4 py-1.5 text-sm font-semibold text-white/86 backdrop-blur"
               >
-                <motion.span
-                  className="size-2 rounded-full bg-[var(--agri-primary)]"
-                  animate={
-                    reduceMotion
-                      ? { opacity: 1 }
-                      : { opacity: [0.55, 1, 0.55], scale: [1, 1.24, 1] }
-                  }
-                  transition={{ duration: 1.9, repeat: Infinity }}
-                />
-                수북농업 대표 제품 3종 안내
-              </motion.div>
+                <span className="h-2 w-2 rounded-full bg-[var(--agri-primary)]" />
+                토양과 작물을 함께 살피는 수북농업
+              </motion.p>
 
               <motion.h1
-                initial={fadeUpInitial}
-                animate={fadeUpAnimate}
+                initial={revealInitial}
+                animate={revealAnimate}
                 transition={{ delay: 0.12 }}
-                className="font-display text-5xl font-bold leading-[0.96] tracking-[-0.02em] text-white md:text-7xl lg:text-8xl"
+                className="font-display mt-6 max-w-5xl text-5xl font-bold leading-[0.98] text-white md:text-7xl lg:text-8xl"
               >
-                수북농업이 만드는{" "}
-                <span className="bg-gradient-to-r from-[var(--agri-primary)] to-[#e5ffc6] bg-clip-text text-transparent">
-                  성장 중심 미래
-                </span>{" "}
-                <br className="hidden sm:block" />
-                농업 솔루션
+                현장을 먼저 살피고
+                <br className="hidden sm:block" /> 농사의 힘을 키우는
+                <span className="text-[var(--agri-primary)]"> 수북농업</span>
               </motion.h1>
 
               <motion.p
-                initial={fadeUpInitial}
-                animate={fadeUpAnimate}
-                transition={{ delay: 0.2 }}
-                className="mt-7 max-w-2xl text-base leading-relaxed text-white/88 md:text-xl"
+                initial={revealInitial}
+                animate={revealAnimate}
+                transition={{ delay: 0.18 }}
+                className="mt-7 max-w-3xl text-base leading-relaxed text-white/86 md:text-xl"
               >
-                수북농업은 친환경 비료와 토양 중심 컨설팅으로 수확량을 높이고 농업
-                운영의 안정성을 강화하는 농업 솔루션을 제공합니다.
+                {companyProfile.summary}
               </motion.p>
 
               <motion.div
-                initial={fadeUpInitial}
-                animate={fadeUpAnimate}
-                transition={{ delay: 0.3 }}
-                className="mt-10 flex w-full flex-col justify-center gap-4 sm:w-auto sm:flex-row"
+                initial={revealInitial}
+                animate={revealAnimate}
+                transition={{ delay: 0.24 }}
+                className="mt-8 flex flex-wrap gap-3"
+              >
+                {verifiedFactCards.map((card) => (
+                  <span
+                    key={card.title}
+                    className="rounded-full border border-white/14 bg-white/10 px-4 py-2 text-sm font-semibold text-white/88 backdrop-blur"
+                  >
+                    {card.value}
+                  </span>
+                ))}
+              </motion.div>
+
+              <motion.div
+                initial={revealInitial}
+                animate={revealAnimate}
+                transition={{ delay: 0.32 }}
+                className="mt-10 flex w-full flex-col gap-4 sm:w-auto sm:flex-row"
               >
                 <Link
-                  href="/about"
-                  className="rounded-full bg-[var(--agri-primary)] px-8 py-4 text-base font-extrabold text-[var(--agri-ink)] shadow-[0_16px_42px_rgba(87,219,49,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_48px_rgba(87,219,49,0.48)]"
+                  href="/ceo"
+                  className="rounded-full bg-[var(--agri-primary)] px-8 py-4 text-base font-extrabold text-[var(--agri-ink)] shadow-[0_16px_42px_rgba(87,219,49,0.35)] transition hover:-translate-y-0.5"
                 >
-                  수북농업 소개
+                  김종수 대표 보기
                 </Link>
                 <Link
-                  href="/products"
-                  className="rounded-full border border-white/35 bg-white/10 px-8 py-4 text-base font-bold text-white backdrop-blur transition hover:bg-white/20"
+                  href="/about"
+                  className="rounded-full border border-white/30 bg-white/10 px-8 py-4 text-base font-bold text-white backdrop-blur transition hover:bg-white/20"
                 >
-                  제품 보기
+                  회사 정보 보기
                 </Link>
               </motion.div>
             </div>
@@ -394,15 +344,13 @@ export default function HomePageClient() {
             <button
               type="button"
               onClick={() => scrollToSection(1)}
-              className="absolute bottom-28 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-white/80 transition hover:text-[var(--agri-primary)] sm:bottom-24 md:bottom-20 lg:bottom-16"
+              className="absolute bottom-20 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-white/78 transition hover:text-[var(--agri-primary)]"
             >
-              <span className="text-[10px] font-bold tracking-[0.22em]">SCROLL</span>
+              <span className="text-[10px] font-bold tracking-[0.22em]">내려보기</span>
               <span className="flex h-10 w-6 items-start justify-center rounded-full border border-current p-1">
                 <motion.span
                   className="h-2.5 w-1 rounded-full bg-current"
-                  animate={
-                    reduceMotion ? { opacity: 1 } : { y: [0, 11], opacity: [1, 0] }
-                  }
+                  animate={reduceMotion ? { opacity: 1 } : { y: [0, 11], opacity: [1, 0] }}
                   transition={{ duration: 1.35, repeat: Infinity }}
                 />
               </span>
@@ -414,82 +362,51 @@ export default function HomePageClient() {
             data-section-index={1}
             className={`${sectionClassName} bg-[var(--agri-paper)]`}
           >
-            <div className="mx-auto w-full max-w-6xl">
+            <div className="mx-auto w-full max-w-7xl">
               <motion.div
-                initial={fadeUpInitial}
-                whileInView={fadeUpAnimate}
-                viewport={{ once: true, amount: 0.4 }}
-                className="mb-12 flex flex-col gap-4"
+                initial={revealInitial}
+                whileInView={revealAnimate}
+                viewport={{ once: true, amount: 0.35 }}
+                className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr]"
               >
-                <p className="text-sm font-bold uppercase tracking-[0.24em] text-[var(--agri-primary-deep)]">
-                  Products
-                </p>
-                <h2 className="font-display text-4xl font-bold tracking-tight text-[var(--agri-ink)] md:text-5xl">
-                  주요 제품 3종 요약
-                </h2>
-              </motion.div>
+                <div>
+                  <p className="text-sm font-bold uppercase tracking-[0.24em] text-[var(--agri-primary-deep)]">
+                    회사 소개
+                  </p>
+                  <h2 className="font-display mt-4 text-4xl font-bold tracking-tight text-[var(--agri-ink)] md:text-5xl">
+                    수북농업 소개
+                  </h2>
+                  <div className="mt-6 space-y-4 text-base leading-relaxed text-[#4d654d] md:text-lg">
+                    {companyProfile.companyOverview.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                  </div>
+                  <p className="mt-6 rounded-2xl bg-white px-5 py-4 text-sm leading-relaxed text-[#4a634a] shadow-[0_18px_45px_rgba(12,26,12,0.06)]">
+                    {companyProfile.verificationNote}
+                  </p>
+                </div>
 
-              <div className="grid gap-6 md:grid-cols-3">
-                {productSummaries.map((item, index) => (
-                  <Link
-                    key={item.id}
-                    href="/products"
-                    aria-label={`${item.name} 제품 상세 보기`}
-                    className="group block rounded-3xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--agri-primary-deep)] focus-visible:ring-offset-4"
-                  >
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {verifiedFactCards.map((card, index) => (
                     <motion.article
-                      initial={fadeUpInitial}
-                      whileInView={fadeUpAnimate}
-                      viewport={{ once: true, amount: 0.2 }}
-                      transition={{ duration: 0.42, delay: Math.min(index * 0.08, 0.2) }}
-                      whileHover={reduceMotion ? undefined : { y: -8, scale: 1.012 }}
-                      className="flex flex-col overflow-hidden rounded-3xl border border-black/6 bg-white shadow-[0_20px_50px_rgba(10,25,10,0.07)] transition-shadow duration-300 group-hover:shadow-[0_28px_70px_rgba(10,25,10,0.14)]"
+                      key={card.title}
+                      initial={revealInitial}
+                      whileInView={revealAnimate}
+                      viewport={{ once: true, amount: 0.35 }}
+                      transition={{ delay: Math.min(index * 0.05, 0.14) }}
+                      className="rounded-3xl border border-black/8 bg-white p-6 shadow-[0_20px_48px_rgba(12,26,12,0.06)]"
                     >
-                      <div className="relative h-56 overflow-hidden bg-[#edf3e7]">
-                        <Image
-                          alt={`${item.name} 제품 이미지`}
-                          src={item.image}
-                          fill
-                          sizes="(min-width: 768px) 28vw, 100vw"
-                          className="object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent transition-opacity duration-300 group-hover:opacity-80" />
-                        <p className="absolute left-5 top-5 rounded-full bg-white/82 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--agri-ink)] backdrop-blur">
-                          {item.label}
-                        </p>
-                      </div>
-                      <div className="flex flex-1 flex-col p-7">
-                        <p className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-[var(--agri-primary-deep)]">
-                          Flagship
-                        </p>
-                        <h3 className="text-xl font-extrabold text-[var(--agri-ink)] transition-colors duration-300 group-hover:text-[var(--agri-primary-deep)]">
-                          {item.name}
-                        </h3>
-                        <p className="mt-3 leading-relaxed text-[#4f624d]">{item.benefit}</p>
-                        <div className="mt-5 flex flex-wrap gap-2">
-                          {item.crops.map((crop) => (
-                            <span
-                              key={`${item.id}-${crop}`}
-                              className="rounded-full bg-[#edf4e8] px-3 py-1 text-xs font-semibold text-[#476247]"
-                            >
-                              {crop}
-                            </span>
-                          ))}
-                        </div>
-                        <div className="mt-8 inline-flex w-fit items-center gap-2 text-sm font-bold text-[var(--agri-ink)] transition-colors duration-300 group-hover:text-[var(--agri-primary-deep)]">
-                          자세히 보기
-                          <span
-                            aria-hidden
-                            className="transition-transform duration-300 group-hover:translate-x-1"
-                          >
-                            →
-                          </span>
-                        </div>
-                      </div>
+                      <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#678066]">
+                        {card.title}
+                      </p>
+                      <p className="mt-3 text-2xl font-bold text-[var(--agri-ink)]">{card.value}</p>
+                      <p className="mt-3 text-sm leading-relaxed text-[#536a52]">
+                        {card.description}
+                      </p>
                     </motion.article>
-                  </Link>
-                ))}
-              </div>
+                  ))}
+                </div>
+              </motion.div>
             </div>
           </section>
 
@@ -500,58 +417,47 @@ export default function HomePageClient() {
           >
             <div className="mx-auto w-full max-w-7xl">
               <motion.div
-                initial={fadeUpInitial}
-                whileInView={fadeUpAnimate}
+                initial={revealInitial}
+                whileInView={revealAnimate}
                 viewport={{ once: true, amount: 0.35 }}
                 className="mb-10"
               >
                 <p className="text-sm font-bold uppercase tracking-[0.22em] text-[var(--agri-primary-deep)]">
-                  Case Study
+                  제품 안내
                 </p>
                 <h2 className="font-display mt-3 text-4xl font-bold tracking-tight text-[var(--agri-ink)] md:text-5xl">
-                  고객 후기 및 현장 수치
+                  대표 제품 3종
                 </h2>
               </motion.div>
-              <div className="grid gap-6 md:grid-cols-3">
-                {caseStudies.map((item, index) => (
+              <div className="grid gap-6 lg:grid-cols-3">
+                {productSummaries.map((item, index) => (
                   <motion.article
                     key={item.id}
-                    initial={fadeUpInitial}
-                    whileInView={fadeUpAnimate}
-                    viewport={{ once: true, amount: 0.24 }}
-                    transition={{ delay: Math.min(index * 0.08, 0.2) }}
-                    className="rounded-3xl border border-black/8 bg-[#f9fcf7] p-7"
+                    initial={revealInitial}
+                    whileInView={revealAnimate}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ delay: Math.min(index * 0.08, 0.18) }}
+                    className="overflow-hidden rounded-3xl border border-black/8 bg-[#f8fbf6] shadow-[0_22px_54px_rgba(12,26,12,0.07)]"
                   >
-                    <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <p className="text-sm font-bold text-[#425b42]">{item.region}</p>
-                        <p className="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-[#607860]">
-                          작물: {item.crop}
-                        </p>
-                      </div>
-                      <span className="rounded-full bg-[var(--agri-primary)]/20 px-3 py-1 text-sm font-extrabold text-[var(--agri-primary-deep)]">
-                        {item.change}
-                      </span>
-                    </div>
-                    <p className="mt-4 leading-relaxed text-[#486248]">{item.summary}</p>
-                    <div className="mt-6 rounded-2xl border border-black/8 bg-white p-4">
-                      <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#789178]">
-                        {item.metric}
+                    <div className="relative h-64">
+                      <Image
+                        alt={`${item.name} 제품 실사`}
+                        src={item.image}
+                        fill
+                        sizes="(min-width: 1024px) 28vw, 100vw"
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/12 to-transparent" />
+                      <p className="absolute left-5 top-5 rounded-full bg-white/86 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--agri-ink)]">
+                        {item.material}
                       </p>
-                      <div className="mt-2 grid grid-cols-2 gap-3">
-                        <div className="rounded-xl bg-[#f1f4ee] p-3 text-center">
-                          <p className="text-[10px] font-bold uppercase tracking-[0.1em] text-[#768a76]">
-                            Before
-                          </p>
-                          <p className="mt-1 text-sm font-bold text-[#5d735d]">{item.before}</p>
-                        </div>
-                        <div className="rounded-xl bg-[#ecfae5] p-3 text-center">
-                          <p className="text-[10px] font-bold uppercase tracking-[0.1em] text-[#2f7f22]">
-                            After
-                          </p>
-                          <p className="mt-1 text-sm font-bold text-[#2f7f22]">{item.after}</p>
-                        </div>
-                      </div>
+                    </div>
+                    <div className="p-7">
+                      <h3 className="text-2xl font-bold text-[var(--agri-ink)]">{item.name}</h3>
+                      <p className="mt-3 leading-relaxed text-[#516851]">{item.benefit}</p>
+                      <p className="mt-5 text-sm font-semibold text-[#365335]">
+                        권장 사용량: {item.usage}
+                      </p>
                     </div>
                   </motion.article>
                 ))}
@@ -562,49 +468,85 @@ export default function HomePageClient() {
           <section
             ref={registerSection(3)}
             data-section-index={3}
-            className={`${sectionClassName} bg-[#f3f7ef]`}
+            className="relative z-10 flex items-center bg-[#f3f7ef] px-5 py-14 md:min-h-[100svh] md:snap-start md:snap-always md:px-10 md:py-12 lg:px-20"
           >
-            <div className="mx-auto grid w-full max-w-7xl items-center gap-10 lg:grid-cols-12">
-              <motion.div
-                initial={fadeUpInitial}
-                whileInView={fadeUpAnimate}
+            <div className="mx-auto grid w-full max-w-7xl items-center gap-10 lg:grid-cols-[0.82fr_1.18fr]">
+              <motion.figure
+                initial={revealInitial}
+                whileInView={revealAnimate}
                 viewport={{ once: true, amount: 0.35 }}
-                className="relative lg:col-span-4"
+                className="overflow-hidden rounded-[2rem] border border-black/8 bg-white shadow-[0_26px_70px_rgba(12,26,12,0.12)]"
               >
-                <div className="relative aspect-[3/4] overflow-hidden rounded-3xl border border-black/10 shadow-[0_30px_70px_rgba(13,28,11,0.16)]">
+                <div className="relative aspect-[4/5] bg-[#e6ebdf]">
                   <Image
-                    alt="수북농업 CEO 프로필"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfNvDKOA4us8Alix8jWVyu9urycX7CVV0JHF2Oyn_q3QsnIetIvYF0EgmdheZjgusMTMdPL-fVIxhFDDMdRKXfA0Cez0UsJf5TLPkvZotFit9BsCAmE_QfMnqCpxJIsy2ESR12g92bWDTjePFIXGej4QL7Gr8ndelj0l6HLLQiS-7bhvYJiwapUYvMfWXkAaDFFxW6PVzE4sSYkk4AkjuGmAR8w0f2mNwEi0rSi4HZta0qVc96JqNlqpb8AYgT4QUkh4aAWFiB77E"
+                    alt="농민신문 기사에 실린 김종수 대표 사진"
+                    src="/image/kim-jong-su-portrait.jpg"
                     fill
-                    sizes="(min-width: 1024px) 28vw, 100vw"
+                    sizes="(min-width: 1024px) 34vw, 100vw"
                     className="object-cover"
                   />
                 </div>
-              </motion.div>
+                <figcaption className="border-t border-black/8 px-5 py-4 text-sm leading-relaxed text-[#546a54]">
+                  김종수 대표
+                </figcaption>
+              </motion.figure>
+
               <motion.article
-                initial={fadeUpInitial}
-                whileInView={fadeUpAnimate}
-                viewport={{ once: true, amount: 0.3 }}
-                className="lg:col-span-8"
+                initial={revealInitial}
+                whileInView={revealAnimate}
+                viewport={{ once: true, amount: 0.28 }}
               >
-                <p className="text-sm font-bold uppercase tracking-[0.18em] text-[var(--agri-primary-deep)]">
-                  CEO Message
+                <p className="text-sm font-bold uppercase tracking-[0.22em] text-[var(--agri-primary-deep)]">
+                  대표 소개
                 </p>
                 <h2 className="font-display mt-3 text-4xl font-bold tracking-tight text-[var(--agri-ink)] md:text-5xl">
-                  한 줄 메시지
+                  김종수 대표 소개
                 </h2>
-                <p className="mt-6 text-2xl leading-relaxed text-[#334c33] md:text-3xl">
-                  &ldquo;현장 수치로 증명되는 기술만 농가에 전달하겠습니다.&rdquo;
+                <p className="mt-6 text-lg leading-relaxed text-[#456045] md:text-xl">
+                  수북농업과 수북환경개발을 이끌며 유기질비료 산업과 현장 중심의 농업
+                  활동을 이어오고 있습니다.
                 </p>
-                <p className="mt-6 max-w-3xl leading-relaxed text-[#4d654d]">
-                  수북농업은 연구 데이터보다 현장 적용 결과를 우선합니다. 작물과 토양이
-                  모두 달라지는 현실에서, 실행 가능한 처방 체계를 만들고 있습니다.
-                </p>
+                <div className="mt-6 grid gap-3 md:grid-cols-2">
+                  {homeCeoCurrentStatus.map((item) => (
+                    <a
+                      key={item.date}
+                      href={item.sourceUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="rounded-[1.4rem] border border-black/8 bg-[#f5f8f1] px-5 py-4 text-left shadow-[0_16px_36px_rgba(12,26,12,0.05)] transition hover:-translate-y-0.5"
+                    >
+                      <p className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--agri-primary-deep)]">
+                        {item.date}
+                      </p>
+                      <p className="mt-2 text-base font-bold text-[var(--agri-ink)]">
+                        {item.title}
+                      </p>
+                      <p className="mt-2 text-sm leading-relaxed text-[#536b52]">
+                        {item.description}
+                      </p>
+                    </a>
+                  ))}
+                </div>
+                <ul className="mt-8 space-y-4">
+                  {homeCeoHighlights.map((item, index) => (
+                    <motion.li
+                      key={item}
+                      initial={revealInitial}
+                      whileInView={revealAnimate}
+                      viewport={{ once: true, amount: 0.35 }}
+                      transition={{ delay: Math.min(index * 0.05, 0.16) }}
+                      className="flex gap-3 rounded-2xl bg-white px-5 py-4 text-sm leading-relaxed text-[#536b52] shadow-[0_16px_36px_rgba(12,26,12,0.05)]"
+                    >
+                      <span className="mt-1 h-2.5 w-2.5 rounded-full bg-[var(--agri-primary-deep)]" />
+                      <span>{item}</span>
+                    </motion.li>
+                  ))}
+                </ul>
                 <Link
                   href="/ceo"
                   className="mt-8 inline-flex items-center gap-2 rounded-full bg-[var(--agri-ink)] px-7 py-3 text-sm font-bold text-white transition hover:bg-[var(--agri-primary-deep)]"
                 >
-                  CEO 소개 페이지로 이동
+                  대표 소개 자세히 보기
                   <span aria-hidden>→</span>
                 </Link>
               </motion.article>
@@ -614,35 +556,57 @@ export default function HomePageClient() {
           <section
             ref={registerSection(4)}
             data-section-index={4}
-            className={`${sectionClassName} bg-white`}
+            className="relative z-10 flex items-center bg-white px-5 py-14 md:min-h-[100svh] md:snap-start md:snap-always md:px-10 md:py-10 lg:px-20"
           >
-            <div className="mx-auto w-full max-w-7xl">
+            <div className="mx-auto w-full max-w-6xl">
               <motion.div
-                initial={fadeUpInitial}
-                whileInView={fadeUpAnimate}
-                viewport={{ once: true, amount: 0.3 }}
-                className="mb-10 text-center"
+                initial={revealInitial}
+                whileInView={revealAnimate}
+                viewport={{ once: true, amount: 0.35 }}
+                className="mb-8"
               >
                 <p className="text-sm font-bold uppercase tracking-[0.22em] text-[var(--agri-primary-deep)]">
-                  Partners
+                  공개 연혁
                 </p>
-                <h2 className="font-display mt-3 text-4xl font-bold text-[var(--agri-ink)] md:text-5xl">
-                  인증 및 협력 네트워크
+                <h2 className="font-display mt-3 text-4xl font-bold tracking-tight text-[var(--agri-ink)] md:text-5xl">
+                  수북농업 주요 연혁
                 </h2>
               </motion.div>
-              <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
-                {certificationItems.map((item, index) => (
-                  <motion.div
-                    key={item}
-                    initial={fadeUpInitial}
-                    whileInView={fadeUpAnimate}
-                    viewport={{ once: true, amount: 0.4 }}
-                    transition={{ delay: Math.min(index * 0.05, 0.2) }}
-                    className="flex min-h-28 items-center justify-center rounded-2xl border border-black/8 bg-[#f6faef] px-3 text-center text-sm font-bold text-[#4a644a]"
+              <div className="space-y-5">
+                {homeTimelineItems.map((item, index) => (
+                  <motion.article
+                    key={item.date}
+                    initial={revealInitial}
+                    whileInView={revealAnimate}
+                    viewport={{ once: true, amount: 0.25 }}
+                    transition={{ delay: Math.min(index * 0.05, 0.16) }}
+                    className="grid gap-3 rounded-3xl border border-black/8 bg-[#f8fbf6] p-5 md:grid-cols-[10rem_1fr_auto]"
                   >
-                    {item}
-                  </motion.div>
+                    <div>
+                      <p className="text-sm font-bold text-[var(--agri-primary-deep)]">{item.date}</p>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-[var(--agri-ink)]">{item.title}</h3>
+                      <p className="mt-3 leading-relaxed text-[#516851]">{item.description}</p>
+                    </div>
+                    <a
+                      href={item.sourceUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-fit self-start rounded-full border border-black/10 px-4 py-2 text-sm font-bold text-[var(--agri-ink)] transition hover:bg-black/4"
+                    >
+                      {item.sourceLabel}
+                    </a>
+                  </motion.article>
                 ))}
+              </div>
+              <div className="mt-8">
+                <Link
+                  href="/history"
+                  className="inline-flex rounded-full bg-[var(--agri-ink)] px-6 py-3 text-sm font-bold text-white transition hover:bg-[var(--agri-primary-deep)]"
+                >
+                  전체 연혁 보기
+                </Link>
               </div>
             </div>
           </section>
@@ -650,40 +614,56 @@ export default function HomePageClient() {
           <section
             ref={registerSection(5)}
             data-section-index={5}
-            className={`${sectionClassName} bg-[#f7faf4]`}
+            className="relative z-10 flex items-center bg-[#f7faf4] px-5 py-14 md:min-h-[100svh] md:snap-start md:snap-always md:px-10 md:py-12 lg:px-20"
           >
-            <div className="mx-auto w-full max-w-5xl">
+            <div className="mx-auto w-full max-w-7xl">
               <motion.div
-                initial={fadeUpInitial}
-                whileInView={fadeUpAnimate}
+                initial={revealInitial}
+                whileInView={revealAnimate}
                 viewport={{ once: true, amount: 0.35 }}
-                className="mb-10 text-center"
+                className="mb-10"
               >
                 <p className="text-sm font-bold uppercase tracking-[0.22em] text-[var(--agri-primary-deep)]">
-                  FAQ
+                  참고 자료
                 </p>
-                <h2 className="font-display mt-3 text-4xl font-bold text-[var(--agri-ink)] md:text-5xl">
-                  자주 묻는 질문
+                <h2 className="font-display mt-3 text-4xl font-bold tracking-tight text-[var(--agri-ink)] md:text-5xl">
+                  함께 보면 좋은 자료
                 </h2>
               </motion.div>
-              <div className="space-y-4">
-                {faqItems.map((faq, index) => (
-                  <motion.details
-                    key={faq.question}
-                    initial={fadeUpInitial}
-                    whileInView={fadeUpAnimate}
-                    viewport={{ once: true, amount: 0.45 }}
-                    transition={{ delay: Math.min(index * 0.04, 0.16) }}
-                    className="rounded-2xl border border-black/8 bg-white"
+              <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                {homeSources.map((source, index) => (
+                  <motion.article
+                    key={source.label}
+                    initial={revealInitial}
+                    whileInView={revealAnimate}
+                    viewport={{ once: true, amount: 0.25 }}
+                    transition={{ delay: Math.min(index * 0.05, 0.18) }}
+                    className="flex h-full flex-col rounded-3xl border border-black/8 bg-white p-7 shadow-[0_16px_38px_rgba(12,26,12,0.06)]"
                   >
-                    <summary className="cursor-pointer list-none p-5 text-base font-bold text-[var(--agri-ink)]">
-                      {faq.question}
-                    </summary>
-                    <div className="border-t border-black/8 px-5 pb-5 pt-4 text-[#4b634b]">
-                      {faq.answer}
-                    </div>
-                  </motion.details>
+                    <h3 className="text-xl font-bold text-[var(--agri-ink)]">{source.label}</h3>
+                    <p className="mt-3 flex-1 leading-relaxed text-[#526952]">{source.detail}</p>
+                    {source.url ? (
+                      <a
+                        href={source.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="mt-6 text-sm font-bold text-[var(--agri-primary-deep)]"
+                      >
+                        자료 보기 →
+                      </a>
+                    ) : (
+                      <p className="mt-6 text-sm font-semibold text-[#647b63]">사이트 자료</p>
+                    )}
+                  </motion.article>
                 ))}
+              </div>
+              <div className="mt-8">
+                <Link
+                  href="/about"
+                  className="inline-flex rounded-full bg-[var(--agri-ink)] px-6 py-3 text-sm font-bold text-white transition hover:bg-[var(--agri-primary-deep)]"
+                >
+                  전체 자료 보기
+                </Link>
               </div>
             </div>
           </section>
@@ -693,70 +673,98 @@ export default function HomePageClient() {
             data-section-index={6}
             className={`${sectionClassName} bg-white`}
           >
-            <div className="mx-auto w-full max-w-7xl">
-              <motion.div
-                initial={fadeUpInitial}
-                whileInView={fadeUpAnimate}
-                viewport={{ once: true, amount: 0.35 }}
-                className="mb-10 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end"
+            <div className="mx-auto grid w-full max-w-7xl gap-8 lg:grid-cols-[1.15fr_0.85fr]">
+              <motion.article
+                initial={revealInitial}
+                whileInView={revealAnimate}
+                viewport={{ once: true, amount: 0.3 }}
+                className="rounded-[2rem] bg-[#112614] px-8 py-10 text-white"
               >
-                <div>
-                  <p className="text-sm font-bold uppercase tracking-[0.22em] text-[var(--agri-primary-deep)]">
-                    News
-                  </p>
-                  <h2 className="font-display mt-3 text-4xl font-bold text-[var(--agri-ink)] md:text-5xl">
-                    공지 및 소식
-                  </h2>
-                </div>
-                <Link
-                  href="/about"
-                  className="text-sm font-bold text-[#4a634a] transition hover:text-[var(--agri-primary-deep)]"
-                >
-                  전체 소식 보기 →
-                </Link>
-              </motion.div>
-              <div className="grid gap-6 md:grid-cols-3">
-                {newsItems.map((item, index) => (
-                  <motion.article
-                    key={`${item.date}-${item.title}`}
-                    initial={fadeUpInitial}
-                    whileInView={fadeUpAnimate}
-                    viewport={{ once: true, amount: 0.2 }}
-                    transition={{ delay: Math.min(index * 0.08, 0.2) }}
-                    className="flex flex-col rounded-3xl border border-black/8 bg-[#f8fbf6] p-7"
+                <p className="text-sm font-bold uppercase tracking-[0.22em] text-[var(--agri-primary)]">
+                  문의 안내
+                </p>
+                <h2 className="font-display mt-4 text-4xl font-bold md:text-5xl">
+                  수북농업 본사 문의
+                </h2>
+                <p className="mt-5 max-w-3xl leading-relaxed text-white/84">
+                  제품 상담이나 회사 문의가 필요하면 전화, 휴대전화, 이메일 중 편한 채널을
+                  이용해 주세요. 남겨주신 문의는 확인 후 순차적으로 안내해 드립니다.
+                </p>
+                <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                  <a
+                    href={companyInfo.telephoneHref}
+                    className="rounded-2xl bg-white/10 px-5 py-4 text-left backdrop-blur transition hover:bg-white/14"
                   >
-                    <p className="text-xs font-bold uppercase tracking-[0.14em] text-[var(--agri-primary-deep)]">
-                      {item.category}
+                    <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/64">전화</p>
+                    <p className="mt-2 text-xl font-bold">{companyInfo.telephoneDisplay}</p>
+                  </a>
+                  <a
+                    href={companyInfo.mobileHref}
+                    className="rounded-2xl bg-white/10 px-5 py-4 text-left backdrop-blur transition hover:bg-white/14"
+                  >
+                    <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/64">
+                      휴대전화
                     </p>
-                    <p className="mt-2 text-sm font-semibold text-[#627962]">{item.date}</p>
-                    <h3 className="mt-4 text-xl font-bold leading-snug text-[var(--agri-ink)]">
-                      {item.title}
-                    </h3>
-                    <p className="mt-3 leading-relaxed text-[#4d654d]">{item.summary}</p>
-                    <Link
-                      href={item.href}
-                      className="mt-6 w-fit text-sm font-bold text-[var(--agri-primary-deep)]"
-                    >
-                      자세히 보기 →
-                    </Link>
-                  </motion.article>
-                ))}
-              </div>
+                    <p className="mt-2 text-xl font-bold">{companyInfo.mobileDisplay}</p>
+                  </a>
+                  <a
+                    href={companyInfo.emailHref}
+                    className="rounded-2xl bg-white/10 px-5 py-4 text-left backdrop-blur transition hover:bg-white/14 sm:col-span-2"
+                  >
+                    <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/64">이메일</p>
+                    <p className="mt-2 text-xl font-bold break-all">{companyInfo.emailDisplay}</p>
+                  </a>
+                </div>
+              </motion.article>
+
+              <motion.article
+                initial={revealInitial}
+                whileInView={revealAnimate}
+                viewport={{ once: true, amount: 0.3 }}
+                className="rounded-[2rem] border border-black/8 bg-[#f4f8ee] px-8 py-10"
+              >
+                <p className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--agri-primary-deep)]">
+                  본사 정보
+                </p>
+                <h3 className="mt-4 text-3xl font-bold text-[var(--agri-ink)]">담양 본사 정보</h3>
+                <p className="mt-5 leading-relaxed text-[#506750]">
+                  {companyInfo.legalName}
+                  <br />
+                  {companyInfo.address}
+                </p>
+                <p className="mt-5 rounded-2xl bg-white px-5 py-4 text-sm leading-relaxed text-[#536a52]">
+                  상담 가능 시간: {companyInfo.businessHours}
+                </p>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <Link
+                    href="/contact"
+                    className="rounded-full bg-[var(--agri-ink)] px-6 py-3 text-sm font-bold text-white transition hover:bg-[var(--agri-primary-deep)]"
+                  >
+                    문의 페이지 열기
+                  </Link>
+                  <Link
+                    href="/products"
+                    className="rounded-full border border-black/12 px-6 py-3 text-sm font-bold text-[var(--agri-ink)] transition hover:bg-black/4"
+                  >
+                    제품 자료 보기
+                  </Link>
+                </div>
+              </motion.article>
             </div>
           </section>
         </main>
 
         <div
           className={`fixed inset-x-0 bottom-0 z-40 border-t border-black/10 bg-white/92 backdrop-blur-md transition-transform duration-300 ${
-            isBottomSection ? "translate-y-0" : "pointer-events-none translate-y-full"
+            showBottomBar ? "translate-y-0" : "pointer-events-none translate-y-full"
           }`}
           style={{ paddingBottom: "max(env(safe-area-inset-bottom), 0rem)" }}
         >
           <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-3 px-4 py-3 sm:flex-row sm:px-6 md:px-8">
             <div className="flex flex-col items-center gap-1 text-center sm:items-start sm:text-left">
-              <p className="text-sm font-bold text-[var(--agri-ink)]">상담 가능 시간</p>
+              <p className="text-sm font-bold text-[var(--agri-ink)]">빠른 문의</p>
               <p className="text-xs text-[#526652]">
-                {companyInfo.businessHours}, 문의 접수 후 순차 회신
+                전화 {companyInfo.telephoneDisplay} · 휴대전화 {companyInfo.mobileDisplay}
               </p>
             </div>
             <div className="flex w-full gap-2 sm:w-auto">
@@ -764,20 +772,19 @@ export default function HomePageClient() {
                 href={companyInfo.telephoneHref}
                 className="flex-1 rounded-lg border border-black/10 bg-[#f2f6ef] px-4 py-2 text-center text-sm font-bold text-[var(--agri-ink)] transition hover:bg-[#e9f2e3] sm:flex-none"
               >
-                <span className="sm:hidden">전화</span>
-                <span className="hidden sm:inline">전화 {companyInfo.telephoneDisplay}</span>
+                전화 연결
               </a>
               <Link
-                href="/products"
+                href="/ceo"
                 className="flex-1 rounded-lg bg-[#ffe812] px-4 py-2 text-center text-sm font-bold text-[#3b1f1f] transition hover:brightness-95 sm:flex-none"
               >
-                제품 보기
+                대표 소개
               </Link>
               <Link
                 href="/contact"
                 className="flex-1 rounded-lg bg-[var(--agri-primary)] px-4 py-2 text-center text-sm font-bold text-[var(--agri-ink)] transition hover:brightness-95 sm:flex-none"
               >
-                문의폼
+                문의 페이지
               </Link>
             </div>
           </div>

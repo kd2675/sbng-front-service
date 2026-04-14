@@ -21,12 +21,14 @@ export default function SiteFooter() {
           </div>
           <div>
             <p className="mt-1 text-sm text-[#5a6a57]">
-              수북농업과 함께 생산성과 토양 건강을 높입니다.
+              수북농업의 회사 소개와 제품 정보를 한곳에서 안내합니다.
             </p>
             <p className="mt-3 text-sm leading-relaxed text-[#5a6a57]">
               {companyInfo.address}
               <br />
               전화 {companyInfo.telephoneDisplay} · 팩스 {companyInfo.faxDisplay}
+              <br />
+              휴대전화 {companyInfo.mobileDisplay} · 이메일 {companyInfo.emailDisplay}
             </p>
           </div>
         </div>
@@ -41,6 +43,12 @@ export default function SiteFooter() {
               {item.label}
             </Link>
           ))}
+          <Link
+            href="/admin"
+            className="rounded-full border border-black/12 px-3 py-1 text-xs font-bold text-[var(--agri-ink)] transition hover:bg-black/4"
+          >
+            관리자
+          </Link>
         </nav>
       </div>
     </footer>

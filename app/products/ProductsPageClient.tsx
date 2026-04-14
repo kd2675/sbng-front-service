@@ -26,7 +26,7 @@ export default function ProductsPageClient() {
               transition={{ delay: 0.04 }}
               className="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--agri-primary)]"
             >
-              Product Lineup
+              제품 안내
             </motion.p>
             <motion.h1
               initial={revealInitial}
@@ -34,7 +34,7 @@ export default function ProductsPageClient() {
               transition={{ delay: 0.1 }}
               className="font-display mt-5 max-w-4xl text-4xl font-bold leading-tight text-white md:text-6xl"
             >
-              홍보자료 기준으로 정리한
+              수북농업이 소개하는
               <br className="hidden sm:block" /> 수북농업 대표 제품 3종
             </motion.h1>
             <motion.p
@@ -43,9 +43,8 @@ export default function ProductsPageClient() {
               transition={{ delay: 0.16 }}
               className="mt-6 max-w-3xl text-base leading-relaxed text-white/78 md:text-lg"
             >
-              흙손, 흙보약, 무등산은 모두 토양개량 및 작물생육용 제품군입니다.
-              포장 실사와 안내 시트를 함께 배치해 브랜드 소개 사이트에서도 제품 신뢰도를
-              빠르게 전달하도록 구성했습니다.
+              흙손, 흙보약, 무등산은 수북농업을 대표하는 제품입니다. 포장 이미지와 안내
+              자료를 함께 살펴보며 제품 특징과 사용 정보를 확인해 보세요.
             </motion.p>
 
             <div className="mt-10 grid gap-4 md:grid-cols-3">
@@ -93,15 +92,14 @@ export default function ProductsPageClient() {
               className="rounded-[2rem] border border-[#dfe7d7] bg-white p-8 shadow-[0_24px_60px_rgba(12,26,12,0.08)] md:p-10"
             >
               <p className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--agri-primary-deep)]">
-                Selection Principle
+                제품 자료 안내
               </p>
               <h2 className="font-display mt-3 text-3xl font-bold text-[var(--agri-ink)] md:text-4xl">
-                브랜드 소개 사이트에 맞는 제품 커뮤니케이션 구조
+                포장 이미지와 안내 자료를 함께 소개합니다
               </h2>
               <p className="mt-5 max-w-3xl leading-relaxed text-[#496048]">
-                대표 썸네일에는 포장 앞면 실사를, 상세 설명에는 안내 시트를, 신뢰 보강
-                용도로는 포장 뒷면 이미지를 배치했습니다. 판매 페이지처럼 복잡하게 보이지
-                않으면서도, 실제 제품 확인과 핵심 정보 전달이 동시에 되도록 설계했습니다.
+                제품 앞면, 안내 시트, 포장 뒷면을 함께 보시며 주요 성분과 사용 기준,
+                포장 정보를 한눈에 살펴보실 수 있습니다.
               </p>
             </motion.div>
 
@@ -113,20 +111,21 @@ export default function ProductsPageClient() {
               className="rounded-[2rem] border border-[#dfe7d7] bg-[#edf5e7] p-8 shadow-[0_24px_60px_rgba(12,26,12,0.05)]"
             >
               <p className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--agri-primary-deep)]">
-                Consultation
+                문의 안내
               </p>
               <h3 className="mt-3 text-2xl font-bold text-[var(--agri-ink)]">
                 제품 상담 및 자료 문의
               </h3>
               <p className="mt-4 leading-relaxed text-[#496048]">
                 작물 특성, 투입 시기, 토양 상태에 따라 실제 적용량은 달라질 수 있습니다.
-                상세 상담은 본사로 문의하는 구성이 가장 자연스럽습니다.
+                자세한 상담은 본사로 문의해 주세요.
               </p>
               <div className="mt-6 space-y-2 text-sm font-semibold text-[#264526]">
                 <p>{companyInfo.legalName}</p>
                 <p>{companyInfo.address}</p>
                 <p>전화 {companyInfo.telephoneDisplay}</p>
                 <p>팩스 {companyInfo.faxDisplay}</p>
+                <p>이메일 {companyInfo.emailDisplay}</p>
               </div>
             </motion.aside>
           </section>
@@ -168,7 +167,7 @@ export default function ProductsPageClient() {
                           transition={{ delay: 0.05 }}
                           className="text-xs font-bold uppercase tracking-[0.18em] text-[#60765f]"
                         >
-                          Series 0{index + 1}
+                          제품 0{index + 1}
                         </motion.span>
                       </div>
 
@@ -332,15 +331,14 @@ export default function ProductsPageClient() {
             className="mt-16 rounded-[2rem] bg-[#112614] px-8 py-12 text-white md:px-10"
           >
             <p className="text-sm font-bold uppercase tracking-[0.22em] text-[var(--agri-primary)]">
-              Brand Note
+              안내 기준
             </p>
             <h2 className="font-display mt-4 text-3xl font-bold md:text-4xl">
-              제품 이미지는 소개용, 세부 적용은 상담 중심으로
+              제품 상담이 필요하시면 본사로 문의해 주세요
             </h2>
             <p className="mt-5 max-w-4xl leading-relaxed text-white/82">
-              이 페이지는 온라인 판매가 아니라 브랜드 소개와 제품 이해를 위한 구성입니다.
-              실제 시비량과 적용 시기는 토양 상태와 작물 조건에 따라 달라질 수 있으므로,
-              현장 상담을 통해 최종 안내하는 흐름이 가장 적절합니다.
+              실제 시비량과 적용 시기는 토양 상태와 작물 조건에 따라 달라질 수 있습니다.
+              제품 선택과 적용 상담은 본사 연락처를 통해 안내해 드립니다.
             </p>
           </motion.section>
         </main>

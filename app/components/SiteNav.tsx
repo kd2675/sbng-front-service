@@ -18,7 +18,7 @@ export default function SiteNav() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const useDarkText = pathname.startsWith("/contact");
+  const useDarkText = pathname.startsWith("/contact") || pathname.startsWith("/admin");
 
   useEffect(() => {
     const previous = document.body.style.overflow;

@@ -22,27 +22,27 @@ export const metadata: Metadata = {
     template: "%s | 수북농업",
   },
   description:
-    "수북농업은 흙손, 흙보약, 무등산 등 토양 중심 비료 솔루션과 농업 컨설팅을 제공합니다.",
+    "수북농업은 전남 담양을 기반으로 흙손, 흙보약, 무등산 제품과 회사 정보를 안내합니다.",
   keywords: [
     "수북농업",
     "subuknongeop",
-    "친환경 비료",
-    "유기질 비료",
+    "김종수",
+    "담양 수북농업",
+    "유기질비료",
     "흙손",
     "흙보약",
     "무등산",
-    "농업 솔루션",
-    "토양 관리",
+    "수북환경개발",
   ],
   alternates: {
     canonical: "/",
   },
   manifest: "/manifest.webmanifest",
   icons: {
-    shortcut: [{ url: "/favicon-32x32.png", type: "image/svg+xml" }],
+    shortcut: [{ url: "/favicon-32x32.png", type: "image/png" }],
     icon: [
-      { url: "/favicon-32x32.png", type: "image/svg+xml", sizes: "32x32" },
-      { url: "/favicon-16x16.png", type: "image/svg+xml", sizes: "16x16" },
+      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
     ],
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
@@ -53,13 +53,21 @@ export const metadata: Metadata = {
     siteName: "수북농업",
     title: "수북농업",
     description:
-      "수북농업은 흙손, 흙보약, 무등산 등 토양 중심 비료 솔루션과 농업 컨설팅을 제공합니다.",
+      "전남 담양을 기반으로 한 수북농업의 회사 소개와 제품 정보를 소개합니다.",
+    images: [
+      {
+        url: "/image/heukboyak-front.jpeg",
+        width: 1200,
+        height: 1200,
+        alt: "수북농업 대표 제품 흙보약 포장 이미지",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "수북농업",
     description:
-      "수북농업은 흙손, 흙보약, 무등산 등 토양 중심 비료 솔루션과 농업 컨설팅을 제공합니다.",
+      "전남 담양을 기반으로 한 수북농업의 회사 소개와 제품 정보를 소개합니다.",
   },
   robots: {
     index: true,
@@ -91,6 +99,7 @@ export default function RootLayout({
     url: siteUrl,
     logo: `${siteUrl}/icon.svg`,
     telephone: companyInfo.telephoneDisplay,
+    email: companyInfo.emailDisplay,
     address: {
       "@type": "PostalAddress",
       streetAddress: companyInfo.address,
@@ -101,6 +110,7 @@ export default function RootLayout({
     contactPoint: {
       "@type": "ContactPoint",
       telephone: companyInfo.telephoneDisplay,
+      email: companyInfo.emailDisplay,
       contactType: "customer support",
       areaServed: "KR",
       availableLanguage: ["ko"],
