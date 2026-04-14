@@ -44,14 +44,14 @@ export const metadata: Metadata = {
     title: siteConfig.defaultTitle,
     description: siteConfig.defaultDescription,
     images: [
-      {
-        url: absoluteUrl("/opengraph-image"),
-        width: 1200,
-        height: 630,
-        alt: "수북농업 김종수 대표 사진",
-      },
-    ],
-  },
+        {
+          url: absoluteUrl("/opengraph-image"),
+          width: 1200,
+          height: 630,
+          alt: "수북농업 로고",
+        },
+      ],
+    },
   twitter: {
     card: "summary_large_image",
     title: siteConfig.defaultTitle,
