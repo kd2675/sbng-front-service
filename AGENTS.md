@@ -17,7 +17,7 @@
 | `app/about/AboutPageClient.tsx` | 브랜드 소개 페이지 클라이언트 |
 | `app/articleArchive.ts` | 기사 보관본 매핑과 원문 상태 확인 helper |
 | `app/sources/[slug]/page.tsx` | 기사 원문 확인 후 보관본을 제공하는 내부 소스 페이지 |
-| `app/sitemap.ts` | 사이트맵 생성 |
+| `app/sitemap.xml/route.ts` | 사이트맵 XML 생성 |
 | `app/rss.xml/route.ts` | RSS 피드 생성 |
 | `app/components/SiteNav.tsx` | 공통 네비게이션 |
 | `app/components/SiteFooter.tsx` | 공통 푸터 |
@@ -55,6 +55,6 @@ npm run archive:articles
 ## Agent Rules
 
 - 이 앱은 서비스 운영 콘솔이 아니라 브랜드/SEO 사이트라는 전제를 유지합니다.
-- 페이지 수정 시 `layout.tsx`, `sitemap.ts`, `rss.xml/route.ts`의 정합성도 함께 확인합니다.
+- 페이지 수정 시 `layout.tsx`, `sitemap.xml/route.ts`, `rss.xml/route.ts`의 정합성도 함께 확인합니다.
 - 현재 린트는 `<img>` 최적화 경고가 남아 있으므로 성능 개선 작업과 콘텐츠 수정 작업을 구분합니다.
 - 화면/컴포넌트 파일은 PascalCase, multi-word 데이터/helper 파일은 camelCase를 기본으로 유지합니다.

@@ -48,4 +48,4 @@ npm run archive:articles
 ## 참고
 
 - 별도 API 의존성은 거의 없습니다.
-- 문서/SEO 출력 검증 시 `app/layout.tsx`, `app/sitemap.ts`, `app/rss.xml/route.ts`를 함께 확인하면 됩니다.
+- 문서/SEO 출력 검증 시 `app/layout.tsx`, `app/sitemap.xml/route.ts`, `app/rss.xml/route.ts`를 함께 확인하면 됩니다.

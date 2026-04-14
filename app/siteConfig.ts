@@ -23,6 +23,14 @@ export const siteConfig = {
     "수북환경개발",
   ],
   siteUpdatedAt: "2026-04-14T09:00:00+09:00",
+  pageUpdatedAt: {
+    home: "2026-04-14T16:36:33+09:00",
+    ceo: "2026-04-14T13:48:48+09:00",
+    history: "2026-04-14T11:32:17+09:00",
+    products: "2026-04-14T10:25:04+09:00",
+    about: "2026-04-14T11:01:57+09:00",
+    contact: "2026-04-14T09:55:31+09:00",
+  },
 } as const;
 
 export function absoluteUrl(path = "/"): string {
