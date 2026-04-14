@@ -13,7 +13,7 @@ type FeedItem = {
 const feedItems: FeedItem[] = [
   {
     title: "수북농업 공식 홈페이지",
-    description: "담양 기반 수북농업의 회사 정보와 대표 제품 3종 자료를 소개합니다.",
+    description: siteConfig.defaultDescription,
     path: "/",
     publishedAt: siteConfig.siteUpdatedAt,
   },
@@ -80,7 +80,7 @@ export function GET() {
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>수북농업 RSS Feed</title>
-    <description>수북농업 회사 소개, 대표 정보, 제품 자료 업데이트 안내</description>
+    <description>${siteConfig.defaultDescription}</description>
     <link>${siteConfig.siteUrl}</link>
     <language>ko-kr</language>
     <lastBuildDate>${lastBuildDate}</lastBuildDate>
