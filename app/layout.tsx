@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Manrope, Playfair_Display } from "next/font/google";
 import JsonLd from "./components/JsonLd";
 import { siteConfig } from "./siteConfig";
@@ -7,6 +7,25 @@ import {
   buildWebSiteJsonLd,
 } from "./structuredData";
 import "./globals.css";
+
+/**
+ * Next.js 16 `viewport` export.
+ *
+ * 이 export 는 **반드시** `layout.tsx` 또는 `page.tsx` 에서 이루어져야 합니다.
+ * 과거에 존재했던 `app/viewport.ts` 는 Next.js 파일 컨벤션이 **아니며**
+ * 완전히 dead code 였습니다. 결과적으로 `<meta name="theme-color">`,
+ * PWA 테마 색상이 렌더되지 않고 있었습니다.
+ *
+ * - `themeColor` 는 Android Chrome 주소창 색상, PWA splash 색상에 반영됩니다.
+ * - `colorScheme` 를 명시해 접근성/다크모드 힌트를 제공합니다.
+ * - `width/initialScale` 은 Next.js 기본값을 명시적으로 선언해 모바일 렌더링을 안정화합니다.
+ */
+export const viewport: Viewport = {
+  themeColor: siteConfig.themeColor,
+  colorScheme: "light",
+  width: "device-width",
+  initialScale: 1,
+};
 
 const manrope = Manrope({
   variable: "--font-manrope",
