@@ -3,16 +3,22 @@ import { historyFlowTimeline } from "./companyProfile";
 import { productCatalog } from "./productCatalog";
 import { absoluteUrl, buildWebPageJsonLd, siteConfig } from "./siteConfig";
 
-function buildOrganizationEntity() {
+/**
+ * 전역에서 재사용 가능한 Organization 엔티티.
+ * layout.tsx 와 각 페이지 구조화 데이터에서 동일한 객체를 공유해,
+ * 필드 누락/중복 정의로 인한 불일치를 방지합니다.
+ */
+export function buildOrganizationEntity() {
   return {
     "@type": "Organization",
     name: siteConfig.siteName,
     alternateName: companyInfo.legalName,
     url: siteConfig.siteUrl,
-    logo: absoluteUrl("/icon.svg"),
+    logo: absoluteUrl(siteConfig.organizationLogoPath),
     image: absoluteUrl("/image/company/subuk-facility-2015-share.jpg"),
     foundingDate: "1996-03-30",
     description: siteConfig.defaultDescription,
+    knowsAbout: ["유기질비료", "퇴비", "토양개량", "농업 자재"],
     telephone: companyInfo.telephoneDisplay,
     email: companyInfo.emailDisplay,
     identifier: companyInfo.businessRegistrationNumber,
@@ -31,6 +37,30 @@ function buildOrganizationEntity() {
       areaServed: "KR",
       availableLanguage: ["ko"],
     },
+  };
+}
+
+/**
+ * 전역 Organization 스키마 (@context 포함).
+ * layout.tsx 에서 직접 JSON 직렬화할 때 사용합니다.
+ */
+export function buildOrganizationJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    ...buildOrganizationEntity(),
+  };
+}
+
+/**
+ * 전역 WebSite 스키마 (@context 포함).
+ */
+export function buildWebSiteJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: siteConfig.siteName,
+    url: siteConfig.siteUrl,
+    inLanguage: "ko-KR",
   };
 }
 
@@ -71,6 +101,8 @@ export function buildCeoProfilePageJsonLd() {
 }
 
 export function buildProductsCollectionPageJsonLd() {
+  const organizationEntity = buildOrganizationEntity();
+
   return {
     ...buildWebPageJsonLd({
       name: "흙손 흙보약 무등산 제품 소개",
@@ -120,6 +152,27 @@ export function buildProductsCollectionPageJsonLd() {
             },
           ],
           url: absoluteUrl(`/products#product-${product.id}`),
+          // B2B 상담 기반 판매 구조이므로 공개 가격은 없지만,
+          // 구조화 데이터에서 "판매 가능" 상태와 판매자 정보를 명시해
+          // Google/Naver가 구매 문의 링크를 라이브러리 수준에서 인식하도록 제공합니다.
+          offers: {
+            "@type": "Offer",
+            availability: "https://schema.org/InStock",
+            priceCurrency: "KRW",
+            // 공개 단가가 없으므로 문의 기반 판매임을 알리는 0원 명시.
+            // Google Rich Results 는 정확한 금액이 없을 때 이 필드를 무시하되,
+            // 스키마 유효성은 유지됩니다.
+            price: "0",
+            url: absoluteUrl("/contact"),
+            businessFunction: "https://schema.org/Sell",
+            seller: {
+              "@type": "Organization",
+              name: organizationEntity.name,
+              url: organizationEntity.url,
+              telephone: organizationEntity.telephone,
+              email: organizationEntity.email,
+            },
+          },
         },
       })),
     },

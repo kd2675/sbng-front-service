@@ -7,15 +7,13 @@ import { ADMIN_COOKIE_NAME, isAdminSessionValue } from "@/app/adminAuth";
 import { getContactSubmissions } from "@/app/contactStore";
 import SiteNav from "@/app/components/SiteNav";
 import SiteFooter from "@/app/components/SiteFooter";
+import { buildNoIndexMetadata } from "@/app/siteConfig";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildNoIndexMetadata({
   title: "문의 관리",
   description: "수북농업 문의 접수 관리 페이지",
-  robots: {
-    index: false,
-    follow: false,
-  },
-};
+  path: "/admin",
+});
 
 export default async function AdminPage() {
   const cookieStore = await cookies();

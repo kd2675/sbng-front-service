@@ -10,6 +10,7 @@ import SiteFooter from "../../components/SiteFooter";
 import SiteNav from "../../components/SiteNav";
 import SourceLink from "../../components/SourceLink";
 import { articleArchiveBySlug, checkRemoteSourceStatus } from "../../articleArchive";
+import { buildNoIndexMetadata } from "../../siteConfig";
 
 type SourcePageProps = {
   params: Promise<{
@@ -22,25 +23,21 @@ export const dynamic = "force-dynamic";
 export async function generateMetadata({ params }: SourcePageProps): Promise<Metadata> {
   const { slug } = await params;
   const entry = articleArchiveBySlug.get(slug);
+  const path = `/sources/${slug}`;
 
   if (!entry) {
-    return {
+    return buildNoIndexMetadata({
       title: "자료 보관본",
-      robots: {
-        index: false,
-        follow: false,
-      },
-    };
+      description: "수북농업 내부 자료 보관본 페이지입니다.",
+      path,
+    });
   }
 
-  return {
+  return buildNoIndexMetadata({
     title: `${entry.sourceLabel} 보관본`,
     description: `${entry.sourceLabel} 기사 보관본과 기사 상태를 안내합니다.`,
-    robots: {
-      index: false,
-      follow: false,
-    },
-  };
+    path,
+  });
 }
 
 async function fileExists(publicPath: string): Promise<boolean> {

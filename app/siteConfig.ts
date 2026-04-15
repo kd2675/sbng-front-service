@@ -9,6 +9,7 @@ export const siteConfig = {
     "농업회사법인 (유) 수북농업의 회사 정보, 제품 안내, 김종수 대표 소개를 전합니다.",
   themeColor: "#112614",
   accentColor: "#57db31",
+  organizationLogoPath: "/image/logo-og.png",
   defaultSocialImagePath: "/image/history/history-weeklypeople-2020-02-03-main.jpg",
   defaultSocialImageAlt: "수북농업 대표 이미지",
   defaultKeywords: [
@@ -70,6 +71,14 @@ export function buildPageMetadata({
     keywords: [...siteConfig.defaultKeywords, ...keywords],
     alternates: {
       canonical: url,
+      // Next.js 는 페이지 레벨 `alternates` 를 지정하면 레이아웃의 `alternates` 를
+      // 그대로 덮어씁니다. 따라서 RSS autodiscovery 링크를 모든 페이지에서
+      // 유지하려면 각 페이지 메타데이터에도 `types` 를 다시 포함시켜야 합니다.
+      types: {
+        "application/rss+xml": [
+          { url: absoluteUrl("/rss.xml"), title: `${siteConfig.siteName} RSS Feed` },
+        ],
+      },
     },
     openGraph: {
       type: "website",
@@ -92,6 +101,65 @@ export function buildPageMetadata({
       title,
       description,
       images: [socialImage],
+    },
+  };
+}
+
+type BuildNoIndexMetadataInput = {
+  title: string;
+  description: string;
+  path: string;
+};
+
+export function buildNoIndexMetadata({
+  title,
+  description,
+  path,
+}: BuildNoIndexMetadataInput): Metadata {
+  const url = absoluteUrl(path);
+  const socialImage = absoluteUrl(siteConfig.defaultSocialImagePath);
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: url,
+      // noindex 페이지에서도 RSS autodiscovery 를 유지합니다.
+      types: {
+        "application/rss+xml": [
+          { url: absoluteUrl("/rss.xml"), title: `${siteConfig.siteName} RSS Feed` },
+        ],
+      },
+    },
+    openGraph: {
+      type: "website",
+      locale: "ko_KR",
+      url,
+      siteName: siteConfig.siteName,
+      title,
+      description,
+      images: [
+        {
+          url: socialImage,
+          width: 1200,
+          height: 630,
+          alt: siteConfig.defaultSocialImageAlt,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [socialImage],
+    },
+    robots: {
+      index: false,
+      follow: false,
+      googleBot: {
+        index: false,
+        follow: false,
+      },
     },
   };
 }
