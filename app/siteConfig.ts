@@ -9,6 +9,8 @@ export const siteConfig = {
     "농업회사법인 (유) 수북농업의 회사 정보, 제품 안내, 김종수 대표 소개를 전합니다.",
   themeColor: "#112614",
   accentColor: "#57db31",
+  defaultSocialImagePath: "/image/history/history-weeklypeople-2020-02-03-main.jpg",
+  defaultSocialImageAlt: "수북농업 대표 이미지",
   defaultKeywords: [
     "수북농업",
     "농업회사법인 유한회사 수북농업",
@@ -56,8 +58,8 @@ export function buildPageMetadata({
   description,
   path,
   keywords = [],
-  imagePath = "/opengraph-image",
-  imageAlt = `${siteConfig.siteName} 대표 이미지`,
+  imagePath = siteConfig.defaultSocialImagePath,
+  imageAlt = siteConfig.defaultSocialImageAlt,
 }: BuildPageMetadataInput): Metadata {
   const url = absoluteUrl(path);
   const socialImage = absoluteUrl(imagePath);

@@ -13,7 +13,6 @@ export const metadata: Metadata = buildPageMetadata({
   description: siteConfig.defaultDescription,
   path: "/",
   keywords: ["담양 유기질비료", "수북농업 제품", "김종수 대표", "흙손 흙보약 무등산"],
-  imageAlt: "수북농업 로고",
 });
 
 export default function HomePage() {

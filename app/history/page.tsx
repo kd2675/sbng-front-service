@@ -13,8 +13,6 @@ export const metadata: Metadata = buildPageMetadata({
     "김종수 대표와 수북농업의 공개 기사, 사업자 정보, 회사 자료를 바탕으로 연혁 흐름을 사진과 함께 소개합니다.",
   path: "/history",
   keywords: ["수북농업 연혁", "김종수 연혁", "수북농업 기사", "수북농업 공개 기록"],
-  imagePath: "/image/history/history-weeklypeople-2020-02-03-main.jpg",
-  imageAlt: "수북농업 연혁 대표 이미지",
 });
 
 export default function HistoryPage() {

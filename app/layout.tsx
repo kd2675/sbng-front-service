@@ -45,10 +45,10 @@ export const metadata: Metadata = {
     description: siteConfig.defaultDescription,
     images: [
         {
-          url: absoluteUrl("/opengraph-image"),
+          url: absoluteUrl(siteConfig.defaultSocialImagePath),
           width: 1200,
           height: 630,
-          alt: "수북농업 로고",
+          alt: siteConfig.defaultSocialImageAlt,
         },
       ],
     },
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.defaultTitle,
     description: siteConfig.defaultDescription,
-    images: [absoluteUrl("/twitter-image")],
+    images: [absoluteUrl(siteConfig.defaultSocialImagePath)],
   },
   robots: {
     index: true,
