@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { absoluteUrl, siteConfig } from "./siteConfig";
+import { productCatalog } from "./productCatalog";
 
 /**
  * Next.js 16 빌트인 `app/sitemap.ts`.
@@ -57,6 +58,12 @@ const sitemapSourceEntries: SitemapSourceEntry[] = [
     changeFrequency: "monthly",
     priority: 0.7,
   },
+  ...productCatalog.map((product) => ({
+    path: `/products/${product.id}`,
+    lastModified: siteConfig.pageUpdatedAt.products,
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  })),
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

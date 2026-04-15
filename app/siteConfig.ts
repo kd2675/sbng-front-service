@@ -6,7 +6,7 @@ export const siteConfig = {
   shortName: "수북농업",
   defaultTitle: "수북농업",
   defaultDescription:
-    "농업회사법인 (유) 수북농업의 회사 정보, 제품 안내, 김종수 대표 소개를 전합니다.",
+    "전남 담양 수북농업의 유기질비료 제품 흙손·흙보약·무등산과 회사 정보, 김종수 대표 소개를 안내합니다.",
   themeColor: "#112614",
   accentColor: "#57db31",
   organizationLogoPath: "/image/logo-og.png",

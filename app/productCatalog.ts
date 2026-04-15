@@ -1,3 +1,24 @@
+export type ProductCatalogEntry = {
+  id: string;
+  name: string;
+  displayName: string;
+  category: string;
+  form: string;
+  material: string;
+  useType: string;
+  packUnit: string;
+  usage: string;
+  guarantee: string;
+  summary: string;
+  cardSummary: string;
+  highlights: string[];
+  cropTags: string[];
+  frontImage: string;
+  backImage: string;
+  sheetImage: string;
+  badgeClass: string;
+};
+
 export const productCatalog = [
   {
     id: "heukson",
@@ -77,4 +98,8 @@ export const productCatalog = [
     sheetImage: "/image/mudeungsan-sheet-300.jpg",
     badgeClass: "bg-[#1d3327] text-[#d6f0d9]",
   },
-] as const;
+] as const satisfies readonly ProductCatalogEntry[];
+
+export const productCatalogById = new Map<string, ProductCatalogEntry>(
+  productCatalog.map((product) => [product.id, product]),
+);

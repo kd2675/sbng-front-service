@@ -11,11 +11,13 @@ import { siteConfig } from "../siteConfig";
  * 운영 규칙:
  * - 기본 `*` 사용자 에이전트는 공개 영역만 허용합니다.
  * - 네이버 Yeti 봇을 명시적으로 허용해 한국 검색 노출을 확보합니다.
- * - `/admin`, `/sources/`, `/api/` 는 비공개 자료이므로 크롤링을 차단합니다.
+ * - `/api/` 는 크롤링 대상이 아니므로 차단합니다.
+ * - `/admin`, `/sources/` 는 페이지 자체가 `noindex` 를 반환하므로, 검색엔진이
+ *   해당 지시를 읽을 수 있게 robots.txt 에서는 막지 않습니다.
  * - `Host:` 디렉티브는 Yandex 전용 비표준 규격이라 사용하지 않습니다.
  */
 
-const DISALLOWED_PATHS = ["/admin", "/admin/", "/sources/", "/api/"];
+const DISALLOWED_PATHS = ["/api/"];
 const DAUM_VERIFICATION =
   "#DaumWebMasterTool:e0c3a1dc64236f133b47afde2fa564a57e7761310e8c3acb013622d0d4ce3191:R98rmM28KNmZUNVNYT21Sg==";
 

@@ -43,12 +43,6 @@ export default function SiteFooter() {
               {item.label}
             </Link>
           ))}
-          <Link
-            href="/admin"
-            className="rounded-full border border-black/12 px-3 py-1 text-xs font-bold text-[var(--agri-ink)] transition hover:bg-black/4"
-          >
-            관리자
-          </Link>
         </nav>
       </div>
     </footer>

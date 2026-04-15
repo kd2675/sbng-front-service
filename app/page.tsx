@@ -9,7 +9,7 @@ import {
 } from "./siteConfig";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "수북농업",
+  title: "담양 유기질비료 흙손·흙보약·무등산 | 수북농업",
   description: siteConfig.defaultDescription,
   path: "/",
   keywords: ["담양 유기질비료", "수북농업 제품", "김종수 대표", "흙손 흙보약 무등산"],

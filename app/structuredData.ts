@@ -1,6 +1,6 @@
 import { companyInfo } from "./companyInfo";
 import { historyFlowTimeline } from "./companyProfile";
-import { productCatalog } from "./productCatalog";
+import { productCatalog, type ProductCatalogEntry } from "./productCatalog";
 import { absoluteUrl, buildWebPageJsonLd, siteConfig } from "./siteConfig";
 
 /**
@@ -101,8 +101,6 @@ export function buildCeoProfilePageJsonLd() {
 }
 
 export function buildProductsCollectionPageJsonLd() {
-  const organizationEntity = buildOrganizationEntity();
-
   return {
     ...buildWebPageJsonLd({
       name: "흙손 흙보약 무등산 제품 소개",
@@ -152,30 +150,66 @@ export function buildProductsCollectionPageJsonLd() {
             },
           ],
           url: absoluteUrl(`/products#product-${product.id}`),
-          // B2B 상담 기반 판매 구조이므로 공개 가격은 없지만,
-          // 구조화 데이터에서 "판매 가능" 상태와 판매자 정보를 명시해
-          // Google/Naver가 구매 문의 링크를 라이브러리 수준에서 인식하도록 제공합니다.
-          offers: {
-            "@type": "Offer",
-            availability: "https://schema.org/InStock",
-            priceCurrency: "KRW",
-            // 공개 단가가 없으므로 문의 기반 판매임을 알리는 0원 명시.
-            // Google Rich Results 는 정확한 금액이 없을 때 이 필드를 무시하되,
-            // 스키마 유효성은 유지됩니다.
-            price: "0",
-            url: absoluteUrl("/contact"),
-            businessFunction: "https://schema.org/Sell",
-            seller: {
-              "@type": "Organization",
-              name: organizationEntity.name,
-              url: organizationEntity.url,
-              telephone: organizationEntity.telephone,
-              email: organizationEntity.email,
-            },
-          },
         },
       })),
     },
+  };
+}
+
+export function buildProductDetailPageJsonLd(product: ProductCatalogEntry) {
+  return {
+    ...buildWebPageJsonLd({
+      name: `${product.name} 제품 소개`,
+      description: product.summary,
+      path: `/products/${product.id}`,
+    }),
+    "@type": "Product",
+    name: product.name,
+    description: product.summary,
+    image: [
+      absoluteUrl(product.frontImage),
+      absoluteUrl(product.backImage),
+      absoluteUrl(product.sheetImage),
+    ],
+    brand: {
+      "@type": "Brand",
+      name: siteConfig.siteName,
+    },
+    category: product.category,
+    sku: product.id,
+    url: absoluteUrl(`/products/${product.id}`),
+    additionalProperty: [
+      {
+        "@type": "PropertyValue",
+        name: "제품명",
+        value: product.displayName,
+      },
+      {
+        "@type": "PropertyValue",
+        name: "성상",
+        value: product.form,
+      },
+      {
+        "@type": "PropertyValue",
+        name: "자재명",
+        value: product.material,
+      },
+      {
+        "@type": "PropertyValue",
+        name: "포장단위",
+        value: product.packUnit,
+      },
+      {
+        "@type": "PropertyValue",
+        name: "사용 기준",
+        value: product.usage,
+      },
+      {
+        "@type": "PropertyValue",
+        name: "보증 성분량",
+        value: product.guarantee,
+      },
+    ],
   };
 }
 

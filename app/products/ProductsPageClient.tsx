@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { MotionConfig, motion, useReducedMotion } from "motion/react";
 import { companyInfo } from "../companyInfo";
 import LightboxImage from "../components/LightboxImage";
@@ -77,6 +78,12 @@ export default function ProductsPageClient() {
                       </motion.span>
                     ))}
                   </div>
+                  <Link
+                    href={`/products/${product.id}`}
+                    className="mt-6 inline-flex rounded-full border border-white/16 bg-white/10 px-4 py-2 text-sm font-bold text-white transition hover:bg-white/16"
+                  >
+                    제품 자세히 보기
+                  </Link>
                 </motion.article>
               ))}
             </div>
@@ -269,6 +276,15 @@ export default function ProductsPageClient() {
                             {tag}
                           </motion.span>
                         ))}
+                      </div>
+
+                      <div className="mt-6">
+                        <Link
+                          href={`/products/${product.id}`}
+                          className="inline-flex rounded-full border border-[#d6e1cf] px-5 py-3 text-sm font-bold text-[var(--agri-ink)] transition hover:bg-[#f4f8f0]"
+                        >
+                          {product.name} 상세 페이지
+                        </Link>
                       </div>
                     </motion.div>
 

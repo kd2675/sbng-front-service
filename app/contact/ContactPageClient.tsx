@@ -251,12 +251,6 @@ export default function ContactPageClient() {
                 <p className="mt-3 leading-relaxed text-[#536652]">
                   주소와 전화, 팩스, 휴대전화, 이메일을 한눈에 안내합니다.
                 </p>
-                <Link
-                  href="/admin"
-                  className="mt-5 inline-flex rounded-full border border-black/12 px-4 py-2 text-sm font-bold text-[var(--agri-ink)] transition hover:bg-black/4"
-                >
-                  관리자 페이지 열기
-                </Link>
               </div>
             </article>
           </div>
