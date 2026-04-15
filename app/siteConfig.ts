@@ -10,7 +10,7 @@ export const siteConfig = {
   themeColor: "#112614",
   accentColor: "#57db31",
   organizationLogoPath: "/image/logo-og.png",
-  defaultSocialImagePath: "/image/history/history-weeklypeople-2020-02-03-main.jpg",
+  defaultSocialImagePath: "/image/history/history-weeklypeople-2020-02-03-og.jpg",
   defaultSocialImageAlt: "수북농업 대표 이미지",
   defaultKeywords: [
     "수북농업",
