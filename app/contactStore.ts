@@ -17,12 +17,20 @@ export type ContactSubmission = ContactSubmissionInput & {
 const dataDirPath = path.join(process.cwd(), "data");
 const dataFilePath = path.join(dataDirPath, "contact-submissions.json");
 
-async function ensureStore(): Promise<void> {
+async function ensureStoreForWrite(): Promise<void> {
   await mkdir(dataDirPath, { recursive: true });
 
   try {
     await readFile(dataFilePath, "utf8");
-  } catch {
+  } catch (error) {
+    const code = typeof error === "object" && error !== null && "code" in error
+      ? (error as { code?: string }).code
+      : undefined;
+
+    if (code && code !== "ENOENT") {
+      throw error;
+    }
+
     await writeFile(dataFilePath, "[]\n", "utf8");
   }
 }
@@ -61,8 +69,6 @@ function validateInput(input: ContactSubmissionInput): ContactSubmissionInput {
 }
 
 async function readSubmissions(): Promise<ContactSubmission[]> {
-  await ensureStore();
-
   try {
     const raw = await readFile(dataFilePath, "utf8");
     const parsed = JSON.parse(raw) as ContactSubmission[];
@@ -82,6 +88,7 @@ export async function saveContactSubmission(
   input: ContactSubmissionInput,
 ): Promise<ContactSubmission> {
   const sanitized = validateInput(input);
+  await ensureStoreForWrite();
   const submissions = await readSubmissions();
   const nextSubmission: ContactSubmission = {
     id: randomUUID(),
