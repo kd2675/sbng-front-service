@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion } from "motion/react";
+import { MotionConfig, motion, useReducedMotion } from "motion/react";
 import LightboxImage from "../components/LightboxImage";
 import SourceLink from "../components/SourceLink";
 import SiteFooter from "../components/SiteFooter";
@@ -48,10 +48,11 @@ export default function CEOPageClient() {
   const revealWhileInView = { opacity: 1, y: 0 };
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[var(--agri-paper)] text-[var(--agri-ink)]">
-      <SiteNav />
+    <MotionConfig reducedMotion="user" transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}>
+      <div className="min-h-screen overflow-x-hidden bg-[var(--agri-paper)] text-[var(--agri-ink)]">
+        <SiteNav />
 
-      <main>
+        <main>
         <section className="relative overflow-hidden bg-[#112614] px-5 pb-20 pt-28 md:px-10 lg:px-20">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(122,240,83,0.18),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(255,232,154,0.12),transparent_32%)]" />
           <div className="relative mx-auto max-w-7xl">
@@ -361,9 +362,10 @@ export default function CEOPageClient() {
             </motion.article>
           </div>
         </section>
-      </main>
+        </main>
 
-      <SiteFooter />
-    </div>
+        <SiteFooter />
+      </div>
+    </MotionConfig>
   );
 }

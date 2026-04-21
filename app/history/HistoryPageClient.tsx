@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion } from "motion/react";
+import { MotionConfig, motion, useReducedMotion } from "motion/react";
 import ColorShiftImage from "../about/ColorShiftImage";
 import SourceLink from "../components/SourceLink";
 import { historyFlowTimeline } from "../companyProfile";
@@ -32,10 +32,11 @@ export default function HistoryPageClient() {
   ] as const;
 
   return (
-    <div className="min-h-screen bg-[linear-gradient(180deg,#ebe8dd_0%,#f3f0e6_34%,#eeebdf_100%)]">
-      <SiteNav />
+    <MotionConfig reducedMotion="user" transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}>
+      <div className="min-h-screen bg-[linear-gradient(180deg,#ebe8dd_0%,#f3f0e6_34%,#eeebdf_100%)]">
+        <SiteNav />
 
-      <main className="overflow-x-hidden">
+        <main className="overflow-x-hidden">
         <section className="relative overflow-hidden bg-[#112614] px-5 pb-20 pt-28 md:px-10 lg:px-20">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(122,240,83,0.22),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(255,232,154,0.12),transparent_34%)]" />
 
@@ -183,9 +184,10 @@ export default function HistoryPageClient() {
             </div>
           </div>
         </section>
-      </main>
+        </main>
 
-      <SiteFooter />
-    </div>
+        <SiteFooter />
+      </div>
+    </MotionConfig>
   );
 }

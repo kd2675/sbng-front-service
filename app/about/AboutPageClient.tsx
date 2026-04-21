@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion } from "motion/react";
+import { MotionConfig, motion, useReducedMotion } from "motion/react";
 import LightboxImage from "../components/LightboxImage";
 import SourceLink from "../components/SourceLink";
 import SiteFooter from "../components/SiteFooter";
@@ -112,13 +112,16 @@ export default function AboutPageClient() {
   const reduceMotion = useReducedMotion();
   const revealInitial = reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 };
   const revealWhileInView = { opacity: 1, y: 0 };
+  const sectionViewport = { once: true, amount: 0.2 } as const;
+  const cardViewport = { once: true, amount: 0.22 } as const;
 
   return (
-    <div className="min-h-screen bg-[linear-gradient(180deg,#eef2e9_0%,#f6f8f4_42%,#eef2e8_100%)]">
-      <SiteNav />
+    <MotionConfig reducedMotion="user" transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}>
+      <div className="min-h-screen bg-[linear-gradient(180deg,#eef2e9_0%,#f6f8f4_42%,#eef2e8_100%)]">
+        <SiteNav />
 
-      <main className="overflow-x-hidden">
-        <section className="relative overflow-hidden bg-[#112614] px-5 pb-20 pt-28 md:px-10 lg:px-20">
+        <main className="overflow-x-hidden">
+          <section className="relative overflow-hidden bg-[#112614] px-5 pb-20 pt-28 md:px-10 lg:px-20">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(122,240,83,0.22),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(93,140,84,0.18),transparent_36%)]" />
 
           <div className="relative mx-auto max-w-7xl">
@@ -172,11 +175,16 @@ export default function AboutPageClient() {
               ))}
             </div>
           </div>
-        </section>
+          </section>
 
         <section className="px-5 py-18 md:px-10 lg:px-20">
           <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.05fr_0.95fr]">
-            <article className="rounded-[2rem] bg-white px-8 py-10 shadow-[0_22px_60px_rgba(12,26,12,0.08)]">
+            <motion.article
+              initial={revealInitial}
+              whileInView={revealWhileInView}
+              viewport={sectionViewport}
+              className="rounded-[2rem] bg-white px-8 py-10 shadow-[0_22px_60px_rgba(12,26,12,0.08)]"
+            >
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-[var(--agri-primary-deep)]">
                 회사 개요
               </p>
@@ -191,12 +199,16 @@ export default function AboutPageClient() {
               <p className="mt-6 rounded-2xl bg-[#f5f8f1] px-5 py-4 text-sm leading-relaxed text-[#556d54]">
                 {companyProfile.verificationNote}
               </p>
-            </article>
+            </motion.article>
 
             <div className="grid gap-4 sm:grid-cols-2">
-              {verifiedFactCards.map((card) => (
-                <article
+              {verifiedFactCards.map((card, index) => (
+                <motion.article
                   key={card.title}
+                  initial={revealInitial}
+                  whileInView={revealWhileInView}
+                  viewport={cardViewport}
+                  transition={{ delay: Math.min(index * 0.06, 0.18) }}
                   className="rounded-[1.75rem] border border-black/8 bg-[#f7faf4] px-6 py-6"
                 >
                   <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#6a8068]">
@@ -204,7 +216,7 @@ export default function AboutPageClient() {
                   </p>
                   <p className="mt-3 text-2xl font-bold text-[var(--agri-ink)]">{card.value}</p>
                   <p className="mt-3 text-sm leading-relaxed text-[#566d55]">{card.description}</p>
-                </article>
+                </motion.article>
               ))}
             </div>
           </div>
@@ -212,19 +224,28 @@ export default function AboutPageClient() {
 
         <section className="px-5 py-4 md:px-10 lg:px-20">
           <div className="mx-auto max-w-7xl">
-            <div className="mb-8">
+            <motion.div
+              initial={revealInitial}
+              whileInView={revealWhileInView}
+              viewport={sectionViewport}
+              className="mb-8"
+            >
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-[var(--agri-primary-deep)]">
                 공개 사업자 정보
               </p>
               <h2 className="font-display mt-4 text-4xl font-bold text-[var(--agri-ink)] md:text-5xl">
                 공개 기록 기준 회사 개요
               </h2>
-            </div>
+            </motion.div>
 
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-              {companyRecordCards.map((card) => (
-                <article
+              {companyRecordCards.map((card, index) => (
+                <motion.article
                   key={card.title}
+                  initial={revealInitial}
+                  whileInView={revealWhileInView}
+                  viewport={cardViewport}
+                  transition={{ delay: Math.min(index * 0.05, 0.16) }}
                   className="rounded-[1.75rem] border border-black/8 bg-white px-6 py-6 shadow-[0_16px_42px_rgba(12,26,12,0.06)]"
                 >
                   <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#6a8068]">
@@ -232,7 +253,7 @@ export default function AboutPageClient() {
                   </p>
                   <p className="mt-3 text-2xl font-bold text-[var(--agri-ink)]">{card.value}</p>
                   <p className="mt-3 text-sm leading-relaxed text-[#566d55]">{card.description}</p>
-                </article>
+                </motion.article>
               ))}
             </div>
           </div>
@@ -240,7 +261,12 @@ export default function AboutPageClient() {
 
         <section className="px-5 py-18 md:px-10 lg:px-20">
           <div className="mx-auto max-w-7xl">
-            <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <motion.div
+              initial={revealInitial}
+              whileInView={revealWhileInView}
+              viewport={sectionViewport}
+              className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between"
+            >
               <div>
                 <p className="text-sm font-bold uppercase tracking-[0.22em] text-[var(--agri-primary-deep)]">
                   현장 사진
@@ -255,12 +281,16 @@ export default function AboutPageClient() {
               >
                 현장 탐방 기사 보기
               </SourceLink>
-            </div>
+            </motion.div>
 
             <div className="grid gap-6 md:grid-cols-3">
-              {companyPhotoCards.map((item) => (
-                <figure
+              {companyPhotoCards.map((item, index) => (
+                <motion.figure
                   key={item.src}
+                  initial={revealInitial}
+                  whileInView={revealWhileInView}
+                  viewport={cardViewport}
+                  transition={{ delay: Math.min(index * 0.06, 0.18) }}
                   className="overflow-hidden rounded-[1.75rem] border border-black/8 bg-white shadow-[0_18px_46px_rgba(12,26,12,0.06)]"
                 >
                   <div className="relative aspect-[4/3] bg-[#e8eee1]">
@@ -286,7 +316,7 @@ export default function AboutPageClient() {
                       출처: {item.sourceLabel} →
                     </SourceLink>
                   </figcaption>
-                </figure>
+                </motion.figure>
               ))}
             </div>
           </div>
@@ -294,7 +324,12 @@ export default function AboutPageClient() {
 
         <section className="px-5 py-4 md:px-10 lg:px-20">
           <div className="mx-auto max-w-7xl">
-            <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <motion.div
+              initial={revealInitial}
+              whileInView={revealWhileInView}
+              viewport={sectionViewport}
+              className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between"
+            >
               <div>
                 <p className="text-sm font-bold uppercase tracking-[0.22em] text-[var(--agri-primary-deep)]">
                   업계 교류
@@ -309,12 +344,16 @@ export default function AboutPageClient() {
               >
                 관련 기사 보기
               </SourceLink>
-            </div>
+            </motion.div>
 
             <div className="grid gap-6 md:grid-cols-2">
-              {industryActivityCards.map((item) => (
-                <figure
+              {industryActivityCards.map((item, index) => (
+                <motion.figure
                   key={item.src}
+                  initial={revealInitial}
+                  whileInView={revealWhileInView}
+                  viewport={cardViewport}
+                  transition={{ delay: Math.min(index * 0.08, 0.16) }}
                   className="overflow-hidden rounded-[1.75rem] border border-black/8 bg-white shadow-[0_18px_46px_rgba(12,26,12,0.06)]"
                 >
                   <div className="relative aspect-[4/3] bg-[#e8eee1]">
@@ -339,7 +378,7 @@ export default function AboutPageClient() {
                       출처: {item.sourceLabel} →
                     </SourceLink>
                   </figcaption>
-                </figure>
+                </motion.figure>
               ))}
             </div>
           </div>
@@ -348,7 +387,12 @@ export default function AboutPageClient() {
         <section className="px-5 py-18 md:px-10 lg:px-20">
           <div className="mx-auto max-w-7xl">
             <div className="grid gap-6 lg:grid-cols-[1.08fr_0.92fr]">
-              <article className="rounded-[2rem] bg-[#112614] px-8 py-9 text-white shadow-[0_20px_48px_rgba(12,26,12,0.14)]">
+              <motion.article
+                initial={revealInitial}
+                whileInView={revealWhileInView}
+                viewport={sectionViewport}
+                className="rounded-[2rem] bg-[#112614] px-8 py-9 text-white shadow-[0_20px_48px_rgba(12,26,12,0.14)]"
+              >
                 <p className="text-sm font-bold uppercase tracking-[0.18em] text-[var(--agri-primary)]">
                   사업장 안내
                 </p>
@@ -394,9 +438,15 @@ export default function AboutPageClient() {
                     문의 페이지 열기
                   </Link>
                 </div>
-              </article>
+              </motion.article>
 
-              <article className="overflow-hidden rounded-[2rem] border border-black/8 bg-white shadow-[0_18px_46px_rgba(12,26,12,0.06)]">
+              <motion.article
+                initial={revealInitial}
+                whileInView={revealWhileInView}
+                viewport={sectionViewport}
+                transition={{ delay: 0.08 }}
+                className="overflow-hidden rounded-[2rem] border border-black/8 bg-white shadow-[0_18px_46px_rgba(12,26,12,0.06)]"
+              >
                 <div className="relative aspect-[4/3] bg-[#eff4ea]">
                   <LightboxImage
                     alt="수북농업 명함 이미지"
@@ -422,53 +472,66 @@ export default function AboutPageClient() {
                     전화 {companyInfo.telephoneDisplay} · 휴대전화 {companyInfo.mobileDisplay}
                   </p>
                 </div>
-              </article>
+              </motion.article>
             </div>
           </div>
         </section>
 
         <section className="px-5 pb-24 pt-18 md:px-10 lg:px-20">
           <div className="mx-auto max-w-7xl">
-            <div className="mb-8">
+            <motion.div
+              initial={revealInitial}
+              whileInView={revealWhileInView}
+              viewport={sectionViewport}
+              className="mb-8"
+            >
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-[var(--agri-primary-deep)]">
                 더 살펴보기
               </p>
               <h2 className="font-display mt-4 text-4xl font-bold text-[var(--agri-ink)] md:text-5xl">
                 필요한 정보로 바로 이어집니다
               </h2>
-            </div>
+            </motion.div>
 
             <div className="grid gap-6 md:grid-cols-3">
-              {detailLinks.map((item) => (
-                <Link
+              {detailLinks.map((item, index) => (
+                <motion.div
                   key={item.href}
-                  href={item.href}
-                  className="group overflow-hidden rounded-[2rem] border border-black/8 bg-white shadow-[0_18px_46px_rgba(12,26,12,0.06)] transition hover:-translate-y-1"
+                  initial={revealInitial}
+                  whileInView={revealWhileInView}
+                  viewport={cardViewport}
+                  transition={{ delay: Math.min(index * 0.07, 0.18) }}
                 >
-                  <div className="relative aspect-[4/3] bg-[#e7eee1]">
-                    <LightboxImage
-                      alt={item.alt}
-                      src={item.image}
-                      fill
-                      sizes="(min-width: 1024px) 30vw, 100vw"
-                      className="object-cover transition duration-500 group-hover:scale-[1.03]"
-                    />
-                  </div>
-                  <div className="px-6 py-6">
-                    <h3 className="text-2xl font-bold text-[var(--agri-ink)]">{item.title}</h3>
-                    <p className="mt-3 leading-relaxed text-[#556d54]">{item.description}</p>
-                    <p className="mt-5 text-sm font-bold text-[var(--agri-primary-deep)]">
-                      자세히 보기 →
-                    </p>
-                  </div>
-                </Link>
+                  <Link
+                    href={item.href}
+                    className="group block overflow-hidden rounded-[2rem] border border-black/8 bg-white shadow-[0_18px_46px_rgba(12,26,12,0.06)] transition hover:-translate-y-1"
+                  >
+                    <div className="relative aspect-[4/3] bg-[#e7eee1]">
+                      <LightboxImage
+                        alt={item.alt}
+                        src={item.image}
+                        fill
+                        sizes="(min-width: 1024px) 30vw, 100vw"
+                        className="object-cover transition duration-500 group-hover:scale-[1.03]"
+                      />
+                    </div>
+                    <div className="px-6 py-6">
+                      <h3 className="text-2xl font-bold text-[var(--agri-ink)]">{item.title}</h3>
+                      <p className="mt-3 leading-relaxed text-[#556d54]">{item.description}</p>
+                      <p className="mt-5 text-sm font-bold text-[var(--agri-primary-deep)]">
+                        자세히 보기 →
+                      </p>
+                    </div>
+                  </Link>
+                </motion.div>
               ))}
             </div>
           </div>
         </section>
-      </main>
+        </main>
 
-      <SiteFooter />
-    </div>
+        <SiteFooter />
+      </div>
+    </MotionConfig>
   );
 }

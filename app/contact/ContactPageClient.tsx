@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { motion, useReducedMotion } from "motion/react";
+import { MotionConfig, motion, useReducedMotion } from "motion/react";
 import { companyInfo } from "../companyInfo";
 import LightboxImage from "../components/LightboxImage";
 import SiteFooter from "../components/SiteFooter";
@@ -59,10 +59,11 @@ export default function ContactPageClient() {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--agri-paper)]">
-      <SiteNav />
+    <MotionConfig reducedMotion="user" transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}>
+      <div className="min-h-screen bg-[var(--agri-paper)]">
+        <SiteNav />
 
-      <section className="relative overflow-hidden bg-[#112614] px-5 pb-20 pt-28 md:px-10 lg:px-20">
+        <section className="relative overflow-hidden bg-[#112614] px-5 pb-20 pt-28 md:px-10 lg:px-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(122,240,83,0.2),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(255,232,154,0.12),transparent_34%)]" />
         <div className="relative mx-auto max-w-7xl">
           <motion.p
@@ -132,9 +133,9 @@ export default function ContactPageClient() {
             ))}
           </div>
         </div>
-      </section>
+        </section>
 
-      <main className="px-5 pb-24 pt-14 md:px-10 lg:px-20">
+        <main className="px-5 pb-24 pt-14 md:px-10 lg:px-20">
         <section className="mx-auto mt-10 grid max-w-7xl gap-7 lg:grid-cols-[1.02fr_0.98fr]">
           <div className="rounded-[2rem] border border-black/7 bg-white p-8 shadow-[0_18px_52px_rgba(12,26,12,0.06)]">
             <h2 className="text-2xl font-bold text-[var(--agri-ink)]">상담 요청 남기기</h2>
@@ -261,9 +262,10 @@ export default function ContactPageClient() {
             </article>
           </div>
         </section>
-      </main>
+        </main>
 
-      <SiteFooter />
-    </div>
+        <SiteFooter />
+      </div>
+    </MotionConfig>
   );
 }
