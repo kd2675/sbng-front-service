@@ -209,6 +209,11 @@ export default function HomePageClient() {
 
       if (event.key === "ArrowDown" || event.key === "PageDown") {
         if (shouldUseNativeScroll(1)) {
+          event.preventDefault();
+          root.scrollBy({
+            top: event.key === "PageDown" ? root.clientHeight * 0.82 : 96,
+            behavior: "smooth",
+          });
           return;
         }
 
@@ -218,6 +223,11 @@ export default function HomePageClient() {
 
       if (event.key === "ArrowUp" || event.key === "PageUp") {
         if (shouldUseNativeScroll(-1)) {
+          event.preventDefault();
+          root.scrollBy({
+            top: event.key === "PageUp" ? root.clientHeight * -0.82 : -96,
+            behavior: "smooth",
+          });
           return;
         }
 
