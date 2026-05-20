@@ -115,6 +115,22 @@ export default function HomePageClient() {
       sectionRefs.current[index] = element;
     };
 
+  const shouldUseNativeScroll = useCallback((direction: 1 | -1) => {
+    const root = mainRef.current;
+    const currentSection = sectionRefs.current[activeSectionRef.current];
+
+    if (!root || !currentSection || currentSection.offsetHeight <= root.clientHeight + 2) {
+      return false;
+    }
+
+    const rootRect = root.getBoundingClientRect();
+    const sectionRect = currentSection.getBoundingClientRect();
+
+    return direction > 0
+      ? sectionRect.bottom > rootRect.bottom + 2
+      : sectionRect.top < rootRect.top - 2;
+  }, []);
+
   useEffect(() => {
     const root = mainRef.current;
 
@@ -162,21 +178,28 @@ export default function HomePageClient() {
     }
 
     const onWheel = (event: WheelEvent) => {
-      event.preventDefault();
-
       if (isSwitchingRef.current) {
+        event.preventDefault();
         return;
       }
 
+      const direction = event.deltaY > 0 ? 1 : -1;
+
+      if (shouldUseNativeScroll(direction)) {
+        wheelAccumulatorRef.current = 0;
+        return;
+      }
+
+      event.preventDefault();
       wheelAccumulatorRef.current += event.deltaY;
 
       if (Math.abs(wheelAccumulatorRef.current) < 110) {
         return;
       }
 
-      const direction = wheelAccumulatorRef.current > 0 ? 1 : -1;
+      const accumulatedDirection = wheelAccumulatorRef.current > 0 ? 1 : -1;
       wheelAccumulatorRef.current = 0;
-      scrollToSection(activeSectionRef.current + direction);
+      scrollToSection(activeSectionRef.current + accumulatedDirection);
     };
 
     const onKeyDown = (event: KeyboardEvent) => {
@@ -185,11 +208,19 @@ export default function HomePageClient() {
       }
 
       if (event.key === "ArrowDown" || event.key === "PageDown") {
+        if (shouldUseNativeScroll(1)) {
+          return;
+        }
+
         event.preventDefault();
         scrollToSection(activeSectionRef.current + 1);
       }
 
       if (event.key === "ArrowUp" || event.key === "PageUp") {
+        if (shouldUseNativeScroll(-1)) {
+          return;
+        }
+
         event.preventDefault();
         scrollToSection(activeSectionRef.current - 1);
       }
@@ -202,7 +233,7 @@ export default function HomePageClient() {
       root.removeEventListener("wheel", onWheel);
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [isDesktopMode, scrollToSection]);
+  }, [isDesktopMode, scrollToSection, shouldUseNativeScroll]);
 
   const sectionClassName =
     "relative z-10 flex min-h-[auto] items-center px-5 py-20 md:min-h-[100svh] md:snap-start md:snap-always md:px-10 lg:px-20";
@@ -253,7 +284,7 @@ export default function HomePageClient() {
           data-nav-scroll-root="true"
           className={
             isDesktopMode
-              ? "h-[100svh] overflow-y-hidden scroll-smooth pb-24"
+              ? "h-[100svh] overflow-y-auto scroll-smooth pb-24"
               : "h-[100svh] overflow-y-auto scroll-smooth pb-36"
           }
         >
