@@ -50,6 +50,7 @@ npm run archive:articles
 - `siteUrl`은 `https://www.subuknongeop.com`으로 고정돼 있습니다.
 - 기능 변경 시 화면뿐 아니라 metadata, sitemap, RSS까지 같이 점검하는 편이 맞습니다.
 - `/contact`는 현재 정적 폼 UI이며 실전 전송 처리까지 연결된 상태는 아닙니다.
+- `/admin` 로그인은 `SBNG_ADMIN_PASSWORD`가 필수이며 `SBNG_ADMIN_SESSION_SECRET`으로 세션 쿠키를 서명합니다. 비밀값을 소스에 기본값으로 추가하지 않습니다.
 - 연락처와 주소 성격의 텍스트에는 placeholder 또는 고정 문자열이 섞여 있을 수 있습니다.
 
 ## Agent Rules

@@ -1,8 +1,20 @@
 import { NextResponse } from "next/server";
-import { ADMIN_COOKIE_NAME, getAdminCookieValue, verifyAdminPassword } from "@/app/adminAuth";
+import {
+  ADMIN_COOKIE_NAME,
+  getAdminCookieValue,
+  isAdminAuthConfigured,
+  verifyAdminPassword,
+} from "@/app/adminAuth";
 
 export async function POST(request: Request) {
-  const body = (await request.json()) as { password?: string };
+  if (!isAdminAuthConfigured()) {
+    return NextResponse.json(
+      { ok: false, message: "운영자 인증이 설정되지 않았습니다." },
+      { status: 503 },
+    );
+  }
+
+  const body = await readLoginBody(request);
   const password = body.password ?? "";
 
   if (!verifyAdminPassword(password)) {
@@ -24,4 +36,17 @@ export async function POST(request: Request) {
   });
 
   return response;
+}
+
+async function readLoginBody(request: Request): Promise<{ password?: string }> {
+  try {
+    const value = await request.json() as unknown;
+    if (!value || typeof value !== "object") {
+      return {};
+    }
+    const password = (value as Record<string, unknown>).password;
+    return typeof password === "string" ? { password } : {};
+  } catch {
+    return {};
+  }
 }
