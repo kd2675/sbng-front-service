@@ -340,8 +340,8 @@ export default function HomePageClient() {
                 transition={{ delay: 0.12 }}
                 className="font-display mt-6 max-w-5xl text-5xl font-bold leading-[0.98] text-white md:text-7xl lg:text-8xl"
               >
-                농업회사법인(유)
-                <br className="hidden sm:block" />
+                담양 유기질비료
+                <br />
                 <span className="text-[var(--agri-primary)]">수북농업</span>
               </motion.h1>
 
@@ -351,7 +351,8 @@ export default function HomePageClient() {
                 transition={{ delay: 0.18 }}
                 className="mt-7 max-w-3xl text-base leading-relaxed text-white/86 md:text-xl"
               >
-                회사 정보, 대표 소개, 제품 안내와 공개 연혁을 한곳에서 소개합니다.
+                농업회사법인(유) 수북농업은 전남 담양에서 유기질비료와 퇴비를 생산하며,
+                흙손·흙보약·무등산 제품을 안내합니다.
               </motion.p>
 
               <motion.div

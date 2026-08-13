@@ -101,8 +101,6 @@ export function buildCeoProfilePageJsonLd() {
 }
 
 export function buildProductsCollectionPageJsonLd() {
-  const organizationEntity = buildOrganizationEntity();
-
   return {
     ...buildWebPageJsonLd({
       name: "흙손 흙보약 무등산 제품 소개",
@@ -152,27 +150,6 @@ export function buildProductsCollectionPageJsonLd() {
             },
           ],
           url: absoluteUrl(`/products#product-${product.id}`),
-          // B2B 상담 기반 판매 구조이므로 공개 가격은 없지만,
-          // 구조화 데이터에서 "판매 가능" 상태와 판매자 정보를 명시해
-          // Google/Naver가 구매 문의 링크를 라이브러리 수준에서 인식하도록 제공합니다.
-          offers: {
-            "@type": "Offer",
-            availability: "https://schema.org/InStock",
-            priceCurrency: "KRW",
-            // 공개 단가가 없으므로 문의 기반 판매임을 알리는 0원 명시.
-            // Google Rich Results 는 정확한 금액이 없을 때 이 필드를 무시하되,
-            // 스키마 유효성은 유지됩니다.
-            price: "0",
-            url: absoluteUrl("/contact"),
-            businessFunction: "https://schema.org/Sell",
-            seller: {
-              "@type": "Organization",
-              name: organizationEntity.name,
-              url: organizationEntity.url,
-              telephone: organizationEntity.telephone,
-              email: organizationEntity.email,
-            },
-          },
         },
       })),
     },

@@ -123,7 +123,7 @@ export default async function SourceArchivePage({ params }: SourcePageProps) {
                 href={entry.snapshotHtml}
                 className="rounded-full border border-white/18 bg-white/10 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/16"
               >
-                보관 HTML 보기
+                보관 HTML 다운로드
               </SourceLink>
             ) : null}
             {captureExists ? (
