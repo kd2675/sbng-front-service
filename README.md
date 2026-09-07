@@ -1,5 +1,11 @@
 # sbng-front-service
 
+## 로컬 환경 파일
+
+이 프로젝트의 `.env.example`을 참고해 `.env.local`에 `SBNG_ADMIN_PASSWORD`, `SBNG_ADMIN_SESSION_SECRET`을 서로 다른 비밀값으로 설정합니다. 공용 기본 비밀번호는 없으며 실제 값은 커밋하거나 NEXT_PUBLIC 변수에 넣지 않습니다.
+
+전체 포트·프로필·설정 검증은 워크스페이스의 [로컬 환경 가이드](../LOCAL_DEVELOPMENT.md)를 따릅니다. 기존 개인 환경 파일은 덮어쓰지 않습니다.
+
 수북농업 브랜드/기업 사이트입니다. 제품 앱이 아니라 소개, 제품, CEO, 문의, SEO 자산을 제공하는 Next.js 사이트입니다.
 
 ## 주요 라우트
