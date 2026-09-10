@@ -20,7 +20,6 @@ export function buildOrganizationEntity() {
     description: siteConfig.defaultDescription,
     knowsAbout: ["유기질비료", "퇴비", "토양개량", "농업 자재"],
     telephone: companyInfo.telephoneDisplay,
-    email: companyInfo.emailDisplay,
     identifier: companyInfo.businessRegistrationNumber,
     address: {
       "@type": "PostalAddress",
@@ -31,8 +30,8 @@ export function buildOrganizationEntity() {
     },
     contactPoint: {
       "@type": "ContactPoint",
+      url: absoluteUrl("/contact"),
       telephone: companyInfo.telephoneDisplay,
-      email: companyInfo.emailDisplay,
       contactType: "customer support",
       areaServed: "KR",
       availableLanguage: ["ko"],
@@ -67,13 +66,27 @@ export function buildWebSiteJsonLd() {
 export function buildAboutPageJsonLd() {
   return {
     ...buildWebPageJsonLd({
-      name: "수북농업 회사 정보",
+      name: "수북농업 회사 소개",
       description:
-        "수북농업 회사 소개, 담양 사업장 정보, 공개 사업자 정보, 현장 사진과 업계 활동 자료를 소개합니다.",
+        "1996년 설립한 수북농업의 회사 개요, 유기질비료·퇴비 사업, 생산 현장, 담양 사업장과 회사 자료를 안내합니다.",
       path: "/about",
     }),
     "@type": "AboutPage",
-    primaryImageOfPage: absoluteUrl("/image/company/subuk-facility-2015-share.jpg"),
+    primaryImageOfPage: absoluteUrl(
+      "/image/company/subuk-facility-2015-share.jpg",
+    ),
+    mainEntity: buildOrganizationEntity(),
+  };
+}
+
+export function buildContactPageJsonLd() {
+  return {
+    ...buildWebPageJsonLd({
+      name: "수북농업 문의하기",
+      description: `수북농업 대표전화 ${companyInfo.telephoneDisplay}, ${companyInfo.businessHours}, 담양 사업장 주소와 회사 정보를 안내합니다.`,
+      path: "/contact",
+    }),
+    "@type": "ContactPage",
     mainEntity: buildOrganizationEntity(),
   };
 }
@@ -83,7 +96,7 @@ export function buildCeoProfilePageJsonLd() {
     ...buildWebPageJsonLd({
       name: "김종수 대표 소개",
       description:
-        "수북농업 김종수 대표의 주요 활동, 공개 연혁, 수북환경개발 관련 역할과 현재 공개 기록을 소개합니다.",
+        "수북농업 김종수 대표의 경영 방향, 주요 경력, 유기질비료 산업과 지역 농업 분야의 활동을 소개합니다.",
       path: "/ceo",
     }),
     "@type": "ProfilePage",
@@ -161,11 +174,13 @@ export function buildHistoryCollectionPageJsonLd() {
     ...buildWebPageJsonLd({
       name: "수북농업 연혁",
       description:
-        "김종수 대표와 수북농업의 공개 기사, 사업자 정보, 회사 자료를 바탕으로 연혁 흐름을 사진과 함께 소개합니다.",
+        "1996년 설립부터 이어온 수북농업과 김종수 대표의 발자취를 사진과 출처가 연결된 타임라인으로 소개합니다.",
       path: "/history",
     }),
     "@type": "CollectionPage",
-    primaryImageOfPage: absoluteUrl("/image/history/history-weeklypeople-2020-02-03-main.jpg"),
+    primaryImageOfPage: absoluteUrl(
+      "/image/history/history-weeklypeople-2020-02-03-main.jpg",
+    ),
     mainEntity: {
       "@type": "ItemList",
       itemListOrder: "https://schema.org/ItemListOrderAscending",
@@ -178,23 +193,11 @@ export function buildHistoryCollectionPageJsonLd() {
           name: `${item.period} ${item.title}`,
           description: item.description,
           image: absoluteUrl(item.image.src),
-          url: absoluteUrl(`/history#history-${item.period.replaceAll(".", "-")}`),
+          url: absoluteUrl(
+            `/history#history-${item.period.replaceAll(".", "-")}`,
+          ),
         },
       })),
     },
-  };
-}
-
-export function buildContactPageJsonLd() {
-  return {
-    ...buildWebPageJsonLd({
-      name: "수북농업 문의",
-      description:
-        "수북농업 본사 연락처, 이메일, 휴대전화, 상담 문의 접수 창구와 담양 사업장 정보를 안내합니다.",
-      path: "/contact",
-    }),
-    "@type": "ContactPage",
-    primaryImageOfPage: absoluteUrl("/image/ceo-card.png"),
-    mainEntity: buildOrganizationEntity(),
   };
 }

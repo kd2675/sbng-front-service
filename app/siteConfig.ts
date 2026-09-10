@@ -10,7 +10,8 @@ export const siteConfig = {
   themeColor: "#112614",
   accentColor: "#57db31",
   organizationLogoPath: "/image/logo-og.png",
-  defaultSocialImagePath: "/image/history/history-weeklypeople-2020-02-03-og.jpg",
+  defaultSocialImagePath:
+    "/image/history/history-weeklypeople-2020-02-03-og.jpg",
   defaultSocialImageAlt: "수북농업 대표 이미지",
   defaultKeywords: [
     "수북농업",
@@ -25,14 +26,14 @@ export const siteConfig = {
     "무등산",
     "수북환경개발",
   ],
-  siteUpdatedAt: "2026-08-12T18:00:00+09:00",
+  siteUpdatedAt: "2026-09-10T13:50:50+09:00",
   pageUpdatedAt: {
-    home: "2026-08-12T18:00:00+09:00",
-    ceo: "2026-04-14T13:48:48+09:00",
-    history: "2026-04-14T11:32:17+09:00",
-    products: "2026-08-12T18:00:00+09:00",
-    about: "2026-04-14T11:01:57+09:00",
-    contact: "2026-04-14T09:55:31+09:00",
+    home: "2026-09-10T13:24:14+09:00",
+    ceo: "2026-09-10T11:35:58+09:00",
+    history: "2026-09-10T11:35:58+09:00",
+    products: "2026-09-10T11:35:58+09:00",
+    about: "2026-09-10T13:50:50+09:00",
+    contact: "2026-09-10T13:50:50+09:00",
   },
 } as const;
 
@@ -76,7 +77,10 @@ export function buildPageMetadata({
       // 유지하려면 각 페이지 메타데이터에도 `types` 를 다시 포함시켜야 합니다.
       types: {
         "application/rss+xml": [
-          { url: absoluteUrl("/rss.xml"), title: `${siteConfig.siteName} RSS Feed` },
+          {
+            url: absoluteUrl("/rss.xml"),
+            title: `${siteConfig.siteName} RSS Feed`,
+          },
         ],
       },
     },
@@ -127,7 +131,10 @@ export function buildNoIndexMetadata({
       // noindex 페이지에서도 RSS autodiscovery 를 유지합니다.
       types: {
         "application/rss+xml": [
-          { url: absoluteUrl("/rss.xml"), title: `${siteConfig.siteName} RSS Feed` },
+          {
+            url: absoluteUrl("/rss.xml"),
+            title: `${siteConfig.siteName} RSS Feed`,
+          },
         ],
       },
     },

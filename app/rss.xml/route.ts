@@ -25,25 +25,29 @@ const feedItems: FeedItem[] = [
   },
   {
     title: "제품 소개",
-    description: "흙손, 흙보약, 무등산 제품 라인업과 주요 사용 정보를 소개합니다.",
+    description:
+      "흙손, 흙보약, 무등산 제품 라인업과 주요 사용 정보를 소개합니다.",
     path: "/products",
     publishedAt: siteConfig.pageUpdatedAt.products,
   },
   {
     title: "수북농업 연혁",
-    description: "김종수 대표와 수북농업의 공개 기사, 사업자 정보 흐름을 사진과 함께 소개합니다.",
+    description:
+      "김종수 대표와 수북농업의 공개 기사, 사업자 정보 흐름을 사진과 함께 소개합니다.",
     path: "/history",
     publishedAt: siteConfig.pageUpdatedAt.history,
   },
   {
     title: "회사 정보",
-    description: "수북농업의 회사 소개와 담양 사업장 정보, 주요 연혁을 소개합니다.",
+    description:
+      "수북농업의 회사 소개와 담양 사업장 정보, 주요 연혁을 소개합니다.",
     path: "/about",
     publishedAt: siteConfig.pageUpdatedAt.about,
   },
   {
-    title: "문의하기",
-    description: "수북농업 본사 연락처, 이메일, 휴대전화와 문의 접수 창구를 안내합니다.",
+    title: "문의하기 · 전화 및 위치 안내",
+    description:
+      "수북농업 대표전화와 상담 시간, 담양 사업장의 주소와 회사 정보를 안내합니다.",
     path: "/contact",
     publishedAt: siteConfig.pageUpdatedAt.contact,
   },
@@ -60,10 +64,13 @@ function escapeXml(value: string): string {
 
 export function GET() {
   const sortedFeedItems = [...feedItems].sort(
-    (left, right) => new Date(right.publishedAt).getTime() - new Date(left.publishedAt).getTime(),
+    (left, right) =>
+      new Date(right.publishedAt).getTime() -
+      new Date(left.publishedAt).getTime(),
   );
-  const lastBuildDate = new Date(sortedFeedItems[0]?.publishedAt ?? siteConfig.siteUpdatedAt)
-    .toUTCString();
+  const lastBuildDate = new Date(
+    sortedFeedItems[0]?.publishedAt ?? siteConfig.siteUpdatedAt,
+  ).toUTCString();
 
   const itemsXml = sortedFeedItems
     .map((item) => {

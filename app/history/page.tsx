@@ -1,18 +1,20 @@
 import type { Metadata } from "next";
-import HistoryPageClient from "./HistoryPageClient";
+import HistoryContent from "./HistoryContent";
 import JsonLd from "../components/JsonLd";
-import {
-  buildBreadcrumbJsonLd,
-  buildPageMetadata,
-} from "../siteConfig";
+import { buildBreadcrumbJsonLd, buildPageMetadata } from "../siteConfig";
 import { buildHistoryCollectionPageJsonLd } from "../structuredData";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "수북농업 연혁",
   description:
-    "김종수 대표와 수북농업의 공개 기사, 사업자 정보, 회사 자료를 바탕으로 연혁 흐름을 사진과 함께 소개합니다.",
+    "1996년 설립부터 이어온 수북농업과 김종수 대표의 발자취를 사진과 출처가 연결된 타임라인으로 소개합니다.",
   path: "/history",
-  keywords: ["수북농업 연혁", "김종수 연혁", "수북농업 기사", "수북농업 공개 기록"],
+  keywords: [
+    "수북농업 연혁",
+    "김종수 연혁",
+    "수북농업 기사",
+    "수북농업 공개 기록",
+  ],
 });
 
 export default function HistoryPage() {
@@ -25,7 +27,7 @@ export default function HistoryPage() {
           { name: "연혁", path: "/history" },
         ])}
       />
-      <HistoryPageClient />
+      <HistoryContent />
     </>
   );
 }

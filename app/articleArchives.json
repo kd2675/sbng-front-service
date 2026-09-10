@@ -141,7 +141,12 @@
     ],
     "captureImage": "/archive/articles/weeklypeople-2020-02-03/capture.png",
     "snapshotHtml": "/archive/articles/weeklypeople-2020-02-03/source.html",
-    "selectors": ["img[src*='15807021629762.jpg']", ".view_con", ".article", "body"],
+    "selectors": [
+      "img[src*='15807021629762.jpg']",
+      ".view_con",
+      ".article",
+      "body"
+    ],
     "clip": { "width": 900, "height": 900, "padX": 40, "padY": 40 }
   },
   {
@@ -195,7 +200,12 @@
     ],
     "captureImage": "/archive/articles/jgkoreaja-2023-01-19/capture.png",
     "snapshotHtml": "/archive/articles/jgkoreaja-2023-01-19/source.html",
-    "selectors": ["img[src*='60801_s.jpg']", "#content img", "#content", "body"],
+    "selectors": [
+      "img[src*='60801_s.jpg']",
+      "#content img",
+      "#content",
+      "body"
+    ],
     "clip": { "width": 760, "height": 760, "padX": 40, "padY": 220 }
   },
   {

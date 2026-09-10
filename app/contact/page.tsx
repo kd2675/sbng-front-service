@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
-import ContactPageClient from "./ContactPageClient";
+
+import { companyInfo } from "../companyInfo";
 import JsonLd from "../components/JsonLd";
-import {
-  buildBreadcrumbJsonLd,
-  buildPageMetadata,
-} from "../siteConfig";
+import { buildBreadcrumbJsonLd, buildPageMetadata } from "../siteConfig";
 import { buildContactPageJsonLd } from "../structuredData";
 
+import ContactContent from "./ContactContent";
+
 export const metadata: Metadata = buildPageMetadata({
-  title: "수북농업 문의",
-  description:
-    "수북농업 본사 연락처, 이메일, 휴대전화, 상담 문의 접수 창구와 담양 사업장 정보를 안내합니다.",
+  title: "수북농업 문의하기 · 전화 및 위치 안내",
+  description: `수북농업 대표전화 ${companyInfo.telephoneDisplay}, ${companyInfo.businessHours}, 전남 담양 사업장의 주소와 위치, 회사 정보를 안내합니다.`,
   path: "/contact",
-  keywords: ["수북농업 문의", "수북농업 연락처", "담양 수북농업 전화번호"],
+  keywords: ["수북농업 문의", "수북농업 전화번호", "수북농업 오시는 길"],
 });
 
 export default function ContactPage() {
@@ -25,7 +24,7 @@ export default function ContactPage() {
           { name: "문의하기", path: "/contact" },
         ])}
       />
-      <ContactPageClient />
+      <ContactContent />
     </>
   );
 }

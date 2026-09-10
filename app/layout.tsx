@@ -1,12 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope, Playfair_Display } from "next/font/google";
+import { Manrope } from "next/font/google";
+import SiteNav from "./components/SiteNav";
+import SiteFooter from "./components/SiteFooter";
 import JsonLd from "./components/JsonLd";
 import { siteConfig } from "./siteConfig";
-import {
-  buildOrganizationJsonLd,
-  buildWebSiteJsonLd,
-} from "./structuredData";
+import { buildOrganizationJsonLd, buildWebSiteJsonLd } from "./structuredData";
 import "./globals.css";
+import "./companyPages.css";
 
 /**
  * Next.js 16 `viewport` export.
@@ -29,11 +29,6 @@ export const viewport: Viewport = {
 
 const manrope = Manrope({
   variable: "--font-manrope",
-  subsets: ["latin"],
-});
-
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
   subsets: ["latin"],
 });
 
@@ -115,10 +110,6 @@ export const metadata: Metadata = {
       : {}),
     other: {
       "naver-site-verification": "338733ff0b62d612e4fdae7ce88d19ce157e815d",
-      // Bing Webmaster Tools 도 환경변수 주입. 값이 비어 있으면 키가 스킵됩니다.
-      ...(process.env.NEXT_PUBLIC_MSVALIDATE
-        ? { "msvalidate.01": process.env.NEXT_PUBLIC_MSVALIDATE }
-        : {}),
     },
   },
 };
@@ -131,11 +122,16 @@ export default function RootLayout({
   return (
     // 한국 특정 지역 콘텐츠임을 명확히 하기 위해 BCP 47 `ko-KR` 로 통일.
     // JSON-LD `inLanguage` 및 RSS `language` 표기와도 일관성을 맞춥니다.
-    <html lang="ko-KR">
-      <body className={`${manrope.variable} ${playfair.variable} antialiased`}>
+    <html lang="ko-KR" data-scroll-behavior="smooth">
+      <body className={`${manrope.variable} antialiased`}>
         <JsonLd data={buildOrganizationJsonLd()} />
         <JsonLd data={buildWebSiteJsonLd()} />
+        <a href="#main-content" className="skip-link">
+          본문으로 바로가기
+        </a>
+        <SiteNav />
         {children}
+        <SiteFooter />
       </body>
     </html>
   );

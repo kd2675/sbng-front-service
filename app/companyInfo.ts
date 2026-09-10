@@ -12,12 +12,14 @@ export const companyInfo = {
   addressRegion: "전라남도 담양군",
   telephoneDisplay: "061-383-6186",
   telephoneHref: "tel:0613836186",
-  faxDisplay: "061-383-6187",
-  mobileDisplay: "010-6408-6186",
-  mobileHref: "tel:01064086186",
-  emailDisplay: "kgy2675@hanmail.net",
-  emailHref: "mailto:kgy2675@hanmail.net",
   businessHours: "평일 09:00 - 18:00",
   publicRecordUpdatedAt: "2026.03.03",
   tagline: "담양 기반의 유기질비료·퇴비 제품과 현장 상담 정보를 안내합니다.",
 } as const;
+
+export const companyMapUrl =
+  "https://map.kakao.com/link/search/" +
+  encodeURIComponent(companyInfo.address);
+
+export const companyNaverMapUrl =
+  "https://map.naver.com/p/search/" + encodeURIComponent(companyInfo.address);

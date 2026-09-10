@@ -33,20 +33,25 @@ const GENERIC_MISSING_SIGNALS = [
   "not found",
 ] as const;
 
-export const articleArchiveEntries = articleArchives as readonly ArticleArchiveEntry[];
+export const articleArchiveEntries =
+  articleArchives as readonly ArticleArchiveEntry[];
 
 export const articleArchiveBySlug = new Map(
   articleArchiveEntries.map((entry) => [entry.slug, entry]),
 );
 
-const articleArchiveByUrl = new Map(articleArchiveEntries.map((entry) => [entry.url, entry]));
+const articleArchiveByUrl = new Map(
+  articleArchiveEntries.map((entry) => [entry.url, entry]),
+);
 
 export function getArchivedSourceHref(url: string): string {
   const entry = articleArchiveByUrl.get(url);
   return entry ? `/sources/${entry.slug}` : url;
 }
 
-export async function checkRemoteSourceStatus(entry: ArticleArchiveEntry): Promise<{
+export async function checkRemoteSourceStatus(
+  entry: ArticleArchiveEntry,
+): Promise<{
   available: boolean;
   reason: string;
 }> {
@@ -65,10 +70,10 @@ export async function checkRemoteSourceStatus(entry: ArticleArchiveEntry): Promi
     });
 
     if (!response.ok) {
-        return {
-          available: false,
-          reason: `응답 코드 ${response.status}`,
-        };
+      return {
+        available: false,
+        reason: `응답 코드 ${response.status}`,
+      };
     }
 
     const contentType = response.headers.get("content-type") ?? "";
@@ -82,8 +87,13 @@ export async function checkRemoteSourceStatus(entry: ArticleArchiveEntry): Promi
 
     const html = await response.text();
     const haystack = html.toLowerCase();
-    const missingSignals = [...GENERIC_MISSING_SIGNALS, ...(entry.missingSignals ?? [])];
-    const matchedSignal = missingSignals.find((signal) => haystack.includes(signal.toLowerCase()));
+    const missingSignals = [
+      ...GENERIC_MISSING_SIGNALS,
+      ...(entry.missingSignals ?? []),
+    ];
+    const matchedSignal = missingSignals.find((signal) =>
+      haystack.includes(signal.toLowerCase()),
+    );
 
     if (matchedSignal) {
       return {

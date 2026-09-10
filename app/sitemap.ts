@@ -55,7 +55,7 @@ const sitemapSourceEntries: SitemapSourceEntry[] = [
     path: "/contact",
     lastModified: siteConfig.pageUpdatedAt.contact,
     changeFrequency: "monthly",
-    priority: 0.7,
+    priority: 0.6,
   },
 ];
 

@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
-import ProductsPageClient from "./ProductsPageClient";
+import ProductsContent from "./ProductsContent";
 import JsonLd from "../components/JsonLd";
-import {
-  buildBreadcrumbJsonLd,
-  buildPageMetadata,
-} from "../siteConfig";
+import { buildBreadcrumbJsonLd, buildPageMetadata } from "../siteConfig";
 import { buildProductsCollectionPageJsonLd } from "../structuredData";
 
 export const metadata: Metadata = buildPageMetadata({
@@ -25,7 +22,7 @@ export default function ProductsPage() {
           { name: "제품 소개", path: "/products" },
         ])}
       />
-      <ProductsPageClient />
+      <ProductsContent />
     </>
   );
 }
