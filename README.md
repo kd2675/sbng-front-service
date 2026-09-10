@@ -61,7 +61,7 @@ npm run start
 
 - `.env.local`: 로컬 실행 설정. `.env.example`을 참고합니다.
 - `.env.dev`: `.env.local`을 그대로 복사한 파일입니다. 다시 적용하려면 `cp .env.dev .env.local` 후 실행합니다.
-- `.env.prod`: Docker의 `NODE_ENV=production`, `HOSTNAME=0.0.0.0`, `PORT=3000`과 선택적인 Google 검색 인증 코드입니다.
+- `.env.prod`: 운영 서버에서 직접 만드는 Docker 설정 파일입니다. 현재 필요한 항목은 선택적인 Google 검색 인증 코드입니다.
 
 Next.js는 `.env.dev`와 `.env.prod`를 해당 이름만으로 자동 로드하지 않습니다. 로컬에서는 `.env.local`을 읽고, Docker에서는 아래 Compose 명령과 `env_file`로 적용합니다.
 
@@ -75,6 +75,14 @@ Next.js는 `.env.dev`와 `.env.prod`를 해당 이름만으로 자동 로드하�
 
 ## Docker 운영
 
+운영 서버의 `/data/git/sbng-front-service/.env.prod`를 직접 만듭니다. Google 검색 인증을 사용하지 않으면 값은 비워둡니다.
+
+```dotenv
+NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=
+```
+
+`NODE_ENV=production`, `HOSTNAME=0.0.0.0`, `PORT=3000`은 Dockerfile과 Compose에 이미 고정되어 있어 `.env.prod`에 중복해서 작성할 필요가 없습니다. 환경 파일은 Git에서 제외되며, 없을 때 자동 생성하거나 `.env.example`로 대체하지 않습니다.
+
 ```bash
 docker compose --env-file .env.prod config --quiet
 docker compose --env-file .env.prod up -d --build
@@ -83,6 +91,28 @@ docker compose --env-file .env.prod up -d --build
 앱은 Docker 네트워크 안에서 3000 포트로 실행하고 Caddy가 외부의 80/443 요청을 전달합니다. 앱에 별도 DB나 문의 데이터 볼륨이 필요하지 않습니다. Caddy의 인증서와 설정 볼륨은 유지합니다.
 
 Compose의 `env_file`은 `.env.prod`를 컨테이너에 전달하고, `--env-file .env.prod`는 Google 검색 인증 코드의 빌드 인자 치환에 사용합니다. 인증 코드를 변경했다면 `--build`로 이미지를 다시 생성합니다. 환경 파일 자체와 로컬 데이터는 이미지 빌드에서 제외합니다.
+
+### Jenkins SSH 배포
+
+서버에 `.env.prod`를 준비한 뒤 Jenkins에서는 다음 명령을 사용합니다. 설정 파일은 배포할 때마다 읽으며 기존 내용을 변경하지 않습니다.
+
+```bash
+ssh -T -p 122 kimd0@kimd0.iptime.org 'bash -se' <<'EOF'
+set -euo pipefail
+
+cd /data/git/sbng-front-service
+
+git fetch origin
+git merge --ff-only origin/main
+
+docker compose --env-file .env.prod config --quiet
+docker compose --env-file .env.prod up -d --build
+EOF
+```
+
+비대화형 Bash로 실행하며 Git 갱신·Compose 설정 검사·빌드 또는 기동 명령이 실패하면 SSH의 종료 코드가 Jenkins에 전달됩니다. `up -d` 성공은 컨테이너 시작까지의 결과이며 외부 HTTPS 응답이나 장기 실행 상태를 보장하지는 않습니다.
+
+Docker는 `node server.js`로 standalone 서버를 직접 실행합니다. `package.json`의 `start`는 Docker 밖에서 빌드를 확인하는 로컬 실행 경로이며 Jenkins 배포의 환경 파일 선택에 관여하지 않습니다.
 
 ## 이전 문의 기록
 
