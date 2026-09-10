@@ -41,8 +41,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# runtime data
+# Legacy inquiry records remain private after retiring the online form.
 /data/contact-submissions.json
+/data/*.tmp
+/data.lock/
 
 # Local agent/tool artifacts
 .codex/

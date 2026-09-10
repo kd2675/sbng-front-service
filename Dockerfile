@@ -1,4 +1,4 @@
-FROM node:20-alpine AS base
+FROM node:24-alpine AS base
 
 FROM base AS deps
 WORKDIR /app
@@ -8,6 +8,8 @@ RUN npm ci
 FROM base AS builder
 WORKDIR /app
 ENV NEXT_TELEMETRY_DISABLED=1
+ARG NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=""
+ENV NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=${NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION}
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build

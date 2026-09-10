@@ -4,5 +4,6 @@ subuknongeop.com {
 
 www.subuknongeop.com {
   encode zstd gzip
+  header Strict-Transport-Security "max-age=31536000"
   reverse_proxy sbng-front-service:3000
 }
