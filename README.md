@@ -44,7 +44,7 @@ npm run start
 - `app/template.tsx`: 모션 감소 설정을 따르는 짧은 페이지 등장 효과.
 - `app/components/PageHero.tsx`, `PageSectionNav.tsx`, `PageLinks.tsx`: 상세 페이지의 도입부, 내용 바로가기, 관련 페이지.
 - `app/components/ProductGallery.tsx`: 제품 앞면·뒷면·안내 시트 선택. 확대 화면은 공통 `LightboxImage.tsx`를 사용합니다.
-- `app/history/HistoryTimeline.tsx`: 연혁 사진이 읽는 영역에 들어오면 기울기와 색감을 복원합니다. 화면 높이에 맞춰 진입 위치를 계산하고 모션 감소 설정을 따릅니다.
+- `app/history/HistoryTimeline.tsx`: 연혁 사진 전체가 화면 아래쪽에서 보이는 순간 기울기와 색감을 복원합니다. 모션 감소 설정을 따릅니다.
 - `app/companyInfo.ts`: 대표번호·상담 시간·주소·카카오맵·네이버지도 링크의 공통 기준. 회사 소개와 문의하기에서 같은 주소를 사용하며 전화번호를 바꿀 때 표시값과 `tel:` 값을 함께 수정합니다.
 - `app/contact/ContactContent.tsx`: 대표전화와 상담 시간, 위치·방문 안내, 대표자와 사업자 정보. 문의 폼 없이 서버에서 렌더링합니다.
 - `app/companyProfile.ts`, `companyPhotos.ts`, `productCatalog.ts`: 회사·제품·기사 자료.

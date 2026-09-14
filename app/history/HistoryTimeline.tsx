@@ -13,7 +13,6 @@ export default function HistoryTimeline({ children }: { children: ReactNode }) {
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let observer: IntersectionObserver | undefined;
-    let resizeFrame = 0;
 
     function observePhotos() {
       observer?.disconnect();
@@ -27,31 +26,22 @@ export default function HistoryTimeline({ children }: { children: ReactNode }) {
           entries.forEach((entry) => {
             entry.target.setAttribute(
               "data-in-view",
-              String(entry.isIntersecting),
+              String(entry.isIntersecting && entry.intersectionRatio >= 1),
             );
           });
         },
         {
-          threshold: 0.05,
-          // Use viewport height: percentage root margins are based on width.
-          rootMargin: `0px 0px -${Math.round(window.innerHeight * 0.55)}px 0px`,
+          // Start as soon as the whole photo enters from the viewport bottom.
+          threshold: 1,
         },
       );
       photos?.forEach((photo) => observer?.observe(photo));
     }
 
-    function onResize() {
-      window.cancelAnimationFrame(resizeFrame);
-      resizeFrame = window.requestAnimationFrame(observePhotos);
-    }
-
     observePhotos();
-    window.addEventListener("resize", onResize);
     reduceMotion.addEventListener("change", observePhotos);
     return () => {
       observer?.disconnect();
-      window.cancelAnimationFrame(resizeFrame);
-      window.removeEventListener("resize", onResize);
       reduceMotion.removeEventListener("change", observePhotos);
     };
   }, []);
