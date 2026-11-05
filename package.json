@@ -12,6 +12,8 @@
     "test": "node --test scripts/*.test.mjs",
     "verify:site": "node scripts/verify-site.mjs",
     "verify:home-scroll": "node scripts/verifyHomeScroll.mjs",
+    "verify:product-gallery": "node scripts/verifyProductGallery.mjs",
+    "verify:images": "node scripts/verifyImages.mjs",
     "format": "prettier --write app next.config.ts scripts/*.test.mjs scripts/verify*.mjs"
   },
   "dependencies": {

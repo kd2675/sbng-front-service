@@ -108,7 +108,11 @@ export default function AboutContent() {
                     src={photo.src}
                     alt={photo.alt}
                     fill
-                    sizes="(min-width: 1024px) 48vw, (min-width: 640px) 45vw, 90vw"
+                    sizes={
+                      index === 0
+                        ? "(min-width: 1280px) 640px, (min-width: 1024px) 53vw, 90vw"
+                        : "(min-width: 1280px) 270px, (min-width: 1024px) 24vw, (min-width: 640px) 45vw, 90vw"
+                    }
                     className="object-contain"
                   />
                 </div>
@@ -253,7 +257,7 @@ export default function AboutContent() {
                       src={photo.src}
                       alt={photo.alt}
                       fill
-                      sizes="(min-width: 768px) 42vw, 90vw"
+                      sizes="(min-width: 1280px) 570px, (min-width: 640px) 45vw, 90vw"
                       className="object-contain"
                     />
                   </div>

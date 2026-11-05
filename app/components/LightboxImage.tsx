@@ -19,6 +19,9 @@ export default function LightboxImage({
   const previousOverflow = useRef("");
   const ownsScrollLock = useRef(false);
   const [loaded, setLoaded] = useState(false);
+  const [zoomStatus, setZoomStatus] = useState<"loading" | "ready" | "error">(
+    "loading",
+  );
   const captionId = useId();
   useEffect(
     () => () => {
@@ -70,7 +73,11 @@ export default function LightboxImage({
         onClose={() => {
           document.body.style.overflow = previousOverflow.current;
           ownsScrollLock.current = false;
-          triggerRef.current?.focus();
+          if (zoomStatus === "error") {
+            setLoaded(false);
+            setZoomStatus("loading");
+          }
+          triggerRef.current?.focus({ preventScroll: true });
         }}
         onClick={(event) => {
           if (event.target === event.currentTarget) dialogRef.current?.close();
@@ -91,14 +98,29 @@ export default function LightboxImage({
               닫기 ×
             </button>
           </div>
-          <div className="relative h-[min(70dvh,calc(100dvh-12rem),900px)]">
+          <div
+            className="relative h-[min(70dvh,calc(100dvh-12rem),900px)]"
+            aria-busy={zoomStatus === "loading"}
+          >
+            {zoomStatus !== "ready" && (
+              <p
+                role="status"
+                className="absolute inset-0 grid place-items-center px-4 text-center text-sm text-white"
+              >
+                {zoomStatus === "error"
+                  ? "이미지를 불러오지 못했습니다. 닫은 뒤 다시 시도해 주세요."
+                  : "큰 이미지를 불러오고 있습니다…"}
+              </p>
+            )}
             {loaded && (
               <Image
                 src={imageProps.src}
                 alt={alt}
                 fill
-                sizes="(min-width: 1100px) 1050px, 95vw"
+                sizes="(min-width: 1132px) 1068px, calc(100vw - 64px)"
                 className="object-contain"
+                onLoad={() => setZoomStatus("ready")}
+                onError={() => setZoomStatus("error")}
               />
             )}
           </div>

@@ -78,7 +78,7 @@ export default function CeoContent() {
                 src="/image/kim-jong-su-portrait.jpg"
                 alt="김종수 대표 인물 사진"
                 fill
-                priority
+                preload
                 sizes="(min-width: 768px) 300px, 70vw"
                 className="object-contain"
               />
@@ -183,7 +183,7 @@ export default function CeoContent() {
                   src="/image/kim-jong-su-assembly.jpg"
                   alt="비료품질관리교육 행사 사진"
                   fill
-                  sizes="(min-width: 1024px) 46vw, 90vw"
+                  sizes="(min-width: 1280px) 584px, (min-width: 768px) 45vw, 90vw"
                   className="object-contain"
                 />
               </div>

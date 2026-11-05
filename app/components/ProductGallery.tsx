@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import LightboxImage from "./LightboxImage";
 
@@ -12,11 +12,31 @@ export default function ProductGallery({
   images: readonly { src: string; label: string }[];
 }) {
   const [selected, setSelected] = useState(0);
+  const [nearViewport, setNearViewport] = useState(false);
+  const galleryRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const gallery = galleryRef.current;
+    if (!gallery) return;
+    // Prepare only this product's display-sized images before it is reached.
+    // Hidden alternatives otherwise start their first request after selection.
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        setNearViewport(true);
+        observer.disconnect();
+      },
+      { rootMargin: "600px 0px" },
+    );
+    observer.observe(gallery);
+    return () => observer.disconnect();
+  }, [images.length]);
+
   const current = images[selected];
   if (!current) return null;
 
   return (
-    <div className="product-gallery">
+    <div ref={galleryRef} className="product-gallery">
       <div
         className="product-image-options"
         role="group"
@@ -35,14 +55,18 @@ export default function ProductGallery({
       </div>
       <figure>
         <div className="product-main-image">
-          <LightboxImage
-            key={current.src}
-            src={current.src}
-            alt={name + " " + current.label}
-            fill
-            sizes="(min-width: 1024px) 460px, 90vw"
-            className="object-contain p-4"
-          />
+          {images.map((item, index) => (
+            <div key={item.src} hidden={selected !== index}>
+              <LightboxImage
+                src={item.src}
+                alt={name + " " + item.label}
+                fill
+                loading={nearViewport ? "eager" : "lazy"}
+                sizes="(min-width: 1024px) 460px, 90vw"
+                className="object-contain p-4"
+              />
+            </div>
+          ))}
         </div>
         <figcaption aria-live="polite">
           {name} · {current.label}

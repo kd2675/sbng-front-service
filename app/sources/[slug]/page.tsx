@@ -4,10 +4,12 @@ import path from "node:path";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 
 import {
   articleArchiveBySlug,
   checkRemoteSourceStatus,
+  type ArticleArchiveEntry,
 } from "../../articleArchive";
 import LightboxImage from "../../components/LightboxImage";
 import PageHero from "../../components/PageHero";
@@ -41,12 +43,25 @@ async function fileExists(publicPath: string) {
   }
 }
 
+async function SourceStatus({ entry }: { entry: ArticleArchiveEntry }) {
+  const status = await checkRemoteSourceStatus(entry);
+  return (
+    <>
+      <p className="font-semibold">
+        {status.available
+          ? "원문 서버 응답 확인"
+          : "보관 자료를 먼저 확인해 주세요"}
+      </p>
+      <p className="mt-2 text-xs leading-6">{status.reason}</p>
+    </>
+  );
+}
+
 export default async function SourceArchivePage({ params }: SourcePageProps) {
   const { slug } = await params;
   const entry = articleArchiveBySlug.get(slug);
   if (!entry) notFound();
-  const [status, captureExists, snapshotExists] = await Promise.all([
-    checkRemoteSourceStatus(entry),
+  const [captureExists, snapshotExists] = await Promise.all([
     fileExists(entry.captureImage),
     fileExists(entry.snapshotHtml),
   ]);
@@ -80,12 +95,16 @@ export default async function SourceArchivePage({ params }: SourcePageProps) {
               ))}
             </ul>
             <div className="notice mt-7">
-              <p className="font-semibold">
-                {status.available
-                  ? "원문 서버 응답 확인"
-                  : "보관 자료를 먼저 확인해 주세요"}
-              </p>
-              <p className="mt-2 text-xs leading-6">{status.reason}</p>
+              <Suspense
+                fallback={
+                  <p role="status" className="font-semibold">
+                    원문 응답을 확인하고 있습니다… 보관 자료는 먼저 볼 수
+                    있습니다.
+                  </p>
+                }
+              >
+                <SourceStatus entry={entry} />
+              </Suspense>
               <p className="mt-2 text-xs leading-6">
                 원문 상태는 접속 시 확인합니다. 보관 자료는 저장 당시의 내용이며
                 원문의 이후 수정 사항은 포함하지 않을 수 있습니다.

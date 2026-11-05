@@ -23,6 +23,10 @@ npm run start
 
 메인 스크롤 변경 후에는 서버를 실행한 상태에서 `npm run verify:home-scroll`도 실행합니다. Playwright Chromium이 필요하며, 없으면 `npx playwright install chromium`으로 준비합니다. 새 브라우저 세션의 첫 진입, 직접 해시 링크, 뒤로가기·새로고침, 섹션·푸터 이동, 모바일 메뉴·이미지 확대와 모션 감소 설정을 검사합니다. 다른 로컬 포트는 동일한 `SBNG_TEST_TARGET_URL`로 지정합니다.
 
+제품 자료 선택을 변경하면 `npm run verify:product-gallery`로 PC·모바일 크기의 제품 3종 × 자료 3종을 검사합니다. 이미지 응답에 지연을 넣은 새 브라우저에서 화면 근처 자료의 사전 로딩, 선택 시 추가 요청 여부, 키보드 선택, 고해상도 확대와 초점 복귀를 확인합니다. Playwright 준비와 로컬 포트 지정 방법은 위 명령과 같습니다.
+
+전체 이미지 검사는 `npm run verify:images`입니다. 390·1440·2560px에서 공개 화면과 자료 보관본의 표시 이미지·확대·응답 오류·요청 크기를 확인합니다. `SBNG_IMAGE_AUDIT_REPORT=/임시/경로.json`을 지정하면 상세 결과를 저장하며, 보관본 전체는 1440px에서 검사합니다.
+
 ## 주요 경로와 구조
 
 | 경로                                      | 역할                                                       |

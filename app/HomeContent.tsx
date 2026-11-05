@@ -149,7 +149,7 @@ export default function HomeContent() {
                     alt={product.name + " 제품 실사"}
                     hintClassName="compact-image-hint"
                     fill
-                    sizes="(min-width: 1024px) 28vw, (min-width: 640px) 44vw, 90vw"
+                    sizes="(min-width: 1280px) 384px, (min-width: 768px) calc((100vw - 120px) / 3), (min-width: 640px) calc((100vw - 80px) / 3), 90px"
                     className="object-contain p-3"
                   />
                 </div>
