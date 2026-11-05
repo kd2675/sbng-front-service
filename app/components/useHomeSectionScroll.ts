@@ -5,6 +5,43 @@ import { useEffect, useState } from "react";
 import { createHomeWheelGesture, getHomeScrollTarget } from "../homeScroll";
 
 const WHEEL_THRESHOLD = 48;
+let initialFragmentChecked = false;
+
+function restoreInitialFragment() {
+  // Native fragment navigation can run before streamed sections are revealed.
+  // Repair only the original document entry, once. Reload/back restoration and
+  // subsequent App Router navigation retain ownership of their scroll position.
+  if (initialFragmentChecked) return;
+  initialFragmentChecked = true;
+  const navigation = performance.getEntriesByType("navigation")[0] as
+    PerformanceNavigationTiming | undefined;
+  if (
+    navigation?.type !== "navigate" ||
+    navigation.name !== window.location.href ||
+    !window.location.hash
+  )
+    return;
+
+  let targetId: string;
+  try {
+    targetId = decodeURIComponent(window.location.hash.slice(1));
+  } catch {
+    return;
+  }
+  const target = document.getElementById(targetId);
+  const entryUrl = window.location.href;
+  // Font metrics can change the height of an oversized preceding section.
+  // Wait for its final layout, and abandon the repair if navigation replaced it.
+  void document.fonts.ready.then(() => {
+    if (!target?.isConnected || window.location.href !== entryUrl) return;
+    const margin =
+      Number.parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
+    window.scrollTo({
+      top: target.getBoundingClientRect().top + window.scrollY - margin,
+      behavior: "instant",
+    });
+  });
+}
 
 export function useHomeSectionScroll(sectionIds: readonly string[]) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -206,6 +243,7 @@ export function useHomeSectionScroll(sectionIds: readonly string[]) {
     }
     function onAnchorClick(event: MouseEvent) {
       if (
+        event.defaultPrevented ||
         event.button !== 0 ||
         event.ctrlKey ||
         event.metaKey ||
@@ -219,13 +257,19 @@ export function useHomeSectionScroll(sectionIds: readonly string[]) {
       const index = href?.startsWith("#")
         ? sectionIds.indexOf(href.slice(1))
         : -1;
-      if (index < 0) return;
+      if (index < 0 || anchor?.hasAttribute("download") || anchor?.target)
+        return;
+      event.preventDefault();
+      // Next's History API integration keeps the route tree in sync with the
+      // fragment entry, so returning from a detail page restores the home too.
+      if (window.location.hash !== href)
+        window.history.pushState(null, "", href);
       wheelGesture.consume();
-      startTransition(
-        window.scrollY + elements[index].getBoundingClientRect().top,
-      );
+      moveTo(window.scrollY + elements[index].getBoundingClientRect().top);
+      elements[index].focus({ preventScroll: true });
     }
 
+    restoreInitialFragment();
     schedule();
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("scrollend", onScrollEnd);

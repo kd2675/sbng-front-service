@@ -21,6 +21,8 @@ npm run start
 
 서버 실행 후 `npm run verify:site`로 공개 화면·전화 링크·검색 메타데이터·이전 경로의 응답을 확인합니다. 종료된 API에 대한 검사도 포함하므로 이 스크립트는 로컬 서버만 허용합니다. 다른 로컬 포트는 `SBNG_TEST_TARGET_URL=http://127.0.0.1:3104 npm run verify:site`로 지정합니다.
 
+메인 스크롤 변경 후에는 서버를 실행한 상태에서 `npm run verify:home-scroll`도 실행합니다. Playwright Chromium이 필요하며, 없으면 `npx playwright install chromium`으로 준비합니다. 새 브라우저 세션의 첫 진입, 직접 해시 링크, 뒤로가기·새로고침, 섹션·푸터 이동, 모바일 메뉴·이미지 확대와 모션 감소 설정을 검사합니다. 다른 로컬 포트는 동일한 `SBNG_TEST_TARGET_URL`로 지정합니다.
+
 ## 주요 경로와 구조
 
 | 경로                                      | 역할                                                       |
@@ -119,6 +121,8 @@ Docker는 `node server.js`로 standalone 서버를 직접 실행합니다. `pack
 문의 기능을 종료하면서 저장·관리·1년 보유 기간 계산·자동 파기 코드를 제거했습니다. 현재 앱은 문의 개인정보를 새로 수집하거나 저장하지 않습니다.
 
 기존 `data/contact-submissions.json`과 이미 존재하는 Docker `contact_data` 볼륨의 기록은 자동 이관하거나 삭제하지 않습니다. 새 앱은 이 저장소를 읽거나 연결하지 않습니다. 과거 기록의 보유·파기와 백업은 운영자가 별도로 관리합니다. 로컬 기록은 Git·Docker·standalone 산출물에서 계속 제외합니다.
+
+Git에서는 `data/.gitkeep`만 유지하고 `data/`의 기록·백업 전체를 제외합니다. 환경 파일은 `.env.example`만 추적하며, IDE 설정과 검증 스크린샷·Playwright 출력은 로컬 전용입니다. 상위 `zeroq-common` 저장소는 독립 저장소인 `sbng-front-service/`를 제외하므로 SBNG의 변경 확인과 커밋은 이 디렉터리 안에서 진행합니다.
 
 ## 콘텐츠와 외부 의존성
 

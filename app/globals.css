@@ -528,11 +528,23 @@ h3 {
     transform: none;
   }
 }
-/* Home sections snap within the document so long content stays reachable. */
+/* Streaming stages the home in a hidden tree before inserting its sections.
+   Enable footer snapping only when those sections are visible; otherwise the
+   footer is the only snap target and stays selected as it moves to the bottom.
+   An explicit footer fragment must still follow that early-rendered target. */
 html:has(.home-page) {
   scroll-snap-type: y mandatory;
+  /* User-triggered motion belongs to useHomeSectionScroll. Native initial hash
+     scrolling must not race that controller with a CSS smooth animation. */
+  scroll-behavior: auto;
 }
-html:has(.home-page) footer {
+/* The home scrolls the document; body-only locks still allow keyboard scrolling
+   behind a native dialog. Its own menu/image content remains scrollable. */
+html:has(.home-page):has(dialog[open]) {
+  overflow: hidden;
+}
+html:has(.home-page:not([hidden], [hidden] *)) footer,
+html:has(.home-page) footer:has(#phone-contact:target) {
   scroll-snap-align: end;
   scroll-snap-stop: always;
 }
