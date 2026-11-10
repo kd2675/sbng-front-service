@@ -23,6 +23,8 @@ npm run start
 
 메인 스크롤 변경 후에는 서버를 실행한 상태에서 `npm run verify:home-scroll`도 실행합니다. Playwright Chromium이 필요하며, 없으면 `npx playwright install chromium`으로 준비합니다. 새 브라우저 세션의 첫 진입, 직접 해시 링크, 뒤로가기·새로고침, 섹션·푸터 이동, 모바일 메뉴·이미지 확대와 모션 감소 설정을 검사합니다. 다른 로컬 포트는 동일한 `SBNG_TEST_TARGET_URL`로 지정합니다.
 
+첫 화면이나 페이지 전환 변경 후에는 `npm run build`와 `npm run start`로 실행한 서버에 `npm run verify:home-entry`를 사용합니다. 7개 문서의 응답, 4개 화면 크기·모션 감소 설정별 첫 표시와 새로고침, JavaScript를 보류하거나 끈 상태의 서버 본문, PC·모바일 메뉴를 통한 상세·자료 보관본·홈 전환을 검사합니다. 중간 로딩 화면이나 본문이 사라지는 프레임이 없는지도 확인합니다. 보고서와 스크린샷은 `output/playwright/home-entry/`에 저장하며, 다른 로컬 포트는 `SBNG_TEST_TARGET_URL`로 지정합니다.
+
 제품 자료 선택을 변경하면 `npm run verify:product-gallery`로 PC·모바일 크기의 제품 3종 × 자료 3종을 검사합니다. 이미지 응답에 지연을 넣은 새 브라우저에서 화면 근처 자료의 사전 로딩, 선택 시 추가 요청 여부, 키보드 선택, 고해상도 확대와 초점 복귀를 확인합니다. Playwright 준비와 로컬 포트 지정 방법은 위 명령과 같습니다.
 
 전체 이미지 검사는 `npm run verify:images`입니다. 390·1440·2560px에서 공개 화면과 자료 보관본의 표시 이미지·확대·응답 오류·요청 크기를 확인합니다. `SBNG_IMAGE_AUDIT_REPORT=/임시/경로.json`을 지정하면 상세 결과를 저장하며, 보관본 전체는 1440px에서 검사합니다.
@@ -43,11 +45,11 @@ npm run start
 `/contact`는 전화와 회사 위치를 안내하는 문의하기 페이지입니다. 기존 `/contact?product=heukson`도 같은 안내 페이지를 표시합니다. `/admin`, `/privacy`와 문의·관리자 API는 제거되어 404를 반환합니다.
 
 - `app/layout.tsx`: 공통 메뉴, 푸터, 본문 바로가기와 전역 메타데이터.
+- `app/page.tsx`: URL `/`의 홈 본문과 메타데이터. 정적 소개 화면은 서버 응답부터 본문을 표시하며 전체 페이지 로딩이나 투명도 등장 효과를 사용하지 않습니다. 자료 보관본은 원문 응답 확인 부분만 `Suspense`로 분리합니다.
 - `app/components/SiteNav.tsx`, `navItems.ts`: 회사 소개 → 제품 안내 → 대표 소개 → 연혁 → 문의하기 순서의 공통 메뉴. 1024px 미만에서는 바로 전화 버튼과 전체 메뉴 패널을 제공합니다.
 - `app/HomeContent.tsx`, 각 경로의 `*Content.tsx`: 서버에서 렌더링하는 소개 화면.
 - `app/components/HomeSectionNav.tsx`, `useHomeSectionScroll.ts`: 메인의 한 섹션씩 이동, 현재 위치와 빠른 전화 안내. 긴 내용은 현재 구간 안에서 읽고 경계에서 다음 구간으로 이동합니다.
 - `app/homeScroll.ts`: 섹션·긴 내용·푸터의 이동 경계 계산과 휠 관성 구분. `scripts/homeScroll.test.mjs`에서 연속 입력·방향 전환과 본문·푸터 접근을 검사합니다.
-- `app/template.tsx`: 모션 감소 설정을 따르는 짧은 페이지 등장 효과.
 - `app/components/PageHero.tsx`, `PageSectionNav.tsx`, `PageLinks.tsx`: 상세 페이지의 도입부, 내용 바로가기, 관련 페이지.
 - `app/components/ProductGallery.tsx`: 제품 앞면·뒷면·안내 시트 선택. 확대 화면은 공통 `LightboxImage.tsx`를 사용합니다.
 - `app/history/HistoryTimeline.tsx`: 연혁 사진 전체가 화면 아래쪽에서 보이는 순간 기울기와 색감을 복원합니다. 모션 감소 설정을 따릅니다.

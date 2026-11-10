@@ -11,6 +11,7 @@
     "archive:articles": "node scripts/archive-article-sources.mjs",
     "test": "node --test scripts/*.test.mjs",
     "verify:site": "node scripts/verify-site.mjs",
+    "verify:home-entry": "node scripts/verifyHomeEntry.mjs",
     "verify:home-scroll": "node scripts/verifyHomeScroll.mjs",
     "verify:product-gallery": "node scripts/verifyProductGallery.mjs",
     "verify:images": "node scripts/verifyImages.mjs",

@@ -19,6 +19,7 @@
 ## 주요 구조와 규칙
 
 - `app/layout.tsx`에서 SiteNav·SiteFooter·본문 바로가기를 한 번만 렌더링합니다.
+- 홈은 `app/page.tsx`에서 본문을 바로 서버 렌더링합니다. 정적 소개 화면에는 전체 페이지 `loading.tsx`나 투명도 등장 효과를 추가하지 않습니다. 자료 보관본의 원문 상태 확인은 해당 영역의 `Suspense`로 처리해 본문을 가리지 않습니다.
 - 각 화면의 `main`은 `id="main-content"`와 하나의 h1을 갖습니다.
 - `app/HomeContent.tsx`, `about/AboutContent.tsx`, `ceo/CeoContent.tsx`, `history/HistoryContent.tsx`, `products/ProductsContent.tsx`, `contact/ContactContent.tsx`는 서버 컴포넌트입니다.
 - 클라이언트 상호작용은 메뉴·홈 섹션 이동·연혁 사진 효과·제품 자료 선택·이미지 확대를 중심으로 최소화합니다.

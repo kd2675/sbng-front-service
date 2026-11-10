@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+
 import JsonLd from "./components/JsonLd";
 import HomeContent from "./HomeContent";
 import {
@@ -8,17 +9,22 @@ import {
   siteConfig,
 } from "./siteConfig";
 
-export const metadata: Metadata = buildPageMetadata({
-  title: "담양 유기질비료·퇴비 제조 | 수북농업",
-  description: siteConfig.defaultDescription,
-  path: "/",
-  keywords: [
-    "담양 유기질비료",
-    "수북농업 제품",
-    "김종수 대표",
-    "흙손 흙보약 무등산",
-  ],
-});
+const homePageTitle = "담양 유기질비료·퇴비 제조 | 수북농업";
+
+export const metadata: Metadata = {
+  ...buildPageMetadata({
+    title: homePageTitle,
+    description: siteConfig.defaultDescription,
+    path: "/",
+    keywords: [
+      "담양 유기질비료",
+      "수북농업 제품",
+      "김종수 대표",
+      "흙손 흙보약 무등산",
+    ],
+  }),
+  title: { absolute: homePageTitle },
+};
 
 export default function HomePage() {
   return (

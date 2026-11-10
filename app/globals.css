@@ -18,6 +18,8 @@
     var(--font-manrope), "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
 }
 html {
+  background: var(--background);
+  color-scheme: light;
   scroll-behavior: smooth;
   scrollbar-gutter: stable;
 }
@@ -698,17 +700,6 @@ main:not(.legacy-page) {
 .record-image {
   transition: transform 0.3s;
 }
-.page-transition {
-  animation: page-enter 0.25s ease-out;
-}
-@keyframes page-enter {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
 @media (min-width: 768px) {
   .site-header {
     padding-inline: 1.5rem;
@@ -782,9 +773,6 @@ main:not(.legacy-page) {
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .page-transition {
-    animation: none;
-  }
   .record-image {
     transform: none !important;
     transition: none;
